@@ -15,10 +15,12 @@ namespace TaurenEngine.Editor.Common
 {
 	public sealed class CopyFileEditorData : EditorData<CopyFileData>
 	{
-		protected override void UpdateData()
+		protected override void UpdateProperty()
 		{
 			Groups = GetProperty(Groups, nameof(Data.groups));
 		}
+
+		protected override string SavePath => "Assets/EditorConfig/CopyFileConfig.asset";
 
 		public PropertyList<CopyFileGroupEo> Groups { get; private set; }
 	}

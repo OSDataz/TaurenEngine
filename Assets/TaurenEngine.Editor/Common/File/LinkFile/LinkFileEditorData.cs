@@ -14,10 +14,12 @@ namespace TaurenEngine.Editor.Common
 {
 	public sealed class LinkFileEditorData : EditorData<LinkFileData>
 	{
-		protected override void UpdateData()
+		protected override void UpdateProperty()
 		{
 			Groups = GetProperty(Groups, nameof(Data.groups));
 		}
+
+		protected override string SavePath => "Assets/EditorConfig/LinkFileConfig.asset";
 
 		public PropertyList<LinkFileGroupEo> Groups { get; private set; }
 	}
@@ -135,8 +137,8 @@ namespace TaurenEngine.Editor.Common
 
 		public void LinkFile(BatScript bat)
 		{
-			var fromPath = FileEx.FormatDirectoryPath(RootFromPath.Value);
-			var toPath = FileEx.FormatDirectoryPath(RootToPath.Value);
+			var fromPath = PathEx.FormatPathEnd(RootFromPath.Value, false);
+			var toPath = PathEx.FormatPathEnd(RootToPath.Value, false);
 
 			Items.List.ForEach(item => item.LinkFile(bat, fromPath, toPath));
 		}

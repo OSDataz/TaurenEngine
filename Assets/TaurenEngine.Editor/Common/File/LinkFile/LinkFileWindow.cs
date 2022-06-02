@@ -28,7 +28,7 @@ namespace TaurenEngine.Editor.Common
 		void OnEnable()
 		{
 			_editorData ??= new LinkFileEditorData();
-			_editorData.LoadData("Assets/EditorConfig/LinkFileConfig.asset");
+			_editorData.LoadData();
 		}
 
 		void OnDisable()

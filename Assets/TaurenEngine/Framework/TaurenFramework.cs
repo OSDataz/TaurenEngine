@@ -13,6 +13,8 @@ namespace TaurenEngine.Framework
 {
 	public static class TaurenFramework
 	{
+		public const string Version = "0.5.0";
+
 		/// <summary>
 		/// 计时器/帧循环组件
 		/// </summary>

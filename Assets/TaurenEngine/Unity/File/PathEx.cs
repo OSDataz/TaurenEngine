@@ -32,5 +32,57 @@ namespace TaurenEngine.Unity
 		{
 			return pathExt.ToLower() == extension.ToLower();
 		}
+
+		/// <summary>
+		/// 格式化文件夹路径，开头是否需要斜杆
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="needSlash"></param>
+		/// <returns></returns>
+		public static string FormatPathStart(string path, bool needSlash)
+		{
+			if (string.IsNullOrEmpty(path))
+				return path;
+
+			var c = path[0];
+			if (c == '/' || c == '\\')
+			{
+				if (!needSlash)
+					return path.Substring(1);
+			}
+			else
+			{
+				if (needSlash)
+					return path + "/";
+			}
+
+			return path;
+		}
+
+		/// <summary>
+		/// 格式化文件夹路径，末尾是否需要斜杆
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="needSlash"></param>
+		/// <returns></returns>
+		public static string FormatPathEnd(string path, bool needSlash)
+		{
+			if (string.IsNullOrEmpty(path))
+				return path;
+
+			var c = path[path.Length - 1];
+			if (c == '/' || c == '\\')
+			{
+				if (!needSlash)
+					return path.Substring(0, path.Length - 1);
+			}
+			else
+			{
+				if (needSlash)
+					return path + "/";
+			}
+
+			return path;
+		}
 	}
 }

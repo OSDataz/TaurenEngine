@@ -12,6 +12,28 @@ using UnityEngine;
 namespace TaurenEngine.Editor
 {
 	/// <summary>
+	/// 全局数据单例
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="TData"></typeparam>
+	public abstract class EditorDataSingleton<T, TData> : EditorData<TData> where T : EditorDataSingleton<T, TData>, new() where TData : ScriptableObject
+	{
+		private static T _instance;
+		public static T Instance 
+		{
+			get
+			{
+				if (_instance == null)
+				{
+					_instance = new T();
+					_instance.LoadData();
+				}
+				return _instance;
+			}
+		}
+	}
+
+	/// <summary>
 	/// 编辑器存储数据
 	/// </summary>
 	/// <typeparam name="T">数据类</typeparam>
@@ -27,22 +49,22 @@ namespace TaurenEngine.Editor
 		/// 加载存储文件数据
 		/// </summary>
 		/// <param name="path">存储地址（Assets/****.asset）</param>
-		public void LoadData(string path)
+		public void LoadData()
 		{
 			if (Data == null)
 			{
-				if (File.Exists(path))
+				if (File.Exists(SavePath))
 				{
-					Data = AssetDatabase.LoadAssetAtPath<T>(path);
+					Data = AssetDatabase.LoadAssetAtPath<T>(SavePath);
 				}
 				else
 				{
-					var directoryName = Path.GetDirectoryName(path);
+					var directoryName = Path.GetDirectoryName(SavePath);
 					if (!string.IsNullOrEmpty(directoryName) && !Directory.Exists(directoryName))
 						Directory.CreateDirectory(directoryName);
 
 					Data = ScriptableObject.CreateInstance<T>();
-					AssetDatabase.CreateAsset(Data, path);
+					AssetDatabase.CreateAsset(Data, SavePath);
 					AssetDatabase.Refresh();
 				}
 
@@ -53,13 +75,18 @@ namespace TaurenEngine.Editor
 				AssetDatabase.Refresh();
 			}
 
-			UpdateData();
+			UpdateProperty();
 		}
 
 		/// <summary>
-		/// 设置字段
+		/// 配置保存路径，后缀asset的文件
 		/// </summary>
-		protected abstract void UpdateData();
+		protected abstract string SavePath { get; }
+
+		/// <summary>
+		/// 更新字段
+		/// </summary>
+		protected abstract void UpdateProperty();
 
 		/// <summary>
 		/// 保存 存储文件数据 到 磁盘

@@ -9,17 +9,16 @@ using UnityEngine;
 
 namespace TaurenEngine.Framework
 {
-	public abstract class UIPanel
+	public abstract class UIPanel : UIBase
 	{
-		public Transform Root { get; private set; }
+		protected UIPanelSetting setting;
+
 		/// <summary> 面板是否打开 </summary>
 		public bool IsOpen { get; internal set; }
 
-		protected UIPanelSetting setting;
-
-		public virtual void Init(Transform root)
+		public override void Init(Transform root)
 		{
-			Root = root;
+			base.Init(root);
 
 			setting = root.GetComponent<UIPanelSetting>();
 			if (setting == null)
@@ -31,8 +30,8 @@ namespace TaurenEngine.Framework
 			TaurenFramework.UI.Close(this);
 		}
 
-		public abstract void OnOpen();
+		public virtual void OnOpen() { }
 
-		public abstract void OnClose();
+		public virtual void OnClose() { }
 	}
 }

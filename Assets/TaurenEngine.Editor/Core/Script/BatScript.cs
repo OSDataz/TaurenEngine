@@ -59,10 +59,10 @@ namespace TaurenEngine.Editor
 		#region mklink
 		public void MKLink(string fromPath, string toPath)
 		{
-			fromPath = FileEx.FormatDirectoryPath(fromPath);
-			toPath = FileEx.FormatDirectoryPath(toPath); ;
+			fromPath = PathEx.FormatPathEnd(fromPath, false);
+			toPath = PathEx.FormatPathEnd(toPath, false); ;
 
-			if (!FileEx.CheckPath(ref fromPath, ref toPath, out var fromIsFile, out var toIsFile, out var toIsExist))
+			if (!FileEx.CheckPath(fromPath, toPath, out var fromIsFile, out var toIsFile, out var toIsExist))
 				return;
 
 			if (fromIsFile)
@@ -70,13 +70,13 @@ namespace TaurenEngine.Editor
 				if (!toIsExist)
 				{
 					if (toIsFile)
-						FileEx.CreateSaveFilePath(ref toPath);
+						FileEx.CreateSaveFilePath(toPath);
 					else
-						FileEx.CreateSaveDirectoryPath(ref toPath);
+						FileEx.CreateSaveDirectoryPath(toPath);
 				}
 
 				if (!toIsFile)
-					toPath = $"{FileEx.FormatDirectoryPath(toPath)}\\{Path.GetFileName(fromPath)}";
+					toPath = $"{PathEx.FormatPathEnd(toPath, true)}{Path.GetFileName(fromPath)}";
 
 				// 文件链接文件
 				AddCmd($"mklink /h \"{toPath}\" \"{fromPath}\"");
@@ -87,7 +87,7 @@ namespace TaurenEngine.Editor
 					return;
 
 				var path = Path.GetDirectoryName(toPath);
-				FileEx.CreateSaveDirectoryPath(ref path);
+				FileEx.CreateSaveDirectoryPath(path);
 
 				// 文件夹链接文件夹
 				AddCmd($"mklink /j \"{toPath}\" \"{fromPath}\"");

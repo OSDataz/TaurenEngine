@@ -39,7 +39,7 @@ namespace TaurenEngine.Unity
 		/// </summary>
 		/// <param name="path">路径</param>
 		/// <returns>True 文件；False 文件夹</returns>
-		public static bool IsFile(ref string path)
+		public static bool IsFile(string path)
 		{
 			return Path.HasExtension(path) || File.Exists(path);
 		}
@@ -50,7 +50,7 @@ namespace TaurenEngine.Unity
 		/// <param name="path">路径</param>
 		/// <param name="isFile">True 文件；False 文件夹</param>
 		/// <returns>该路径是否存在</returns>
-		public static bool Exists(ref string path, out bool isFile)
+		public static bool Exists(string path, out bool isFile)
 		{
 			if (Directory.Exists(path))
 			{
@@ -72,22 +72,22 @@ namespace TaurenEngine.Unity
 		/// </summary>
 		/// <param name="path">路径</param>
 		/// <param name="isFile">True 文件；False 文件夹</param>
-		public static bool CheckCreatePath(ref string fromPath, ref string toPath, out bool fromIsFile, out bool toIsFile)
+		public static bool CheckCreatePath(string fromPath, string toPath, out bool fromIsFile, out bool toIsFile)
 		{
-			if (!CheckPath(ref fromPath, ref toPath, out fromIsFile, out toIsFile, out var toIsExist))
+			if (!CheckPath(fromPath, toPath, out fromIsFile, out toIsFile, out var toIsExist))
 				return false;
 
 			if (!toIsExist)
 			{
 				if (toIsFile)
-					CreateSaveFilePath(ref toPath);
+					CreateSaveFilePath(toPath);
 				else
-					CreateSaveDirectoryPath(ref toPath);
+					CreateSaveDirectoryPath(toPath);
 			}
 			return true;
 		}
 
-		public static bool CheckPath(ref string fromPath, ref string toPath, out bool fromIsFile, out bool toIsFile, out bool toIsExist)
+		public static bool CheckPath(string fromPath, string toPath, out bool fromIsFile, out bool toIsFile, out bool toIsExist)
 		{
 			if (string.IsNullOrEmpty(fromPath) || string.IsNullOrEmpty(toPath))
 			{
@@ -97,7 +97,7 @@ namespace TaurenEngine.Unity
 				return false;
 			}
 
-			if (!Exists(ref fromPath, out fromIsFile))
+			if (!Exists(fromPath, out fromIsFile))
 			{
 				toIsFile = false;
 				toIsExist = false;
@@ -105,7 +105,7 @@ namespace TaurenEngine.Unity
 				return false;
 			}
 
-			toIsExist = Exists(ref toPath, out toIsFile);
+			toIsExist = Exists(toPath, out toIsFile);
 			if (toIsFile && !fromIsFile)
 				toIsFile = false;
 
@@ -116,13 +116,13 @@ namespace TaurenEngine.Unity
 		/// 创建存储路径
 		/// </summary>
 		/// <param name="path">路径</param>
-		public static void CreateSaveFilePath(ref string filePath)
+		public static void CreateSaveFilePath(string filePath)
 		{
 			var directoryPath = Path.GetDirectoryName(filePath);
-			CreateSaveDirectoryPath(ref directoryPath);
+			CreateSaveDirectoryPath(directoryPath);
 		}
 
-		public static void CreateSaveDirectoryPath(ref string directoryPath)
+		public static void CreateSaveDirectoryPath(string directoryPath)
 		{
 			if (!Directory.Exists(directoryPath))
 				Directory.CreateDirectory(directoryPath);
@@ -132,7 +132,7 @@ namespace TaurenEngine.Unity
 		/// 删除文件夹下所有文件
 		/// </summary>
 		/// <param name="path"></param>
-		public static void ClearDirectory(ref string path)
+		public static void ClearDirectory(string path)
 		{
 			var rootInfo = new DirectoryInfo(path);
 
@@ -150,28 +150,12 @@ namespace TaurenEngine.Unity
 				direInfos[i].Delete(true);
 			}
 		}
-
-		/// <summary>
-		/// 格式化文件夹路径
-		/// </summary>
-		/// <param name="path"></param>
-		public static string FormatDirectoryPath(string path)
-		{
-			if (string.IsNullOrEmpty(path))
-				return path;
-
-			var c = path[path.Length - 1];
-			if (c == '/' || c == '\\')
-				return path.Substring(0, path.Length - 1);
-
-			return path;
-		}
 		#endregion
 
 		#region 存储/读取 文本
 		public static void SaveText(string filePath, string content)
 		{
-			CreateSaveFilePath(ref filePath);
+			CreateSaveFilePath(filePath);
 
 			StreamWriter writer = File.CreateText(filePath);
 			writer.Write(content);
@@ -202,7 +186,7 @@ namespace TaurenEngine.Unity
 			}
 			else
 			{
-				CreateSaveFilePath(ref filePath);
+				CreateSaveFilePath(filePath);
 				writer = fileInfo.CreateText();
 			}
 			writer.WriteLine(content);
@@ -236,7 +220,7 @@ namespace TaurenEngine.Unity
 		#region 序列化存储/读取
 		public static void SaveObject(string filePath, object content)
 		{
-			CreateSaveFilePath(ref filePath);
+			CreateSaveFilePath(filePath);
 
 			FileStream stream = File.Open(filePath, FileMode.OpenOrCreate);
 			BinaryFormatter format = new BinaryFormatter();
@@ -271,7 +255,7 @@ namespace TaurenEngine.Unity
 		/// <returns></returns>
 		public static bool Copy(string sourcePath, string destPath, bool isFull = false)
 		{
-			if (!CheckCreatePath(ref sourcePath, ref destPath, out var sourIsFile, out var destIsFile))
+			if (!CheckCreatePath(sourcePath, destPath, out var sourIsFile, out var destIsFile))
 				return false;
 
 			if (sourIsFile)
@@ -283,7 +267,7 @@ namespace TaurenEngine.Unity
 				else
 				{
 					// 将文件复制到文件夹中
-					File.Copy(sourcePath, $"{FormatDirectoryPath(destPath)}/{Path.GetFileName(sourcePath)}", true);
+					File.Copy(sourcePath, $"{PathEx.FormatPathEnd(destPath, true)}{Path.GetFileName(sourcePath)}", true);
 				}
 			}
 			else
@@ -294,12 +278,12 @@ namespace TaurenEngine.Unity
 					return false;
 				}
 
-				sourcePath = FormatDirectoryPath(sourcePath);
-				destPath = FormatDirectoryPath(destPath);
+				sourcePath = PathEx.FormatPathEnd(sourcePath, false);
+				destPath = PathEx.FormatPathEnd(destPath, false);
 
 				// 从一个文件夹复制到另一个文件夹
 				if (isFull)
-					ClearDirectory(ref destPath);
+					ClearDirectory(destPath);
 
 				CopyDirectory(sourcePath, destPath);
 			}
@@ -328,7 +312,7 @@ namespace TaurenEngine.Unity
 				var info = sourDires[i];
 				var destDircPath = $"{destPath}/{info.Name}";
 
-				CreateSaveDirectoryPath(ref destDircPath);
+				CreateSaveDirectoryPath(destDircPath);
 				CopyDirectory(info.FullName, destDircPath);
 			}
 		}
@@ -353,7 +337,7 @@ namespace TaurenEngine.Unity
 				return;
 			}
 
-			CreateSaveFilePath(ref filePath);
+			CreateSaveFilePath(filePath);
 
 			FileStream stream = File.Open(filePath, FileMode.OpenOrCreate);
 			stream.Write(bytes, 0, bytes.Length);

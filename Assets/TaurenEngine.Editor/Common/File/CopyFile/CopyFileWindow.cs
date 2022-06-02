@@ -28,7 +28,7 @@ namespace TaurenEngine.Editor.Common
 		void OnEnable()
 		{
 			_editorData ??= new CopyFileEditorData();
-			_editorData.LoadData("Assets/EditorConfig/CopyFileConfig.asset");
+			_editorData.LoadData();
 		}
 
 		void OnDisable()
