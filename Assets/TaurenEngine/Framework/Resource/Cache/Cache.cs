@@ -16,39 +16,75 @@ namespace TaurenEngine.Framework
 	internal class Cache
 	{
 		/// <summary>
+		/// 资源路径
+		/// </summary>
+		public string Path { get; private set; }
+		/// <summary>
 		/// 缓存资源
 		/// </summary>
 		public Asset Asset { get; private set; }
 
 		/// <summary>
-		/// 持久化（永久）缓存（只要有一个请求永久缓存，该资源就会永久缓存），可以手动清理
+		/// 缓存类型
 		/// </summary>
-		public bool Persistent { get; private set; }
+		public CacheType CacheType { get; private set; }
 		/// <summary>
 		/// 资源持有对象
 		/// </summary>
-		public readonly List<int> holders = new List<int>();
+		public readonly List<uint> holders = new List<uint>();
 		/// <summary>
 		/// 最后使用时间
 		/// </summary>
 		public float LastUseTime { get; private set; }
 
-		public void SetData()
-		{
+		/// <summary>
+		/// 是否立即释放
+		/// </summary>
+		public bool IsReleaseImmediate { get; private set; }
 
+		public void SetData(LoadTask loadTask)
+		{
+			Path = loadTask.path;
+			Asset = loadTask.asset;
+			CacheType = loadTask.cacheType;
+			holders.Add(loadTask.id);
 		}
 
-		public bool Release(int id)
+		public bool CheckRelease(uint id)
 		{
 			if (holders.Remove(id))
 			{
-				if (holders.Count == 0)
-					LastUseTime = Time.time;
+				if (CacheType == CacheType.Persistent)
+				{
+					IsReleaseImmediate = false;
+				}
+				else
+				{
+					if (holders.Count == 0)
+					{
+						if (CacheType == CacheType.Reference)
+						{
+							Release();
+							IsReleaseImmediate = true;
+						}
+						else
+						{
+							LastUseTime = Time.time;
+							IsReleaseImmediate = false;
+						}
+					}
+				}
 
 				return true;
 			}
-			else
-				return false;
+
+			return false;
+		}
+
+		public void Release()
+		{
+			Asset.Release();
+			Asset = null;
 		}
 	}
 }

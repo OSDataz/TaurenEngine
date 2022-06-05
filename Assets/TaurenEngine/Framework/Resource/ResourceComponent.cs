@@ -12,6 +12,15 @@ namespace TaurenEngine.Framework
 	/// </summary>
 	public class ResourceComponent : OnceComponent
 	{
+		/// <summary>
+		/// 一直开启自动释放资源
+		/// </summary>
+		public bool alwaysAutoRelease = true;
+		/// <summary>
+		/// 自动释放资源间隔时间
+		/// </summary>
+		public float autoReleaseInterval = 30000f;
+
 		protected override void Awake()
 		{
 			base.Awake();
@@ -19,8 +28,18 @@ namespace TaurenEngine.Framework
 			if (TaurenFramework.Resource == null)
 			{
 				var resource = new ResourceManager();
+				resource.cacheMgr.alwaysAutoRelease = alwaysAutoRelease;
+				resource.cacheMgr.autoReleaseInterval = autoReleaseInterval;
 				TaurenFramework.Resource = resource;
 			}
+		}
+
+		protected override void Start()
+		{
+			if (alwaysAutoRelease)
+				TaurenFramework.Resource.cacheMgr.StartAutoRelease();
+
+			base.Start();
 		}
 	}
 }

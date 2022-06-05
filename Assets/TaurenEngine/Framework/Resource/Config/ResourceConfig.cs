@@ -9,15 +9,29 @@ using System.Collections.Generic;
 
 namespace TaurenEngine.Framework
 {
-	public class ResourceConfig
+	internal class ResourceConfig
 	{
 		/// <summary>
 		/// AB包列表
 		/// </summary>
-		public List<ABItem> abList;
+		public List<ABPackItemConfig> abList;
 		/// <summary>
 		/// 资源列表
 		/// </summary>
-		public List<AssetItem> assetList;
+		public List<AssetItemConfig> assetList;
+	}
+
+	internal class ABPackItemConfig
+	{
+		public string name;
+		public List<string> assetIds;
+	}
+
+	internal class AssetItemConfig
+	{
+		public string guid;
+		public string path;
+		public string abPackName;
+		public List<string> dependencies;
 	}
 }

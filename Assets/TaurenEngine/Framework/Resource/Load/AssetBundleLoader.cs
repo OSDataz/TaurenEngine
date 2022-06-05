@@ -2,13 +2,18 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.5.0
- *│　Time    ：2022/5/30 22:27:25
+ *│　Time    ：2022/5/28 17:38:07
  *└────────────────────────┘*/
+
+using UnityEngine;
 
 namespace TaurenEngine.Framework
 {
-	public class AssetItem
+	internal class AssetBundleLoader
 	{
-
+		public void Load()
+		{
+			//AssetBundle
+		}
 	}
 }

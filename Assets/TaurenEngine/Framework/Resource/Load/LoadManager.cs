@@ -12,5 +12,22 @@ namespace TaurenEngine.Framework
 	/// </summary>
 	internal class LoadManager
 	{
+		public T Load<T>(LoadTask<T> loadTask)
+		{
+			loadTask.isAsync = false;
+
+
+			return default;
+		}
+
+		public void LoadAsync<T>(LoadTask<T> loadTask)
+		{
+			loadTask.isAsync = true;
+		}
+
+		public bool Unload(uint id)
+		{
+			return false;
+		}
 	}
 }

@@ -2,18 +2,23 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.5.0
- *│　Time    ：2022/5/28 17:28:36
+ *│　Time    ：2022/6/4 10:21:27
  *└────────────────────────┘*/
 
-using UnityEngine;
+using LitJson;
 
 namespace TaurenEngine.Framework
 {
-	internal class AssetFont : Asset<Font>
+	public static class JsonHelper
 	{
-		public override void Release()
+		public static T ToObject<T>(string value)
 		{
+			return JsonMapper.ToObject<T>(value);
+		}
 
+		public static string ToJson(object value)
+		{
+			return JsonMapper.ToJson(value);
 		}
 	}
 }

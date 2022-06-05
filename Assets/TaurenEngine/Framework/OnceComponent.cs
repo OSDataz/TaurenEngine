@@ -20,7 +20,7 @@ namespace TaurenEngine.Framework
 		[Tooltip("True 销毁组件对象；False 仅销毁组件")]
 		public bool destroyGameObject = true;
 
-		private void Start()
+		protected virtual void Start()
 		{
 			if (destroyGameObject) GameObject.Destroy(gameObject);
 			else Destroy();
