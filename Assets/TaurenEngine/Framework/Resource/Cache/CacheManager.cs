@@ -12,66 +12,177 @@ namespace TaurenEngine.Framework
 {
 	/// <summary>
 	/// 缓存管理器
+	/// 
+	/// todo：资源大小，如果资源缓存比较少，就不进行自动清理
 	/// </summary>
 	internal class CacheManager
 	{
 		private readonly List<Cache> _caches;
+		private readonly List<ABCache> _abCaches;
 
 		public CacheManager()
 		{
 			_caches = new List<Cache>();
+			_abCaches = new List<ABCache>();
 		}
 
 		/// <summary>
 		/// 添加缓存
 		/// </summary>
 		/// <param name="loadTask"></param>
-		public void AddCache(LoadTask loadTask)
+		public void AddCache(LoadTaskAsync loadTask)
 		{
-			var cache = new Cache();
-			cache.SetData(loadTask);
-			_caches.Add(cache);
+			if (loadTask.isABPack)
+				AddABCache(loadTask.data as AssetBundle, loadTask.abPackConfig, loadTask.id, loadTask.path, loadTask.cacheType);
+			else
+				AddCache(loadTask.data, loadTask.id, loadTask.path, loadTask.loadType, loadTask.cacheType);
+		}
 
-			if (!alwaysAutoRelease && cache.CacheType == CacheType.ReferenceDelay)
-				StartAutoRelease();
+		public void AddCache(UnityEngine.Object data, uint id, string path, LoadType loadType, CacheType cacheType)
+		{
+			var cache = new Cache()
+			{
+				data = data,
+				path = path,
+				loadType = loadType,
+				cacheType = cacheType
+			};
+			cache.holders.Add(id);
+
+			_caches.Add(cache);
+		}
+
+		public void AddABCache(AssetBundle data, ABConfig config, uint id, string path, CacheType cacheType)
+		{
+			var cache = new ABCache()
+			{
+				data = data,
+				config = config,
+				path = path,
+				cacheType = cacheType
+			};
+			cache.holders.Add(id);
+
+			_abCaches.Add(cache);
 		}
 
 		/// <summary>
 		/// 获取缓存
 		/// </summary>
-		/// <typeparam name="T">资源类型</typeparam>
-		/// <param name="path">资源路径</param>
-		/// <param name="id">加载ID</param>
-		/// <param name="data">返回资源</param>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="path"></param>
+		/// <param name="id"></param>
+		/// <param name="data"></param>
+		/// <param name="isTypeError"></param>
 		/// <returns></returns>
-		public bool TryGetCache<T>(string path, uint id, out T data)
+		public bool TryGetCache<T>(string path, uint id, out T data, out bool isTypeError)
 		{
-			var cache = _caches.Find(item => item.Path == path);
+			var cache = _caches.Find(item => item.path == path);
 			if (cache != null)
 			{
 				cache.holders.Add(id);
-				if (cache.Asset.data is T assetData)
+				if (cache.data is T assetData)
+				{
+					isTypeError = false;
+					data = assetData;
+				}
+				else
+				{
+					isTypeError = true;
+					data = default;
+					Logger.Error($"资源存在但获取类型错误，Path：{path}, AssetType：{cache.data.GetType()} GetType：{typeof(T)}");
+				}
+
+				return true;
+			}
+
+			data = default;
+			isTypeError = false;
+			return false;
+		}
+
+		public bool TryGetCache<T>(string path, uint id, out T data)
+		{
+			var cache = _caches.Find(item => item.path == path);
+			if (cache != null)
+			{
+				cache.holders.Add(id);
+				if (cache.data is T assetData)
 				{
 					data = assetData;
-					return true;
 				}
+				else
+				{
+					data = default;
+					Logger.Error($"资源存在但获取类型错误，Path：{path}, AssetType：{cache.data.GetType()} GetType：{typeof(T)}");
+				}
+
+				return true;
 			}
 
 			data = default;
 			return false;
 		}
 
+		/// <summary>
+		/// 获取AB包缓存
+		/// </summary>
+		/// <param name="path"></param>
+		/// <param name="id"></param>
+		/// <param name="ab"></param>
+		/// <returns></returns>
+		public bool TryGetABCache(string path, uint id, out AssetBundle ab)
+		{
+			var cache = _abCaches.Find(item => item.path == path);
+			if (cache != null)
+			{
+				cache.holders.Add(id);
+				ab = cache.data;
+				return true;
+			}
+
+			ab = null;
+			return false;
+		}
+
+		public bool TryGetABCache(string path, out AssetBundle ab)
+		{
+			var cache = _abCaches.Find(item => item.path == path);
+			if (cache != null)
+			{
+				ab = cache.data;
+				return true;
+			}
+
+			ab = null;
+			return false;
+		}
+
+		/// <summary>
+		/// 释放缓存
+		/// </summary>
+		/// <param name="id"></param>
 		public void Release(uint id)
 		{
-			var len = _caches.Count;
-			for (int i = 0; i < len; ++i)
-			{
-				if (_caches[i].CheckRelease(id))
-				{
-					if (_caches[i].IsReleaseImmediate)
-						_caches.RemoveAt(i);
+			var needAutoRealease = false;
 
-					return;
+			Release(id, _caches, ref needAutoRealease);
+			Release(id, _abCaches, ref needAutoRealease);
+
+			if (!alwaysAutoRelease && needAutoRealease)
+				StartAutoRelease();
+		}
+
+		private void Release<T>(uint id, List<T> caches, ref bool needAutoRealease) where T : CacheBase
+		{
+			for (int i = caches.Count - 1; i >= 0; --i)
+			{
+				if (caches[i].CheckRelease(id))
+				{
+					if (caches[i].IsReleaseImmediate)
+						caches.RemoveAt(i);
+					else
+						needAutoRealease = true;
 				}
 			}
 		}
@@ -87,6 +198,12 @@ namespace TaurenEngine.Framework
 			}
 
 			_caches.Clear();
+
+			Resources.UnloadUnusedAssets();
+			AssetBundle.UnloadAllAssetBundles(true);
+
+			if (!alwaysAutoRelease)
+				StopAutoRelease();
 		}
 
 		#region 自动释放内存资源
@@ -116,13 +233,22 @@ namespace TaurenEngine.Framework
 
 		private void OnCheckRelease()
 		{
-			bool needAutoRealease = false;
-
+			var needAutoRealease = false;
 			var time = Time.time;
-			for (int i = _caches.Count - 1; i >= 0; --i)
+
+			CheckRelease(_caches, time, ref needAutoRealease);
+			CheckRelease(_abCaches, time, ref needAutoRealease);
+
+			if (!alwaysAutoRelease && !needAutoRealease)
+				StopAutoRelease();
+		}
+
+		private void CheckRelease<T>(List<T> caches, float time, ref bool needAutoRealease) where T : CacheBase
+		{
+			for (int i = caches.Count - 1; i >= 0; --i)
 			{
-				var data = _caches[i];
-				if (data.CacheType != CacheType.ReferenceDelay)
+				var data = caches[i];
+				if (data.cacheType != CacheType.ReferenceDelay)
 					continue;
 
 				if (data.holders.Count > 0)
@@ -131,15 +257,12 @@ namespace TaurenEngine.Framework
 					continue;
 				}
 
-				if (time - data.LastUseTime > autoReleaseInterval)
+				if (time - data.lastUseTime > autoReleaseInterval)
 				{
-					_caches[i].Release();
-					_caches.RemoveAt(i);
+					caches[i].Release();
+					caches.RemoveAt(i);
 				}
 			}
-
-			if (!alwaysAutoRelease && !needAutoRealease)
-				StopAutoRelease();
 		}
 		#endregion
 	}

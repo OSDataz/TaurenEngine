@@ -13,15 +13,16 @@ namespace TaurenEngine.Framework
 	public enum LoadType
 	{
 		/// <summary>
-		/// 远程下载
+		/// AssetBundle路径格式：Assets起的相对路径，ab包中的索引名。AB包路径：Assets起的相对路径，无后缀
 		/// </summary>
 		AssetBundle,
 		/// <summary>
-		/// 本地加载
+		/// File路径格式：Assets起的相对路径，有后缀，不支持配置
 		/// </summary>
 		File,
 		/// <summary>
-		/// 项目自带资源加载
+		/// 项目自带资源加载，不支持远程下载，不支持配置
+		/// <para>Resources路径格式：Resources文件夹后的相对路径，无后缀</para>
 		/// </summary>
 		Resources,
 	}

@@ -2,7 +2,7 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.5.0
- *│　Time    ：2022/5/7 0:06:19
+ *│　Time    ：2022/6/7 15:09:38
  *└────────────────────────┘*/
 
 using UnityEngine;
@@ -10,28 +10,24 @@ using UnityEngine;
 namespace TaurenEngine.Framework
 {
 	/// <summary>
-	/// 缓存数据
+	/// AB包缓存数据
 	/// </summary>
-	internal class Cache : CacheBase
+	internal class ABCache : CacheBase
 	{
 		/// <summary>
-		/// 加载类型
+		/// AB包
 		/// </summary>
-		public LoadType loadType;
+		public AssetBundle data;
 		/// <summary>
-		/// 缓存资源
+		/// AB包配置
 		/// </summary>
-		public UnityEngine.Object data;
+		public ABConfig config;
 
-		/// <summary>
-		/// 释放资源
-		/// </summary>
 		public override void Release()
 		{
-			if (loadType == LoadType.Resources)
-				Resources.UnloadAsset(data);
+			data.Unload(false);
 
-			data = null;
+			config = null;
 		}
 	}
 }

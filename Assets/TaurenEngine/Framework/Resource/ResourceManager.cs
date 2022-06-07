@@ -17,7 +17,7 @@ namespace TaurenEngine.Framework
 	{
 		internal readonly CacheManager cacheMgr;
 		internal readonly LoadManager loadMgr;
-		private ResourceConfig _resourceConfig;
+		internal ResourceConfig resourceConfig;
 
 		private uint _toId = 0;
 
@@ -27,16 +27,16 @@ namespace TaurenEngine.Framework
 			loadMgr = new LoadManager();
 		}
 
-		#region 加载资源配置
+		#region 加载AB配置
 		/// <summary>
-		/// 加载资源配置
+		/// 加载AB资源配置
 		/// </summary>
 		/// <param name="path"></param>
 		/// <param name="loadType"></param>
 		/// <param name="downloadType"></param>
-		public uint LoadConfig(string path, LoadType loadType, DownloadType downloadType, Action<bool> onLoadComplete)
+		public uint LoadABConfig(string path, LoadType loadType, DownloadType downloadType, Action<bool> onLoadComplete)
 		{
-			return LoadAsync<string>(path, loadType, (result, value) =>
+			return LoadAsync<TextAsset>(path, loadType, (result, value) =>
 			{
 				if (!result)
 				{
@@ -46,7 +46,7 @@ namespace TaurenEngine.Framework
 
 				try
 				{
-					_resourceConfig = JsonHelper.ToObject<ResourceConfig>(value);
+					resourceConfig = JsonHelper.ToObject<ResourceConfig>(value.text);
 				}
 				catch (Exception ex)
 				{
@@ -57,50 +57,59 @@ namespace TaurenEngine.Framework
 					onLoadComplete?.Invoke(result);
 				}
 			},
-			0, CacheType.None, downloadType);
-		}
-
-		private AssetItemConfig GetABItemConfig(string path)
-		{
-			if (_resourceConfig == null)
-				return null;
-
-			return null;
+			10, CacheType.None, downloadType);
 		}
 		#endregion
 
-		public T Load<T>(out uint id, string path, LoadType loadType,
-			int loadPriority = 10, CacheType cacheType = CacheType.ReferenceDelay,
-			DownloadType downloadType = DownloadType.None, Action<float> onLoadProgress = null)
+		#region 同步加载
+		/// <summary>
+		/// 【不推荐，脱管】同步加载资源。
+		/// <para>默认不缓存，无单独依赖资源，不加载AB包，不下载。</para>
+		/// <para>资源自行管理，不需要调用管理器释放。</para>
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="path"></param>
+		/// <param name="loadType"></param>
+		/// <returns></returns>
+		public T Load<T>(string path, LoadType loadType) where T : UnityEngine.Object
+		{
+			return loadMgr.Load<T>(0, path, loadType, CacheType.None);
+		}
+
+		/// <summary>
+		/// 同步加载资源
+		/// <para>默认不下载</para>
+		/// <para>注意：不管是否缓存，释放资源一定要调用管理器释放<c>Unload</c>。</para>
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="path"></param>
+		/// <param name="loadType"></param>
+		/// <param name="id"></param>
+		/// <param name="cacheType"></param>
+		/// <returns></returns>
+		public T Load<T>(string path, LoadType loadType, out uint id, CacheType cacheType = CacheType.ReferenceDelay) where T : UnityEngine.Object
 		{
 			id = ++_toId;
 			if (cacheMgr.TryGetCache<T>(path, id, out var data))
 				return data;
 
-			var task = LoadTask<T>.Get();
-			task.id = id;
-			task.path = path;
-			task.loadType = loadType;
-			task.loadPriority = loadPriority;
-			task.cacheType = cacheType;
-			task.downloadType = downloadType;
-			task.onLoadProgress = onLoadProgress;
-
-			return loadMgr.Load(task);
+			return loadMgr.Load<T>(id, path, loadType, cacheType);
 		}
+		#endregion
 
+		#region 异步加载
 		public uint LoadAsync<T>(string path, LoadType loadType, Action<bool, T> onLoadComplete,
 			int loadPriority = 10, CacheType cacheType = CacheType.ReferenceDelay,
-			DownloadType downloadType = DownloadType.None, Action<float> onLoadProgress = null)
+			DownloadType downloadType = DownloadType.None, Action<float> onLoadProgress = null) where T : UnityEngine.Object
 		{
 			var id = ++_toId;
-			if (cacheMgr.TryGetCache<T>(path, id, out var data))
+			if (cacheMgr.TryGetCache<T>(path, id, out var data, out var isTypeError))
 			{
-				onLoadComplete?.Invoke(true, data);
+				onLoadComplete?.Invoke(!isTypeError, data);
 				return id;
 			}
 
-			var task = LoadTask<T>.Get();
+			var task = LoadTaskAsync<T>.Get();
 			task.id = id;
 			task.path = path;
 			task.loadType = loadType;
@@ -113,7 +122,9 @@ namespace TaurenEngine.Framework
 			loadMgr.LoadAsync(task);
 			return id;
 		}
+		#endregion
 
+		#region 卸载资源
 		/// <summary>
 		/// 卸载资源
 		/// </summary>
@@ -125,5 +136,6 @@ namespace TaurenEngine.Framework
 
 			cacheMgr.Release(id);
 		}
+		#endregion
 	}
 }

@@ -12,22 +12,49 @@ namespace TaurenEngine.Framework
 	/// </summary>
 	internal class LoadManager
 	{
-		public T Load<T>(LoadTask<T> loadTask)
+		#region 同步加载
+		public T Load<T>(uint id, string path, LoadType loadType, CacheType cacheType) where T : UnityEngine.Object
 		{
-			loadTask.isAsync = false;
-
-
-			return default;
+			if (loadType == LoadType.AssetBundle)
+			{
+				var loader = ABLoader.Get();
+				var data = loader.Load<T>(id, path, cacheType);
+				loader.Recycle();
+				return data;
+			}
+			else if (loadType == LoadType.File)
+			{
+				var loader = FileLoader.Get();
+				var data = loader.Load<T>(id, path, cacheType);
+				loader.Recycle();
+				return data;
+			}
+			else if (loadType == LoadType.Resources)
+			{
+				var loader = ResourceLoader.Get();
+				var data = loader.Load<T>(id, path, cacheType);
+				loader.Recycle();
+				return data;
+			}
+			else
+				return null;
 		}
 
-		public void LoadAsync<T>(LoadTask<T> loadTask)
-		{
-			loadTask.isAsync = true;
-		}
 
+		#endregion
+
+		#region 异步加载
+		public void LoadAsync<T>(LoadTaskAsync<T> loadTask) where T : UnityEngine.Object
+		{
+			
+		}
+		#endregion
+
+		#region 释放资源
 		public bool Unload(uint id)
 		{
 			return false;
 		}
+		#endregion
 	}
 }
