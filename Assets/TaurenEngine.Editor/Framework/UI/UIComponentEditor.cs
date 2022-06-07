@@ -26,6 +26,7 @@ namespace TaurenEngine.Editor.Framework
 
 			_uiEditorData.UIPrefabPath.Draw("UI预制体路径：");
 			_uiEditorData.GenerateSavePath.Draw("生成代码保存路径：");
+			_uiEditorData.CodeNamespace.Draw("生成代码命名空间：");
 		}
 	}
 }

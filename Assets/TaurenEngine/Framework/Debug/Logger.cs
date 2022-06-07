@@ -5,7 +5,7 @@
  *│　Time    ：2022/5/25 0:41:29
  *└────────────────────────┘*/
 
-using UnityEngine;
+using System.Diagnostics;
 
 namespace TaurenEngine.Framework
 {
@@ -14,19 +14,21 @@ namespace TaurenEngine.Framework
 	/// </summary>
 	public class Logger
 	{
+		[Conditional("DEBUG")]
 		public static void Log(object message)
 		{
-			Debug.Log(message);
+			UnityEngine.Debug.Log(message);
 		}
 
+		[Conditional("DEBUG")]
 		public static void Warning(object message)
 		{
-			Debug.LogWarning(message);
+			UnityEngine.Debug.LogWarning(message);
 		}
 
 		public static void Error(object message)
 		{
-			Debug.LogError(message);
+			UnityEngine.Debug.LogError(message);
 		}
 	}
 }

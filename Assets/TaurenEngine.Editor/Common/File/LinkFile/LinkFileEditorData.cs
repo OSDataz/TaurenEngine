@@ -14,12 +14,12 @@ namespace TaurenEngine.Editor.Common
 {
 	public sealed class LinkFileEditorData : EditorData<LinkFileData>
 	{
+		protected override string SavePath => "Assets/EditorConfig/LinkFileConfig.asset";
+
 		protected override void UpdateProperty()
 		{
 			Groups = GetProperty(Groups, nameof(Data.groups));
 		}
-
-		protected override string SavePath => "Assets/EditorConfig/LinkFileConfig.asset";
 
 		public PropertyList<LinkFileGroupEo> Groups { get; private set; }
 	}

@@ -13,8 +13,8 @@ namespace TaurenEngine.Editor.Common
 {
 	public class LinkFileWindow : EditorWindow
 	{
-		[MenuItem("TaurenEngine/File/Link File")]
-		private static void ShowLinkFileWindow()
+		[MenuItem("TaurenEngine/File/链接文件工具")]
+		private static void ShowWindow()
 		{
 			var window = EditorWindow.GetWindow<LinkFileWindow>("Link File");
 			window.minSize = new Vector2(500, 100);

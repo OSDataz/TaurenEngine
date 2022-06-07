@@ -13,7 +13,7 @@ namespace TaurenEngine.Editor.Common
 {
 	public static class OpenAppEditor
 	{
-		[MenuItem("TaurenEngine/App/Open Script Project")]
+		[MenuItem("TaurenEngine/App/打开本地代码工程")]
 		private static void OpenScriptProject()
 		{
 			var path = Application.dataPath;

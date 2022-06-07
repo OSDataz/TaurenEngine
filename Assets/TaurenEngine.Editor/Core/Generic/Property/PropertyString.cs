@@ -28,14 +28,14 @@ namespace TaurenEngine.Editor
 			}
 		}
 
-		public void Draw()
+		public void Draw(params GUILayoutOption[] options)
 		{
-			Value = EditorGUILayout.TextField(property.stringValue);
+			Value = EditorGUILayout.TextField(property.stringValue, options);
 		}
 
-		public void Draw(string label)
+		public void Draw(string label, params GUILayoutOption[] options)
 		{
-			Value = EditorGUILayout.TextField(label, property.stringValue);
+			Value = EditorGUILayout.TextField(label, property.stringValue, options);
 		}
 
 		public void Draw(Rect rect)
@@ -43,14 +43,14 @@ namespace TaurenEngine.Editor
 			Value = EditorGUI.TextField(rect, property.stringValue);
 		}
 
-		public void DrawLabel()
+		public void DrawLabel(params GUILayoutOption[] options)
 		{
-			EditorGUILayout.LabelField(property.stringValue);
+			EditorGUILayout.LabelField(property.stringValue, options);
 		}
 
-		public void DrawLabel(string label)
+		public void DrawLabel(string label, params GUILayoutOption[] options)
 		{
-			EditorGUILayout.LabelField(label, property.stringValue);
+			EditorGUILayout.LabelField(label, property.stringValue, options);
 		}
 
 		public void DrawLabel(Rect rect)

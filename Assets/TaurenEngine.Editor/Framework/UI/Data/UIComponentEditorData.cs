@@ -9,15 +9,17 @@ namespace TaurenEngine.Editor.Framework
 {
 	public sealed class UIComponentEditorData : EditorDataSingleton<UIComponentEditorData, UIComponentData>
 	{
+		protected override string SavePath => "Assets/FrameworkConfig/UIComponentConfig.asset";
+
 		protected override void UpdateProperty()
 		{
 			UIPrefabPath = GetProperty(UIPrefabPath, nameof(Data.uiPrefabPath));
 			GenerateSavePath = GetProperty(GenerateSavePath, nameof(Data.generateSavePath));
+			CodeNamespace = GetProperty(CodeNamespace, nameof(Data.codeNamespace));
 		}
-
-		protected override string SavePath => "Assets/EditorConfig/UIComponentConfig.asset";
 
 		public PropertyString UIPrefabPath { get; private set; }
 		public PropertyString GenerateSavePath { get; private set; }
+		public PropertyString CodeNamespace { get; private set; }
 	}
 }

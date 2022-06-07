@@ -20,5 +20,10 @@ namespace TaurenEngine.Editor.Framework
 		/// 生成UI代码保存路径
 		/// </summary>
 		public string generateSavePath;
+
+		/// <summary>
+		/// 生成UI代码命名空间
+		/// </summary>
+		public string codeNamespace;
 	}
 }

@@ -27,6 +27,11 @@ namespace TaurenEngine.Editor
             }
         }
 
+        public void Draw(params GUILayoutOption[] options)
+		{
+            Value = EditorGUILayout.Toggle(property.boolValue, options);
+        }
+
         public void Draw(string label)
         {
             Value = EditorGUILayout.Toggle(label, property.boolValue);

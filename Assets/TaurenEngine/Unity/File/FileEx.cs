@@ -229,19 +229,22 @@ namespace TaurenEngine.Unity
 			stream.Dispose();
 		}
 
-		public static object LoadObject(string filePath)
+		public static bool LoadObject(string filePath, out object data)
 		{
 			if (File.Exists(filePath))
 			{
 				FileStream stream = File.Open(filePath, FileMode.Open);
 				BinaryFormatter format = new BinaryFormatter();
-				object content = format.Deserialize(stream);
+				data = format.Deserialize(stream);
 				stream.Close();
 				stream.Dispose();
-				return content;
+				return true;
 			}
 			else
-				return null;
+			{
+				data = default;
+				return false;
+			}
 		}
 		#endregion
 

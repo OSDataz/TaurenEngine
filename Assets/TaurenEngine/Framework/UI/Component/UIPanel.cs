@@ -25,7 +25,7 @@ namespace TaurenEngine.Framework
 				Debug.LogWarning($"UI面板【{root.name}】未添加并设置UIPanelSetting");
 		}
 
-		public void Close()
+		public virtual void Close()
 		{
 			TaurenFramework.UI.Close(this);
 		}

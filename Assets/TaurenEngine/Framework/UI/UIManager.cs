@@ -19,6 +19,7 @@ namespace TaurenEngine.Framework
 			_uiGroups = uiGroups;
 		}
 
+		#region UI组
 		internal UIGroup FindUIGroup(string uiGroupName)
 		{
 			if (_uiGroups == null)
@@ -33,12 +34,16 @@ namespace TaurenEngine.Framework
 
 			return null;
 		}
+		#endregion
 
+		#region 显示面板
 		public T Open<T>() where T : UIPanel
 		{
 			return null;
 		}
+		#endregion
 
+		#region 关闭面板
 		public void Close<T>(T panel) where T :UIPanel
 		{
 			if (panel == null || !panel.IsOpen)
@@ -46,5 +51,6 @@ namespace TaurenEngine.Framework
 
 
 		}
+		#endregion
 	}
 }

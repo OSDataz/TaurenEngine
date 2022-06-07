@@ -20,7 +20,7 @@ namespace TaurenEngine.Editor.Framework
 {
 	public static class UIComponentTool
 	{
-		[MenuItem("Assets/TaurenFramework/Generate UI Code", true)]
+		[MenuItem("Assets/TaurenFramework/生成UI代码", true)]
 		private static bool GenerateUICodeValidate()
 		{
 			if (Selection.activeGameObject == null)
@@ -36,7 +36,7 @@ namespace TaurenEngine.Editor.Framework
 			return true;
 		}
 
-		[MenuItem("Assets/TaurenFramework/Generate UI Code", false, 500)]
+		[MenuItem("Assets/TaurenFramework/生成UI代码", false, 500)]
 		private static void GenerateUICode()
 		{
 			var uiData = UIComponentEditorData.Instance.Data;
@@ -81,10 +81,19 @@ namespace TaurenEngine.Editor.Framework
 			path = Path.GetDirectoryName(path.Substring(uiEditorData.uiPrefabPath.Length));// 子文件路径
 			path = PathEx.FormatPathEnd(uiEditorData.generateSavePath, true) + PathEx.FormatPathStart(path, false);// Asset下完整文件路径
 
-			var headPath = PathEx.FormatPathEnd(path, false);
-			headPath = headPath.Replace(" ", "");
-			headPath = headPath.Replace('/', '.');
-			headPath = headPath.Replace('\\', '.');
+			string headPath;
+			if (string.IsNullOrEmpty(uiEditorData.codeNamespace))
+			{
+				headPath = PathEx.FormatPathEnd(path, false);
+				headPath = headPath.Replace(" ", "");
+				headPath = headPath.Replace('/', '.');
+				headPath = headPath.Replace('\\', '.');
+				headPath = headPath.Substring(7);
+			}
+			else
+			{
+				headPath = uiEditorData.codeNamespace;
+			}
 
 			path = $"{EditorHelper.ProjectPath}{path}/{className}.cs";// 全代码文件路径
 
@@ -128,7 +137,9 @@ namespace TaurenEngine.Editor.Framework
 				{
 					case '*':// 生成组件，并解析子组件
 						ParseComponent(child, rootPath, ref propertyGet, ref propertySet);
-						ParseSubObject(child, $"{rootPath}/{child.name}", ref propertyGet, ref propertySet);
+
+						
+						ParseSubObject(child, string.IsNullOrEmpty(rootPath) ? child.name : $"{rootPath}/{child.name}", ref propertyGet, ref propertySet);
 						break;
 
 					case '+':// 仅生成组件
@@ -139,7 +150,7 @@ namespace TaurenEngine.Editor.Framework
 						break;
 
 					default:
-						ParseSubObject(child, $"{rootPath}/{child.name}", ref propertyGet, ref propertySet);
+						ParseSubObject(child, string.IsNullOrEmpty(rootPath) ? child.name : $"{rootPath}/{child.name}", ref propertyGet, ref propertySet);
 						break;
 				}
 			}
@@ -187,8 +198,8 @@ namespace TaurenEngine.Editor.Framework
 
 			nameStr = FormatPropertyName(nameStr);
 
-			propertyGet += $"\n		public {typeStr} {nameStr} {{ get; private set; }}";
-			propertySet += $"\n			{nameStr} = root.Find(\"{rootPath}/{transform.name}\")?.GetComponent<{typeStr}>();";
+			propertyGet += $"\r\n		public {typeStr} {nameStr} {{ get; private set; }}";
+			propertySet += $"\r\n			{nameStr} = root.Find(\"{rootPath}/{transform.name}\")?.GetComponent<{typeStr}>();";
 		}
 
 		private static string FormatPropertyName(string name)

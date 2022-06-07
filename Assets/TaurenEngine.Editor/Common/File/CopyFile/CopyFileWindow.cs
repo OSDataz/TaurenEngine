@@ -13,8 +13,8 @@ namespace TaurenEngine.Editor.Common
 {
 	public class CopyFileWindow : EditorWindow
 	{
-		[MenuItem("TaurenEngine/File/Copy File")]
-		private static void ShowCopyFileWindow()
+		[MenuItem("TaurenEngine/File/复制文件工具")]
+		private static void ShowWindow()
 		{
 			var window = EditorWindow.GetWindow<CopyFileWindow>("Copy File");
 			window.minSize = new Vector2(500, 100);
