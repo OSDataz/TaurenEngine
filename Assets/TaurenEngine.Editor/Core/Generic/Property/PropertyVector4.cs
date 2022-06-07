@@ -27,9 +27,9 @@ namespace TaurenEngine.Editor
             }
         }
 
-        public void Draw(string label)
+        public void Draw(string label, params GUILayoutOption[] options)
         {
-            Value = EditorGUILayout.Vector4Field(label, property.vector4Value);
+            Value = EditorGUILayout.Vector4Field(label, property.vector4Value, options);
         }
 
         public void Draw(Rect rect, string label)

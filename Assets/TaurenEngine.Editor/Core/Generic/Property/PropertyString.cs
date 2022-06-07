@@ -58,14 +58,14 @@ namespace TaurenEngine.Editor
 			EditorGUI.LabelField(rect, property.stringValue);
 		}
 
-		public void DrawEnum<T>(string label) where T : Enum
+		public void DrawEnum<T>(string label, params GUILayoutOption[] options) where T : Enum
 		{
 			var editorEnum = EditorEnum.Get<T>();
 
 			var value = property.stringValue;
 			var index = Array.FindIndex(editorEnum.nameArray, item => item == value);
 
-			var newIndex = EditorGUILayout.IntPopup(label, index, editorEnum.tagArray, editorEnum.indexArray);
+			var newIndex = EditorGUILayout.IntPopup(label, index, editorEnum.tagArray, editorEnum.indexArray, options);
 			if (newIndex != index && newIndex >= -1)
 			{
 				Value = editorEnum.nameArray[newIndex];
