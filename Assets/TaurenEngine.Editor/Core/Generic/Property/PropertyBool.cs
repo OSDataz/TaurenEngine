@@ -32,9 +32,9 @@ namespace TaurenEngine.Editor
             Value = EditorGUILayout.Toggle(property.boolValue, options);
         }
 
-        public void Draw(string label)
+        public void Draw(string label, params GUILayoutOption[] options)
         {
-            Value = EditorGUILayout.Toggle(label, property.boolValue);
+            Value = EditorGUILayout.Toggle(label, property.boolValue, options);
         }
 
         public void Draw(Rect rect)

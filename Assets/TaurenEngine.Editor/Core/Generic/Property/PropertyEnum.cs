@@ -34,9 +34,9 @@ namespace TaurenEngine.Editor
 			set { property.enumValueIndex = (int)(object)value; }
 		}
 
-		public void Draw(string label)
+		public void Draw(string label, params GUILayoutOption[] options)
 		{
-			ValueEnum = (T)EditorGUILayout.EnumPopup(label, ValueEnum);
+			ValueEnum = (T)EditorGUILayout.EnumPopup(label, ValueEnum, options);
 		}
 
 		public void Draw(Rect rect)
@@ -44,11 +44,11 @@ namespace TaurenEngine.Editor
 			ValueEnum = (T)EditorGUI.EnumPopup(rect, ValueEnum);
 		}
 
-		public void DrawEnum(string label)
+		public void DrawEnum(string label, params GUILayoutOption[] options)
 		{
 			var editorEnum = EditorEnum.Get<T>();
 
-			Value = EditorGUILayout.IntPopup(label, property.enumValueIndex, editorEnum.tagArray, editorEnum.intArray);
+			Value = EditorGUILayout.IntPopup(label, property.enumValueIndex, editorEnum.tagArray, editorEnum.intArray, options);
 		}
 
 		public void DrawEnum(Rect rect)

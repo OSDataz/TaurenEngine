@@ -27,9 +27,9 @@ namespace TaurenEngine.Editor
             }
         }
 
-        public void Draw(string label)
+        public void Draw(string label, params GUILayoutOption[] options)
         {
-            Value = EditorGUILayout.IntField(label, property.intValue);
+            Value = EditorGUILayout.IntField(label, property.intValue, options);
         }
 
         public void Draw(Rect rect)

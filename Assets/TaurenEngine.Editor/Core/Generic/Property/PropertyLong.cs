@@ -27,9 +27,9 @@ namespace TaurenEngine.Editor
             }
         }
 
-        public void Draw(string label)
+        public void Draw(string label, params GUILayoutOption[] options)
         {
-            Value = EditorGUILayout.LongField(label, property.longValue);
+            Value = EditorGUILayout.LongField(label, property.longValue, options);
         }
 
         public void Draw(Rect rect)
