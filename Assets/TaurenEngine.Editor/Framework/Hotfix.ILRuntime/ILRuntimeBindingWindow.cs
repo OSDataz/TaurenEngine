@@ -40,7 +40,7 @@ namespace TaurenEngine.Editor.Framework
 		{
 			// 通过自动分析热更DLL生成CLR绑定
 			EditorGUILayout.BeginVertical("box");
-			_editorData.DLLPath.Draw("DLL路径：");
+			_editorData.DLLPath.Draw("热更DLL名字：");
 			_editorData.GenerateCodeSavePath.Draw("CLR绑定代码保存路径：");
 			if (GUILayout.Button("通过自动分析热更DLL生成CLR绑定"))
 			{

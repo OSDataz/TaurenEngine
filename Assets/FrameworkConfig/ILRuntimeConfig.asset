@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261e8603e5e3cb44596b9106750b281d, type: 3}
   m_Name: ILRuntimeConfig
   m_EditorClassIdentifier: 
-  dllPath: Assets/Test.Hotfix~/bin/Test.Hotfix.dll
-  generateCodeSavePath: Assets/Test/Script/Generated
+  dllPath: DemoILRuntime.Hotfix.dll
+  generateCodeSavePath: Assets/DemoILRuntime/Script/Generated
   adaptorGroupList:
   - showDetails: 1
     name: "\u6846\u67B6\u9002\u914D"

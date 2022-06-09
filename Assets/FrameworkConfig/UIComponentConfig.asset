@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cfdbe780f9d6b4c866fc8ffbdd68a8, type: 3}
   m_Name: UIComponentConfig
   m_EditorClassIdentifier: 
-  uiPrefabPath: Assets/Test/Resources/UI
-  generateSavePath: Assets/Test.Hotfix~/Scripts/UI
-  codeNamespace: Test.Hotfix
+  uiPrefabPath: Assets/DemoILRuntime/Resources/UI
+  generateSavePath: Assets/DemoILRuntime.Hotfix/Script/UIGenerated
+  codeNamespace: DemoILRuntime.Hotfix
