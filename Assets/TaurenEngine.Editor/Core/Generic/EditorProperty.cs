@@ -50,7 +50,10 @@ namespace TaurenEngine.Editor
 		public void RemoveSelf()
 		{
 			if (_parent is IEditorReference reference)
+			{
+				Clear();
 				reference.Remove(this);
+			}
 		}
 		#endregion
 

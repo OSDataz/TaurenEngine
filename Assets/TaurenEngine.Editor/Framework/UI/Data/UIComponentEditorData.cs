@@ -9,7 +9,7 @@ namespace TaurenEngine.Editor.Framework
 {
 	public sealed class UIComponentEditorData : EditorDataSingleton<UIComponentEditorData, UIComponentData>
 	{
-		protected override string SavePath => "Assets/FrameworkConfig/UIComponentConfig.asset";
+		protected override string SavePath => "Assets/SettingConfig/Project/UIComponentConfig.asset";
 
 		protected override void UpdateProperty()
 		{

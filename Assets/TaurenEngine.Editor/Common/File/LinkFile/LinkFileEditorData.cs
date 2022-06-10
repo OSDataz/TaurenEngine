@@ -14,7 +14,7 @@ namespace TaurenEngine.Editor.Common
 {
 	public sealed class LinkFileEditorData : EditorData<LinkFileData>
 	{
-		protected override string SavePath => "Assets/EditorConfig/LinkFileConfig.asset";
+		protected override string SavePath => "Assets/SettingConfig/Editor/LinkFileConfig.asset";
 
 		protected override void UpdateProperty()
 		{
@@ -53,10 +53,9 @@ namespace TaurenEngine.Editor.Common
 			if (GUILayout.Button("Delete", GUILayout.Width(70)))
 			{
 				if (EditorUtility.DisplayDialog($"删除确认", $"\n当前删除 - {Name.Value}，\n\n确认是否删除？", "删除", "取消"))
-				{
-					Clear();
 					RemoveSelf();
-				}
+
+				EditorGUILayout.EndHorizontal();
 				return false;
 			}
 			EditorGUILayout.EndHorizontal();
@@ -117,8 +116,9 @@ namespace TaurenEngine.Editor.Common
 
 			if (GUILayout.Button("Delete", GUILayout.Width(70)))
 			{
-				Clear();
 				RemoveSelf();
+
+				EditorGUILayout.EndHorizontal();
 				return false;
 			}
 			EditorGUILayout.EndHorizontal();
@@ -169,6 +169,8 @@ namespace TaurenEngine.Editor.Common
 			if (GUILayout.Button("Delete", GUILayout.Width(70)))
 			{
 				RemoveSelf();
+
+				EditorGUILayout.EndHorizontal();
 				return false;
 			}
 			EditorGUILayout.EndHorizontal();

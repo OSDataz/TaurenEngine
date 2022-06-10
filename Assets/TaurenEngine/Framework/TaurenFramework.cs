@@ -31,6 +31,10 @@ namespace TaurenEngine.Framework
 		/// UI管理器
 		/// </summary>
 		public static UIManager UI { get; internal set; }
+		/// <summary>
+		/// 热更管理器
+		/// </summary>
+		public static HotfixManager Hotfix { get; internal set; }
 
 		static TaurenFramework()
 		{

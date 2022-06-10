@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a676a27b8e9c1946a4758e7b3c4822f, type: 3}
+  m_Name: CopyFileConfig
+  m_EditorClassIdentifier: 
+  groups:
+  - showDetails: 0
+    name: "Co.\u4EE3\u7801\u6A21\u677F-Me"
+    updateTime: 2022/6/2 10:36:49
+    items:
+    - copyPath: D:\Cahce\CoreTemplates\Me\Class.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
+    - copyPath: D:\Cahce\CoreTemplates\Me\Interface.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs
+  - showDetails: 0
+    name: "Co.\u4EE3\u7801\u6A21\u677F-Co"
+    updateTime: 2022/4/11 10:29:27
+    items:
+    - copyPath: D:\Cahce\CoreTemplates\Co\Class.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
+    - copyPath: D:\Cahce\CoreTemplates\Co\Interface.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs

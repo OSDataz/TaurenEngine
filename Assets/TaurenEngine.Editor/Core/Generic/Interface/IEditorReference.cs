@@ -7,6 +7,9 @@
 
 namespace TaurenEngine.Editor
 {
+	/// <summary>
+	/// 引用类型的属性
+	/// </summary>
 	public interface IEditorReference : IEditorProperty
 	{
 		void Remove(IEditorProperty item);

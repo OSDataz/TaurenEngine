@@ -15,7 +15,7 @@ namespace TaurenEngine.Editor.Common
 {
 	public sealed class CopyFileEditorData : EditorData<CopyFileData>
 	{
-		protected override string SavePath => "Assets/EditorConfig/CopyFileConfig.asset";
+		protected override string SavePath => "Assets/SettingConfig/Editor/CopyFileConfig.asset";
 
 		protected override void UpdateProperty()
 		{
@@ -57,6 +57,8 @@ namespace TaurenEngine.Editor.Common
 			{
 				if (EditorUtility.DisplayDialog($"删除确认", $"\n删除 - {Name.Value}，\n\n确认是否删除？", "删除", "取消"))
 					RemoveSelf();
+
+				EditorGUILayout.EndHorizontal();
 				return false;
 			}
 			EditorGUILayout.EndHorizontal();
@@ -112,6 +114,8 @@ namespace TaurenEngine.Editor.Common
 			if (GUILayout.Button("Delete", GUILayout.Width(70)))
 			{
 				RemoveSelf();
+
+				EditorGUILayout.EndHorizontal();
 				return false;
 			}
 			EditorGUILayout.EndHorizontal();

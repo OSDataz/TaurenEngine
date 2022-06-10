@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using TaurenEngine.Framework;
 using TaurenEngine.Unity;
@@ -97,19 +98,18 @@ namespace TaurenEngine.Editor.Framework
 
 			path = $"{EditorHelper.ProjectPath}{path}/{className}.cs";// 全代码文件路径
 
-			string propertyGet = "";
-			string propertySet = "";
-			ParseSubObject(gameObject.transform, "", ref propertyGet, ref propertySet);
+			StringBuilder propertyGet = new StringBuilder();
+			StringBuilder propertySet = new StringBuilder();
+			ParseSubObject(gameObject.transform, "", propertyGet, propertySet);
 
 			// 生成代码文件
 			FileEx.SaveText(path, string.Format(
 				template,
-				TaurenFramework.Version,
-				DateTime.Now.ToString(),
+				CodeTemplate.GetHeadAnnotation(),
 				headPath,
 				className,
-				propertyGet,
-				propertySet
+				propertyGet.ToString(),
+				propertySet.ToString()
 				));
 		}
 
@@ -127,7 +127,7 @@ namespace TaurenEngine.Editor.Framework
 				return $"{uiName}{lastName}";
 		}
 
-		private static void ParseSubObject(Transform transform, string rootPath, ref string propertyGet, ref string propertySet)
+		private static void ParseSubObject(Transform transform, string rootPath, StringBuilder propertyGet, StringBuilder propertySet)
 		{
 			var len = transform.childCount;
 			for (int i = 0; i < len; ++i)
@@ -136,27 +136,27 @@ namespace TaurenEngine.Editor.Framework
 				switch (child.name[0])
 				{
 					case '*':// 生成组件，并解析子组件
-						ParseComponent(child, rootPath, ref propertyGet, ref propertySet);
+						ParseComponent(child, rootPath, propertyGet, propertySet);
 
 						
-						ParseSubObject(child, string.IsNullOrEmpty(rootPath) ? child.name : $"{rootPath}/{child.name}", ref propertyGet, ref propertySet);
+						ParseSubObject(child, string.IsNullOrEmpty(rootPath) ? child.name : $"{rootPath}/{child.name}", propertyGet, propertySet);
 						break;
 
 					case '+':// 仅生成组件
-						ParseComponent(child, rootPath, ref propertyGet, ref propertySet);
+						ParseComponent(child, rootPath, propertyGet, propertySet);
 						break;
 
 					case '=':// 跳过该节点
 						break;
 
 					default:
-						ParseSubObject(child, string.IsNullOrEmpty(rootPath) ? child.name : $"{rootPath}/{child.name}", ref propertyGet, ref propertySet);
+						ParseSubObject(child, string.IsNullOrEmpty(rootPath) ? child.name : $"{rootPath}/{child.name}", propertyGet, propertySet);
 						break;
 				}
 			}
 		}
 
-		private static void ParseComponent(Transform transform, string rootPath, ref string propertyGet, ref string propertySet)
+		private static void ParseComponent(Transform transform, string rootPath, StringBuilder propertyGet, StringBuilder propertySet)
 		{
 			string typeStr;
 			string nameStr;
@@ -198,8 +198,8 @@ namespace TaurenEngine.Editor.Framework
 
 			nameStr = FormatPropertyName(nameStr);
 
-			propertyGet += $"\r\n		public {typeStr} {nameStr} {{ get; private set; }}";
-			propertySet += $"\r\n			{nameStr} = root.Find(\"{rootPath}/{transform.name}\")?.GetComponent<{typeStr}>();";
+			propertyGet.Append($"\r\n		public {typeStr} {nameStr} {{ get; private set; }}");
+			propertySet.Append($"\r\n			{nameStr} = root.Find(\"{rootPath}/{transform.name}\")?.GetComponent<{typeStr}>();");
 		}
 
 		private static string FormatPropertyName(string name)
@@ -242,52 +242,38 @@ namespace TaurenEngine.Editor.Framework
 			typeof(Transform),
 		};
 
-		private static string PanelTemplate = @"/*┌────────────────────────┐
- *│　Engine  ：TaurenEngine
- *│　Author  ：Osdataz
- *│　Version ：v{0}
- *│　Time    ：{1}
- *│
- *│  工具自动生成，切勿自行修改。
- *└────────────────────────┘*/
+		private static string PanelTemplate = @"{0}
 
 using TaurenEngine.Framework;
 using UnityEngine;
 
-namespace {2}
+namespace {1}
 {{
-	public class {3} : UIPanel
-	{{{4}
+	public class {2} : UIPanel
+	{{{3}
 
 		public override void Init(Transform root)
 		{{
 			base.Init(root);
-			{5}
+			{4}
 		}}
 	}}
 }}";
 
-		private static string UITemplate = @"/*┌────────────────────────┐
- *│　Engine  ：TaurenEngine
- *│　Author  ：Osdataz
- *│　Version ：v{0}
- *│　Time    ：{1}
- *│
- *│  工具自动生成，切勿自行修改。
- *└────────────────────────┘*/
+		private static string UITemplate = @"{0}
 
 using TaurenEngine.Framework;
 using UnityEngine;
 
-namespace {2}
+namespace {1}
 {{
-	public class {3} : UIBase
-	{{{4}
+	public class {2} : UIBase
+	{{{3}
 
 		public override void Init(Transform root)
 		{{
 			base.Init(root);
-			{5}
+			{4}
 		}}
 	}}
 }}";

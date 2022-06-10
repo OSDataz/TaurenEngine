@@ -7,12 +7,14 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEditorInternal;
 
 namespace TaurenEngine.Editor
 {
 	/// <summary>
-	/// 序列化列表删除时，所有序列化对象都会打乱，需要重新获取
+	/// 自定义方案绘制
+	/// <para>序列化列表删除时，所有序列化对象都会打乱，需要重新获取</para>
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public class PropertyList<T> : EditorProperty, IEditorReference where T : EditorProperty, new()
@@ -53,6 +55,7 @@ namespace TaurenEngine.Editor
 		}
 		#endregion
 
+		#region 列表操作
 		public void Add() => Add(property.arraySize);
 
 		public void Add(int index)
@@ -100,30 +103,38 @@ namespace TaurenEngine.Editor
 
 			UpdateModified();
 		}
+		#endregion
+	}
 
-		public int Length => property.arraySize;
-
-		#region 绘制列表 - 待完善
+	/// <summary>
+	/// 系统方案绘制
+	/// </summary>
+	public class PropertyList : EditorProperty
+	{
 		private ReorderableList _reList;
+
 		/// <summary>
 		/// 初始化绘制
 		/// <para>绘制头部栏 <c>drawHeaderCallback = rect => {}</c>，对应<c>displayHeader</c></para>
 		/// <para>绘制列表项 <c>drawElementCallback = (rect, index, isActive, isFocused) => {}</c>，若item赋值则不需要设置</para>
-		/// <para>处理旋转回调 <c>onSelectCallback = list => {}</c></para>
+		/// <para>处理选择回调 <c>onSelectCallback = list => {}</c></para>
 		/// <para>处理添加项 <c>onAddCallback = list => {}</c>, 对应<c>displayAddButton</c></para>
 		/// <para>处理删除项 <c>onRemoveCallback = list => {}</c>，对应<c>displayRemoveButton</c></para>
 		/// </summary>
+		/// <param name="force"></param>
 		/// <param name="draggable">是否能拖动</param>
 		/// <param name="displayHeader">是否显示头部栏</param>
 		/// <param name="displayAddButton">是否显示添加按钮</param>
 		/// <param name="displayRemoveButton">是否显示删除按钮</param>
-		public void InitReorderableList(
+		/// <returns></returns>
+		public ReorderableList InitReorderableList(
+			bool force = false,
 			bool draggable = true,
 			bool displayHeader = true,
 			bool displayAddButton = true,
 			bool displayRemoveButton = true)
 		{
-			if (_reList == null)
+			if (_reList == null || force)
 			{
 				_reList = new ReorderableList(property.serializedObject, property,
 					draggable, displayHeader, displayAddButton, displayRemoveButton);
@@ -134,11 +145,13 @@ namespace TaurenEngine.Editor
 				_reList.displayAdd = displayAddButton;
 				_reList.displayRemove = displayRemoveButton;
 			}
+
+			return _reList;
 		}
 
 		public ReorderableList ReorderableList
 		{
-			get 
+			get
 			{
 				if (_reList == null)
 					_reList = new ReorderableList(property.serializedObject, property);
@@ -146,6 +159,19 @@ namespace TaurenEngine.Editor
 				return _reList;
 			}
 		}
-		#endregion
+
+		public SerializedProperty GetItem(int index)
+		{
+			return property.GetArrayElementAtIndex(index);
+		}
+
+		public override void Clear()
+		{
+			property.ClearArray();
+
+			UpdateModified();
+		}
+
+		public int Length => property.arraySize;
 	}
 }

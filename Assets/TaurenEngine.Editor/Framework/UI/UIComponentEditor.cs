@@ -20,13 +20,21 @@ namespace TaurenEngine.Editor.Framework
 			_uiEditorData = UIComponentEditorData.Instance;
 		}
 
+		protected void OnDisable()
+		{
+			_uiEditorData.SaveAssets();
+		}
+
 		public override void OnInspectorGUI()
 		{
 			base.OnInspectorGUI();
 
+			EditorGUILayout.BeginVertical("box");
+			EditorGUILayout.LabelField("自动生成UI代码设置");
 			_uiEditorData.UIPrefabPath.Draw("UI预制体路径：");
 			_uiEditorData.GenerateSavePath.Draw("生成代码保存路径：");
 			_uiEditorData.CodeNamespace.Draw("生成代码命名空间：");
+			EditorGUILayout.EndVertical();
 		}
 	}
 }

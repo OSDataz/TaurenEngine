@@ -31,7 +31,7 @@ namespace TaurenEngine.Editor
 			if (string.IsNullOrEmpty(text))
 				return;
 
-			var path = $"{Application.dataPath}/EditorConfig/BatOrder.bat";
+			var path = $"{Application.dataPath}/SettingConfig/Temp/BatOrder.bat";
 
 			// 保存代码文件
 			FileEx.SaveText(path, text);
