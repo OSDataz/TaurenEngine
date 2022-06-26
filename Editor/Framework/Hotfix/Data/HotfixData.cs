@@ -13,6 +13,15 @@ namespace TaurenEngine.Editor.Framework
 {
 	public sealed class HotfixData : ScriptableObject
 	{
+		/// <summary>
+		/// 修改代码后是否自动更新热更DLL
+		/// </summary>
+		public bool isDidReloadScripts;
+		/// <summary>
+		/// 热更DLL保存路径
+		/// </summary>
+		public string hotfixDllSavePath;
+
 		public List<HotfixDll> dlls;
 	}
 

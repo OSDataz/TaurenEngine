@@ -163,6 +163,13 @@ namespace TaurenEngine.Unity
 			writer.Dispose();
 		}
 
+		public static void SaveText(string filePath, string content, Encoding encoding)
+		{
+			CreateSaveFilePath(filePath);
+
+			File.WriteAllText(filePath, content, encoding);
+		}
+
 		/// <summary>
 		/// 默认UTF-8解析格式
 		/// </summary>

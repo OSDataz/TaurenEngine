@@ -30,6 +30,15 @@ namespace TaurenEngine.Editor.Framework
 		{
 			base.OnInspectorGUI();
 
+			_hotfixData.IsDidReloadScripts.Draw("修改代码后自动更新热更Dll：");
+
+			EditorGUILayout.BeginHorizontal();
+			_hotfixData.HotfixDllSavePath.Draw("热更Dll保存路径：");
+			if (GUILayout.Button("更新热更Dll"))
+			{
+				HotfixTool.UpdateHotfixDll();
+			}
+			EditorGUILayout.EndHorizontal();
 			_hotfixData.Dlls.ReorderableList.DoLayoutList();
 		}
 

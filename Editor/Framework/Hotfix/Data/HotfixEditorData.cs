@@ -16,9 +16,13 @@ namespace TaurenEngine.Editor.Framework
 
 		protected override void UpdateProperty()
 		{
+			IsDidReloadScripts = GetProperty(IsDidReloadScripts, nameof(Data.isDidReloadScripts));
+			HotfixDllSavePath = GetProperty(HotfixDllSavePath, nameof(Data.hotfixDllSavePath));
 			Dlls = GetProperty(Dlls, nameof(Data.dlls));
 		}
 
+		public PropertyBool IsDidReloadScripts { get; private set; }
+		public PropertyString HotfixDllSavePath { get; private set; }
 		public PropertyList Dlls { get; private set; }
 	}
 

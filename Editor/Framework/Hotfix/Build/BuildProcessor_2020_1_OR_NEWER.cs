@@ -117,6 +117,16 @@ namespace TaurenEngine.Editor.Framework
 			return String.Empty;
 		}
 
+		[UnityEditor.Callbacks.DidReloadScripts]
+		private static void OnDidReloadScripts()
+		{
+			// Unity更新（修改代码后），自动将热更DLL拷贝到指定目录
+			if (!HotfixEditorData.Instance.Data.isDidReloadScripts)
+				return;
+
+			HotfixTool.UpdateHotfixDll();
+		}
+
 #if UNITY_IOS
 		//hook UnityEditor.BuildCompletionEventsHandler.ReportPostBuildCompletionInfo() ? 因为没有 mac 打包平台因此不清楚
 #endif

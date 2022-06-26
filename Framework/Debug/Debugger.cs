@@ -12,7 +12,7 @@ namespace TaurenEngine.Framework
 	/// <summary>
 	/// 业务代码可选择使用该接口输出日志，用于控制性能
 	/// </summary>
-	public class Logger
+	public class Debugger
 	{
 		[Conditional("DEBUG")]
 		public static void Log(object message)

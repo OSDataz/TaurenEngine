@@ -5,7 +5,6 @@
  *│　Time    ：2022/6/10 10:48:38
  *└────────────────────────┘*/
 
-using System;
 using TaurenEngine.Framework;
 
 namespace TaurenEngine.Editor.Framework
@@ -25,5 +24,11 @@ namespace TaurenEngine.Editor.Framework
  *│  该文件由工具自动生成，切勿自行修改。
  *└────────────────────────┘*/";
 		}
+
+		public static string GetScriptTemplate() => GetHeadAnnotation() + @"
+
+namespace {0}
+{{{1}
+}}";
 	}
 }

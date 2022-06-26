@@ -95,7 +95,7 @@ namespace TaurenEngine.Framework
 				{
 					isTypeError = true;
 					data = default;
-					Logger.Error($"资源存在但获取类型错误，Path：{path}, AssetType：{cache.data.GetType()} GetType：{typeof(T)}");
+					Debugger.Error($"资源存在但获取类型错误，Path：{path}, AssetType：{cache.data.GetType()} GetType：{typeof(T)}");
 				}
 
 				return true;
@@ -119,7 +119,7 @@ namespace TaurenEngine.Framework
 				else
 				{
 					data = default;
-					Logger.Error($"资源存在但获取类型错误，Path：{path}, AssetType：{cache.data.GetType()} GetType：{typeof(T)}");
+					Debugger.Error($"资源存在但获取类型错误，Path：{path}, AssetType：{cache.data.GetType()} GetType：{typeof(T)}");
 				}
 
 				return true;

@@ -65,19 +65,39 @@ namespace TaurenEngine.Editor.Framework
 				EditorGUILayout.BeginHorizontal();
 				if (GUILayout.Button("仅生成配置"))
 				{
+					if (excelList != null)
+					{
+						var configHelper = GetConfigHelper(_configData.Data.formatType);
+						var encoding = CommonUtility.ToEncoding(_configData.Data.encodingType);
+						configHelper.SetEnumAndSubClass(excelList);
+						configHelper.GenerateConfig(_configData.Data, excelList, encoding);
 
+						AssetDatabase.Refresh();
 
-					AssetDatabase.Refresh();
+						Debug.Log("配置表生成配置文件成功");
+					}
 				}
 
 				if (GUILayout.Button("生成代码和配置"))
 				{
-
+					var configHelper = GetConfigHelper(_configData.Data.formatType);
+					var encoding = CommonUtility.ToEncoding(_configData.Data.encodingType);
+					configHelper.GenerateScript(_configData.Data, excelList, encoding);
+					configHelper.GenerateConfig(_configData.Data, excelList, encoding);
+					configHelper.GeneratePrelaodScript(_configData.Data, encoding);
 
 					AssetDatabase.Refresh();
+
+					Debug.Log("配置表生成代码和配置文件成功");
 				}
 				EditorGUILayout.EndHorizontal();
 			}
+		}
+
+		private IConfigHelper GetConfigHelper(ConfigFormatType formatType)
+		{
+			if (formatType == ConfigFormatType.JSON) return new ConfigJsonHelper();
+			return new ConfigJsonHelper();
 		}
 	}
 }
