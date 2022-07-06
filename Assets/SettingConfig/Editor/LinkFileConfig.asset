@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53af68cea0e248e488bbca89d0c350ad, type: 3}
+  m_Name: LinkFileConfig
+  m_EditorClassIdentifier: 
+  groups:
+  - showDetails: 1
+    name: "ILRuntime \u5F15\u7528\u7ED1\u5B9A"
+    groups:
+    - rootFromPath: D:\Workspace Me\Git\ILRuntime
+      rootToPath: D:\Workspace Me\TaurenEngine\Assets\TaurenEngine\Framework\Dependencies\ILRuntime
+      items:
+      - fromPath: Dependencies\ILRuntime.Mono.Cecil.dll
+        toPath: Dependencies
+      - fromPath: Dependencies\ILRuntime.Mono.Cecil.Mdb.dll
+        toPath: Dependencies
+      - fromPath: Dependencies\ILRuntime.Mono.Cecil.Mdb.pdb
+        toPath: Dependencies
+      - fromPath: Dependencies\ILRuntime.Mono.Cecil.pdb
+        toPath: Dependencies
+      - fromPath: Dependencies\ILRuntime.Mono.Cecil.Pdb.dll
+        toPath: Dependencies
+      - fromPath: Dependencies\ILRuntime.Mono.Cecil.Pdb.pdb
+        toPath: Dependencies
+      - fromPath: ILRuntime\CLR
+        toPath: ILRuntime\CLR
+      - fromPath: ILRuntime\Other
+        toPath: ILRuntime\Other
+      - fromPath: ILRuntime\Reflection
+        toPath: ILRuntime\Reflection
+      - fromPath: ILRuntime\Runtime
+        toPath: ILRuntime\Runtime
+    - rootFromPath: D:\Workspace Me\Git\litjson\src
+      rootToPath: D:\Workspace Me\TaurenEngine\Assets\TaurenEngine\Framework\Dependencies
+      items:
+      - fromPath: LitJson
+        toPath: LitJson
+  - showDetails: 0
+    name: "Excel \u548C ZIP \u5F15\u7528\u7ED1\u5B9A\uFF08\u6539\uFF09"
+    groups:
+    - rootFromPath: D:\Workspace Me\Git\SharpZipLib\src\ICSharpCode.SharpZipLib
+      rootToPath: D:\Workspace Me\TaurenEngine\Assets\TaurenEngine\Editor\Framework\Dependencies\SharpZipLib
+      items:
+      - fromPath: BZip2
+        toPath: BZip2
+      - fromPath: Checksum
+        toPath: Checksum
+      - fromPath: Core
+        toPath: Core
+      - fromPath: Encryption
+        toPath: Encryption
+      - fromPath: GZip
+        toPath: GZip
+      - fromPath: Lzw
+        toPath: Lzw
+      - fromPath: Tar
+        toPath: Tar
+      - fromPath: Zip
+        toPath: Zip
+    - rootFromPath: D:\Workspace Me\Git\ExcelDataReader\src
+      rootToPath: D:\Workspace Me\TaurenEngine\Assets\TaurenEngine\Editor\Framework\Dependencies\ExcelDataReader
+      items:
+      - fromPath: ExcelDataReader
+        toPath: ExcelDataReader
+      - fromPath: ExcelDataReader.DataSet
+        toPath: ExcelDataReader.DataSet
