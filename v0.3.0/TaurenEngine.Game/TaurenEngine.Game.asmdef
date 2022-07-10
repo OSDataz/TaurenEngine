@@ -1,0 +1,16 @@
+{
+    "name": "TaurenEngine.Game",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7c39e773ca9405c4ca6c4f4946ea9034"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

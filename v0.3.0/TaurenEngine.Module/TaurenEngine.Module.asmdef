@@ -1,0 +1,21 @@
+{
+    "name": "TaurenEngine.Module",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7c39e773ca9405c4ca6c4f4946ea9034",
+        "GUID:57461801432df3c4a862f726458d7440",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:ac145e6b8c6034cdbadc8c6e26aedbcf",
+        "GUID:1e8e55397bd004beaba78a667566665f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

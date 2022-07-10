@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LinkFileConfig
   m_EditorClassIdentifier: 
   groups:
-  - showDetails: 1
+  - showDetails: 0
     name: "ILRuntime \u5F15\u7528\u7ED1\u5B9A"
     groups:
     - rootFromPath: D:\Workspace Me\Git\ILRuntime

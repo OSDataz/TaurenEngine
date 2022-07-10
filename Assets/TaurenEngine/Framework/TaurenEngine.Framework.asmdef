@@ -1,0 +1,17 @@
+{
+    "name": "TaurenEngine.Framework",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2183fe121646fd946bc80704484389fc",
+        "GUID:44fa051187263ad48bf0cd2b513400da"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

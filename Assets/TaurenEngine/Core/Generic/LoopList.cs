@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace TaurenEngine.Core
 {
 	/// <summary>
-	/// 支持循环中增删元素的列表
+	/// 支持循环中增删元素的列表，减少GC
 	/// <para>注意：不能提供任何操作下标Index的接口</para>
 	/// </summary>
 	/// <typeparam name="T"></typeparam>

@@ -1,0 +1,20 @@
+{
+    "name": "TaurenEditor.Component",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2183fe121646fd946bc80704484389fc",
+        "GUID:a60908c053a7c824b9c053cf27e70800",
+        "GUID:44fa051187263ad48bf0cd2b513400da"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

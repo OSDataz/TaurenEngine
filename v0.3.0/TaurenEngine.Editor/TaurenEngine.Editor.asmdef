@@ -1,0 +1,18 @@
+{
+    "name": "TaurenEngine.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7c39e773ca9405c4ca6c4f4946ea9034"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

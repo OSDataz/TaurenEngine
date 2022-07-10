@@ -1,0 +1,89 @@
+{
+"building_side_tex":
+{
+"width":1792,
+"height":512,
+
+"tex_data_list":
+      [{
+       "tex_id":1,"whole_rect":[0,512,256,512],"bottom_rect":[0,110,256,110,1,2],"bottom_padding_rect":[222,110,34,110],
+"mid_rect":[0,470,256,360,4,3],"mid_padding_rect":[222,110,34,110],"top_rect":[0,512,256,32,1,4],"top_padding_rect":[222,110,34,110],"vertical_padding_to_top_rect":[0,480,256,10]
+      },{
+       "tex_id":2,"whole_rect":[256,512,256,512],"bottom_rect":[256,110,256,110,1,2],"bottom_padding_rect":[478,110,34,110],
+"mid_rect":[256,470,256,360,4,2],"mid_padding_rect":[478,110,34,110],"top_rect":[256,512,256,32,1,4],"top_padding_rect":[478,110,34,110],"vertical_padding_to_top_rect":[256,480,256,10]
+      }, {
+       "tex_id":3,"whole_rect":[512,512,256,512],"bottom_rect":[512,110,256,110,1,6],"bottom_padding_rect":[512,512,256,42],
+"mid_rect":[512,370,256,260,1,6],"mid_padding_rect":[512,512,256,42],"top_rect":[512,470,256,100,1,6],"top_padding_rect":[512,512,256,42],"vertical_padding_to_top_rect":[512,512,256,42]
+      },{
+       "tex_id":4,"whole_rect":[768,512,256,512],"bottom_rect":[768,100,256,100,1,2],"bottom_padding_rect":[768,512,256,48],
+"mid_rect":[768,464,256,364,4,7],"mid_padding_rect":[768,512,256,48],"top_rect":[768,512,256,48,1,1],"top_padding_rect":[768,512,256,48],"vertical_padding_to_top_rect":[768,512,256,48]
+      },{
+       "tex_id":5,"whole_rect":[1024,512,256,512],"bottom_rect":[1024,96,256,96,1,2],"bottom_padding_rect":[1024,96,18,96],
+"mid_rect":[1024,460,256,364,4,2],"mid_padding_rect":[1024,490,256,30],"top_rect":[1024,512,256,52,1,1],"top_padding_rect":[1024,490,256,30],"vertical_padding_to_top_rect":[1024,490,256,30]
+      },{
+       "tex_id":6,"whole_rect":[1280,512,256,512],"bottom_rect":[1280,106,256,106,1,2],"bottom_padding_rect":[1280,496,256,30],
+"mid_rect":[1280,466,256,360,4,3],"mid_padding_rect":[1280,496,256,30],"top_rect":[1280,512,256,46,1,1],"top_padding_rect":[1280,496,256,30],"vertical_padding_to_top_rect":[1280,496,256,30]
+      },{
+       "tex_id":7,"whole_rect":[1536,512,256,512],"bottom_rect":[1536,98,256,98,1,2],"bottom_padding_rect":[1536,98,20,98],
+"mid_rect":[1536,464,256,366,4,2],"mid_padding_rect":[1536,464,22,366],"top_rect":[1536,512,256,48,1,1],"top_padding_rect":[1536,492,256,28],"vertical_padding_to_top_rect":[1536,492,256,28]
+      }],
+
+"tex_mapping_rule_list":[{"rule_id":1, "tex_id":1}],
+
+"tex_height_mapping_rule":{"rule_id":1000, "tex_height_mapping_list":[{"tex_id":5,"height_range":[0,50]},{"tex_id":6,"height_range":[50,70]},{"tex_id":1,"height_range":[70,90]},{"tex_id":5,"height_range":[90,120]},{"tex_id":7,"height_range":[120,150]},{"tex_id":2,"height_range":[150,180]},{"tex_id":3,"height_range":[180,210]},{"tex_id":4,"height_range":[210,240]},{"tex_id":6,"height_range":[240,270]},{"tex_id":1,"height_range":[270,300]},{"tex_id":3,"height_range":[300,360]},{"tex_id":4,"height_range":[360,10000]}]},
+
+"tag_list":[{"tag":"school", "rule_id":1}, {"tag":"hospital", "rule_id":2},{"tag":"shopping_mall", "rule_id":3}, {"tag":"others", "rule_id":1000}],
+
+"single_building_list":[{"building_id":12345,"rule_id":1}, {"building_id":198434,"rule_id":2}],
+
+"buildings_rect_group_list":[{"center_lat":39.124324,"center_lng":116.92834,"width":200,"height":300,"rule_id":2}]
+
+}, 
+
+"building_top_tex":
+{
+"width":1536,
+"height":1024,
+
+"tex_data_list":[
+{"tex_id":1,"whole_rect":[0,512,512,512,2,2]},{"tex_id":2,"whole_rect":[0,1024,512,512,2,2]},{"tex_id":3,"whole_rect":[512,512,512,512,2,2]},{"tex_id":4,"whole_rect":[512,1024,512,512,2,2]},{"tex_id":5,"whole_rect":[1024,512,512,512,2,2]},{"tex_id":6,"whole_rect":[1024,1024,512,512,2,2]}],
+
+"tex_mapping_rule_list":[
+{"rule_id":1,"tex_id":1},
+{"rule_id":2,"tex_id":2},
+{"rule_id":3,"tex_id":3},
+{"rule_id":4,"tex_id":4},
+{"rule_id":5,"tex_id":5},
+{"rule_id":6,"tex_id":6}],
+
+"tex_height_mapping_rule":{"rule_id":1000, "tex_height_mapping_list":[
+{"tex_id":2,"height_range":[0,25]},
+{"tex_id":2,"height_range":[25,50]},
+{"tex_id":1,"height_range":[50,60]},
+{"tex_id":2,"height_range":[60,70]},
+{"tex_id":6,"height_range":[70,90]},
+{"tex_id":1,"height_range":[90,105]},
+{"tex_id":2,"height_range":[105,120]},
+{"tex_id":3,"height_range":[120,135]},
+{"tex_id":4,"height_range":[135,150]},
+{"tex_id":3,"height_range":[150,165]},
+{"tex_id":4,"height_range":[165,180]},
+{"tex_id":1,"height_range":[180,195]},
+{"tex_id":2,"height_range":[195,210]},
+{"tex_id":1,"height_range":[210,225]},
+{"tex_id":2,"height_range":[225,240]},
+{"tex_id":1,"height_range":[240,255]},
+{"tex_id":2,"height_range":[255,270]},
+{"tex_id":6,"height_range":[270,300]},
+{"tex_id":1,"height_range":[300,330]},
+{"tex_id":2,"height_range":[330,360]},
+{"tex_id":1,"height_range":[360,10000]}]},
+
+"tag_list":[{"tag":"school", "rule_id":1},{"tag":"hospital","rule_id":2},{"tag":"others","rule_id":1000}],
+
+"single_building_list":[{"building_id":12345,"table_id":1}, {"building_id":198434,"table_id":3}],
+
+"buildings_rect_group_list":[{"center_lat":39.124324,"center_lng":116.92834,"width":200,"height":300,"table_id":3},{"center_lat":41.124324,"center_lng":120.92834,"width":666,"height":888,"table_id":2}]
+}
+
+}
