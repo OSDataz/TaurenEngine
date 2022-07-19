@@ -4,6 +4,7 @@
   *│　Version ：v0.7.0
   *│　Time    ：$time$
   *└────────────────────────┘*/
+  
 namespace $rootnamespace$
 {
     public class $safeitemrootname$
