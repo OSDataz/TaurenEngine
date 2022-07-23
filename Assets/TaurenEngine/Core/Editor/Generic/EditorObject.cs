@@ -7,7 +7,7 @@
 
 using UnityEditor;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	public abstract class EditorObject<T> : EditorObject
 	{

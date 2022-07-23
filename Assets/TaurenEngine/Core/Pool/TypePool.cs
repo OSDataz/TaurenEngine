@@ -7,7 +7,7 @@
 
 using System;
 
-namespace TaurenEngine.Core
+namespace TaurenEngine
 {
 	/// <summary>
 	/// Type 类型的对象池

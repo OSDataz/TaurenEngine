@@ -8,9 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using TaurenEngine.Unity;
+using TaurenEngine;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 枚举编辑器显示解析数据

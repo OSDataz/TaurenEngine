@@ -8,7 +8,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	public static class EditorHelper
 	{

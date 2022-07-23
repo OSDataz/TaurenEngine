@@ -5,17 +5,16 @@
  *│　Time    ：2021/9/8 10:10:13
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Core
+namespace TaurenEngine
 {
-    public interface IRecycle
+    /// <summary>
+    /// 可回收对象接口
+    /// </summary>
+    public interface IRecycle : IObject
     {
         /// <summary>
-        /// 【外部切勿调用】清理对象，在放入对象池时调用
+        /// 清理对象，在放入对象池时调用
         /// </summary>
         void Clear();
-        /// <summary>
-        /// 【外部切勿调用】销毁对象，在对象池过剩，销毁对象时调用
-        /// </summary>
-        void Destroy();
     }
 }

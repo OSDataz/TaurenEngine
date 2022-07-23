@@ -7,7 +7,7 @@
 
 using System.Diagnostics;
 
-namespace TaurenEngine.Core
+namespace TaurenEngine
 {
 	public static class Debugx
 	{
@@ -26,6 +26,8 @@ namespace TaurenEngine.Core
 		public static void Error(object message)
 		{
 			UnityEngine.Debug.LogError(message);
+
+			
 		}
 	}
 }

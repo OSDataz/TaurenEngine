@@ -5,7 +5,7 @@
  *│　Time    ：2021/9/8 10:11:44
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Core
+namespace TaurenEngine
 {
 	/// <summary>
 	/// 对象池
@@ -102,6 +102,10 @@ namespace TaurenEngine.Core
 			_caches = null;
 		}
 
+		/// <summary>
+		/// 销毁指定列表
+		/// </summary>
+		/// <param name="startIdx"></param>
 		private void DestroyList(int startIdx)
 		{
 			for (; startIdx < _count; ++startIdx)

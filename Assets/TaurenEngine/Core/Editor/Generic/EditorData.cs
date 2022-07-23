@@ -9,7 +9,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 全局数据单例

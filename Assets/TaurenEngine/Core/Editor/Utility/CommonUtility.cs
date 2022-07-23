@@ -7,7 +7,7 @@
 
 using System.Text;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	public static class CommonUtility
 	{

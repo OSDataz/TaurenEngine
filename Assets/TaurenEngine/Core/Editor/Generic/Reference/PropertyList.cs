@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 自定义方案绘制

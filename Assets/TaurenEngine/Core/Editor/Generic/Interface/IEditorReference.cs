@@ -5,7 +5,7 @@
  *│　Time    ：2021/10/17 17:04:31
  *└────────────────────────┘*/
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 引用类型的属性

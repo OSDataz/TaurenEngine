@@ -6,10 +6,10 @@
  *└────────────────────────┘*/
 
 using System.Collections.Generic;
-using TaurenEngine.Core;
+using TaurenEngine;
 using UnityEditor;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	public abstract class EditorProperty : IEditorProperty
 	{

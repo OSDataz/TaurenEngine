@@ -9,7 +9,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	public class PropertyString : EditorProperty
 	{

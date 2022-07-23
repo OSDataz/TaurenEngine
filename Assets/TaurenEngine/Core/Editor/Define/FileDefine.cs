@@ -5,7 +5,7 @@
  *│　Time    ：2022/6/23 20:57:49
  *└────────────────────────┘*/
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	public enum EncodingType
 	{

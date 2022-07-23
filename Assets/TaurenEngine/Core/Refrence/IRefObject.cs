@@ -5,12 +5,14 @@
  *│　Time    ：2022/7/19 23:51:01
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Core
+using System;
+
+namespace TaurenEngine
 {
 	/// <summary>
 	/// 带有引用计数的对象接口
 	/// </summary>
-	public interface IRefObject : IObject
+	public interface IRefObject : IDisposable
 	{
 		/// <summary>
 		/// 引用计数
@@ -18,9 +20,15 @@ namespace TaurenEngine.Core
 		int RefCount { get; set; }
 
 		/// <summary>
-		/// 引用者名字(标示引用来源)
+		/// 该对象是否已经被销毁
+		/// <para>注意：切勿自行赋值</para>
 		/// </summary>
-		string RefName { get; set; }
+		bool IsDestroyed { get; }
+
+		/// <summary>
+		/// 销毁对象执行响应
+		/// </summary>
+		void OnDestroy();
 	}
 
 	/// <summary>
@@ -32,16 +40,16 @@ namespace TaurenEngine.Core
 		/// 该对象被持有，增加引用计数
 		/// </summary>
 		/// <param name="object"></param>
-		public static void Retain(this IRefObject @object)
+		internal static void AddRefCount(this IRefObject @object)
 		{
 			@object.RefCount += 1;
 		}
 
 		/// <summary>
-		/// 释放引用计数，如果引用计数为0，将触发Dispose释放占有的资源
+		/// 释放引用计数，如果引用计数为0，将触发Destroy销毁对象
 		/// </summary>
 		/// <param name="object"></param>
-		public static void Release(this IRefObject @object)
+		internal static void DelRefCount(this IRefObject @object)
 		{
 			if (--@object.RefCount == 0)
 				@object.Dispose();

@@ -8,10 +8,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using TaurenEngine.Unity;
+using TaurenEngine;
 using UnityEngine;
 
-namespace TaurenEditor.Core
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 运行Cmd Bat批处理命令
