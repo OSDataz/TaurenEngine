@@ -101,7 +101,7 @@ namespace TaurenEngine
 			{
 				toIsFile = false;
 				toIsExist = false;
-				Debug.LogError($"原地址未找到：{fromPath}");
+				DebugEx.Error($"原地址未找到：{fromPath}");
 				return false;
 			}
 
@@ -284,7 +284,7 @@ namespace TaurenEngine
 			{
 				if (destIsFile)
 				{
-					Debug.LogError($"不能将文件夹复制到一个文件中。源路径：{sourcePath} 目标路径：{destPath}");
+					DebugEx.Error($"不能将文件夹复制到一个文件中。源路径：{sourcePath} 目标路径：{destPath}");
 					return false;
 				}
 
@@ -343,7 +343,7 @@ namespace TaurenEngine
 				bytes = image.EncodeToEXR();
 			else
 			{
-				Debug.LogError($"保存图片路径后缀未识别：{filePath}");
+				DebugEx.Error($"保存图片路径后缀未识别：{filePath}");
 				return;
 			}
 

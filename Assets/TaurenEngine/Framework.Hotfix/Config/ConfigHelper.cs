@@ -32,7 +32,7 @@ namespace TaurenEngine.Framework.Hotfix
 			var type = typeof(T);
 			if (configMap.ContainsKey(type))
 			{
-				Debugx.Warning("重复添加配置表");
+				DebugEx.Warning("重复添加配置表");
 				return;
 			}
 
@@ -44,7 +44,7 @@ namespace TaurenEngine.Framework.Hotfix
 			var type = typeof(T);
 			if (configMap.ContainsKey(type))
 			{
-				Debugx.Warning("重复添加配置表");
+				DebugEx.Warning("重复添加配置表");
 				return;
 			}
 

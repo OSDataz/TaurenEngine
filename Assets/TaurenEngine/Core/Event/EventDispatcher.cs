@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TaurenEngine
 {
-	public class EventDispatcher<T>
+	public class EventDispatcher<T> : RefObject, IRecycle
 	{
 		#region 对象池
 		internal readonly ObjectPool<LoopList<Event>> eventListPool = new ObjectPool<LoopList<Event>>();
@@ -53,7 +53,7 @@ namespace TaurenEngine
 
 			if (@event == null)
 			{
-				@event = Event.Pool.Get();
+				@event = Event.GetFromPool();
 				@event.callAction = callAction;
 				list.Add(@event);
 			}
@@ -100,7 +100,7 @@ namespace TaurenEngine
 
 			if (@event == null)
 			{
-				@event = Event.Pool.Get();
+				@event = Event.GetFromPool();
 				@event.callParamAction = callAction;
 				list.Add(@event);
 			}
@@ -158,9 +158,8 @@ namespace TaurenEngine
 		private void RemoveEvent(ref T key, LoopList<Event> list, Event @event)
 		{
 			list.Remove(@event);
-			@event.Recycle();
 
-			if (list.IsEmpty)
+			if (list.IsEmptyReal)
 			{
 				events.Remove(key);
 				eventListPool.Add(list);
@@ -176,19 +175,13 @@ namespace TaurenEngine
 			if (!events.TryGetValue(key, out var list))
 				return;
 
-			list.ForEach(RemoveEvent);
 			list.Clear();
 
-			if (list.IsEmpty)
+			if (list.IsEmptyReal)
 			{
 				events.Remove(key);
 				eventListPool.Add(list);
 			}
-		}
-
-		private void RemoveEvent(Event @event)
-		{
-			@event.Recycle();
 		}
 		#endregion
 
@@ -242,12 +235,11 @@ namespace TaurenEngine
 					if (@event.isOnce)
 					{
 						list.Remove(@event);
-						@event.Recycle();
 					}
 				});
 			}
 
-			if (list.IsEmpty)
+			if (list.IsEmptyReal)
 			{
 				events.Remove(key);
 				eventListPool.Add(list);
@@ -257,7 +249,7 @@ namespace TaurenEngine
 
 		#region 异步事件
 		private bool _isAlwaysOpenAsync;
-		private readonly List<Event> _asyncEvents = new List<Event>();
+		private readonly LoopList<Event> _asyncEvents = new LoopList<Event>();
 		//private IFrame _frameUpdate;
 
 		/// <summary>
@@ -280,7 +272,7 @@ namespace TaurenEngine
 				}
 				else
 				{
-					if (_asyncEvents.Count == 0)
+					if (_asyncEvents.IsEmptyLogic)
 						CloseAsyncUpdate();
 				}
 			}
@@ -288,10 +280,9 @@ namespace TaurenEngine
 
 		private void AddAsyncEvent(Event @event)
 		{
-			@event.isAsyncLock = true;
 			_asyncEvents.Add(@event);
 
-			if (!_isAlwaysOpenAsync && _asyncEvents.Count == 1)
+			if (!_isAlwaysOpenAsync && _asyncEvents.LengthLogic == 1)
 				OpenAsyncUpdate();
 		}
 
@@ -308,36 +299,44 @@ namespace TaurenEngine
 
 		private void OnUpdate()
 		{
-			var length = _asyncEvents.Count;
+			var length = _asyncEvents.LengthReal;
 			if (length == 0)
 				return;
 
-			for (int i = 0; i < length; ++i)
+			_asyncEvents.ForEach(@event => 
 			{
-				var @event = _asyncEvents[i];
 				@event.Execute();
+			});
 
-				if (@event.IsRecycle)
-					Event.Pool.Add(@event);
-				else
-					@event.isAsyncLock = false;
-			}
-
-			if (_asyncEvents.Count == length)
+			if (_asyncEvents.LengthReal == length)
+			{
 				_asyncEvents.Clear();
+
+				if (!_isAlwaysOpenAsync)
+					CloseAsyncUpdate();
+			}
 			else
 				_asyncEvents.RemoveRange(0, length);
 		}
 		#endregion
 
-		public void Destroy()
+		public virtual void Clear()
 		{
 			foreach (var kv in events)
 			{
-				kv.Value.ForEach(RemoveEvent);
 				eventListPool.Add(kv.Value);
 			}
 			events.Clear();
+
+			_asyncEvents.Clear();
+
+			if (!_isAlwaysOpenAsync)
+				CloseAsyncUpdate();
+		}
+
+		public override void OnDestroy()
+		{
+			Clear();
 
 			CloseAsyncUpdate();
 		}
