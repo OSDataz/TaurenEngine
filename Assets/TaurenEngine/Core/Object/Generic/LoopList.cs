@@ -204,12 +204,14 @@ namespace TaurenEngine
 		/// <param name="resetLoop">强制循环次数，如果嵌套循环务必设置为 false</param>
 		public void ForEach(Action<T> action, bool resetLoop = false)
 		{
+			var len = RefObjectList.Count;
+			if (len == 0)
+				return;
+
 			if (resetLoop) loopCount = 1;
 			else loopCount += 1;
 
 			int i;
-			var len = RefObjectList.Count;
-
 			for (i = 0; i < len; ++i)
 			{
 				if (status[i] == Status.None)

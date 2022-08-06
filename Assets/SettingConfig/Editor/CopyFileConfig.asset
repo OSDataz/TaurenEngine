@@ -13,19 +13,27 @@ MonoBehaviour:
   m_Name: CopyFileConfig
   m_EditorClassIdentifier: 
   groups:
-  - showDetails: 1
+  - showDetails: 0
     name: "Co.\u4EE3\u7801\u6A21\u677F-Me"
-    updateTime: 2022/7/8 14:15:41
+    updateTime: 2022/8/2 20:07:52
     items:
-    - copyPath: D:\Workspace\Unity\TaurenEngine\CoreTemplates\TaurenEngine\Class.cs
-      pastePath: C:\Software\Microsoft\Visual Studio\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
-    - copyPath: D:\Workspace\Unity\TaurenEngine\CoreTemplates\TaurenEngine\Interface.cs
-      pastePath: C:\Software\Microsoft\Visual Studio\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs
+    - copyPath: D:\Workspace Me\TaurenEngine\CoreTemplates\TaurenEngine\Class.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
+    - copyPath: D:\Workspace Me\TaurenEngine\CoreTemplates\TaurenEngine\Interface.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs
   - showDetails: 0
     name: "Co.\u4EE3\u7801\u6A21\u677F-Co"
-    updateTime: 2022/7/8 14:39:30
+    updateTime: 2022/8/3 14:10:03
     items:
     - copyPath: D:\Cahce\CoreTemplates\Co\Class.cs
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
     - copyPath: D:\Cahce\CoreTemplates\Co\Interface.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs
+  - showDetails: 0
+    name: "Co.\u4EE3\u7801\u6A21\u677F-Co.Frame"
+    updateTime: 2022/8/3 14:09:59
+    items:
+    - copyPath: D:\Cahce\CoreTemplates\Co.Frame\Class.cs
+      pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
+    - copyPath: D:\Cahce\CoreTemplates\Co.Frame\Interface.cs
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs

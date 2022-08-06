@@ -66,8 +66,9 @@ namespace TaurenEngine
 		/// <param name="index"></param>
 		public void RemoveRefObject(int index)
 		{
-			RefObjectList[index].DelRefCount();
+			var refObject = RefObjectList[index];
 			RefObjectList.RemoveAt(index);
+			refObject.DelRefCount();
 		}
 
 		/// <summary>

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TaurenEngine
 {
@@ -36,7 +35,7 @@ namespace TaurenEngine
 		{
 			if (callAction == null)
 			{
-				Debug.LogError($"添加事件，回调函数不能为Null。Key：{key}");
+				DebugEx.Error($"添加事件，回调函数不能为Null。Key：{key}");
 				return;
 			}
 
@@ -83,7 +82,7 @@ namespace TaurenEngine
 		{
 			if (callAction == null)
 			{
-				Debug.LogError($"添加事件，回调函数不能为Null。Key：{key}");
+				DebugEx.Error($"添加事件，回调函数不能为Null。Key：{key}");
 				return;
 			}
 
@@ -250,7 +249,7 @@ namespace TaurenEngine
 		#region 异步事件
 		private bool _isAlwaysOpenAsync;
 		private readonly LoopList<Event> _asyncEvents = new LoopList<Event>();
-		//private IFrame _frameUpdate;
+		private Timer _timer;
 
 		/// <summary>
 		/// 是否永久开启异步事件处理。默认不开启。
@@ -288,13 +287,30 @@ namespace TaurenEngine
 
 		private void OpenAsyncUpdate()
 		{
-			//_frameUpdate ??= TaurenFramework.Frame.GetUpdateFrame(OnUpdate);
-			//_frameUpdate.Start();
+			if (_timer == null)
+			{
+				_timer = Timer.Create(OnUpdate, true);
+				_timer.RefCount += 1;
+			}
+			else
+				_timer.Start();
 		}
 
 		private void CloseAsyncUpdate()
 		{
-			//_frameUpdate?.Stop();
+			_timer?.Stop();
+		}
+
+		private void DestroyAsyncUpdate()
+		{
+			if (_timer == null)
+				return;
+
+			_timer.RefCount -= 1;
+			if (_timer.IsRunning)
+				_timer.Stop();
+			else
+				_timer.Destroy();
 		}
 
 		private void OnUpdate()
@@ -303,7 +319,7 @@ namespace TaurenEngine
 			if (length == 0)
 				return;
 
-			_asyncEvents.ForEach(@event => 
+			_asyncEvents.ForEach(@event =>
 			{
 				@event.Execute();
 			});
@@ -338,7 +354,7 @@ namespace TaurenEngine
 		{
 			Clear();
 
-			CloseAsyncUpdate();
+			DestroyAsyncUpdate();
 		}
 	}
 }

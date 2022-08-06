@@ -1,10 +1,10 @@
 {
-    "name": "TaurenEngine.Framework",
+    "name": "TaurenEditor.Framework.Game",
     "rootNamespace": "",
-    "references": [
-        "GUID:2183fe121646fd946bc80704484389fc"
+    "references": [],
+    "includePlatforms": [
+        "Editor"
     ],
-    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

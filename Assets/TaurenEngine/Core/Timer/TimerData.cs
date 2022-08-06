@@ -2,18 +2,26 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.7.0
- *│　Time    ：2022/7/26 23:49:21
+ *│　Time    ：2022/7/31 11:35:18
  *└────────────────────────┘*/
 
 namespace TaurenEngine
 {
-	/// <summary>
-	/// Timer管理数据
-	/// </summary>
-	public class TimerData : Singleton<TimerData>
+	public sealed class TimerData
 	{
-		
+		/// <summary>
+		/// Update循环列表
+		/// </summary>
+		public readonly LoopList<Timer> updateList = new LoopList<Timer>();
 
-		
+		/// <summary>
+		/// LateUpdate循环列表
+		/// </summary>
+		public readonly LoopList<Timer> lateUpdateList = new LoopList<Timer>();
+
+		/// <summary>
+		/// FixedUpdate循环列表
+		/// </summary>
+		public readonly LoopList<Timer> fixedUpdateList = new LoopList<Timer>();
 	}
 }

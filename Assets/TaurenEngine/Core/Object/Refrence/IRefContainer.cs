@@ -36,8 +36,7 @@ namespace TaurenEngine
 			if (@object.RefObjectList.Contains(refObject))
 				return false;// 已有对象，不再缓存
 
-			@object.RefObjectList.Add(refObject);
-			refObject.AddRefCount();
+			AddRefObject(@object, refObject);
 			return true;
 		}
 
@@ -73,8 +72,9 @@ namespace TaurenEngine
 		/// <param name="index"></param>
 		public static void RemoveRefObject(this IRefContainer @object, int index)
 		{
-			@object.RefObjectList[index].DelRefCount();
+			var refObject = @object.RefObjectList[index];
 			@object.RefObjectList.RemoveAt(index);
+			refObject.DelRefCount();
 		}
 
 		/// <summary>
