@@ -78,7 +78,7 @@ namespace TaurenEngine
 		{
 			for (int i = RefObjectList.Count - 1; i >= 0; --i)
 			{
-				RefObjectList[i]?.DelRefCount();
+				RefObjectList[i]?.DelRefCount();// TODO 设计上Destroy嵌套删除
 			}
 
 			RefObjectList.Clear();

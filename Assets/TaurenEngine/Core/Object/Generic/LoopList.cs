@@ -13,6 +13,7 @@ namespace TaurenEngine
 	/// <summary>
 	/// 支持循环中增删元素的列表，减少GC
 	/// <para>注意：不能提供任何操作下标Index的接口</para>
+	/// <para>最好只用于Event和Timer管理，确保Destroy不会有嵌套删除</para>
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public class LoopList<T> : RefContainer<T>, IRecycle where T : IRefObject
@@ -215,7 +216,20 @@ namespace TaurenEngine
 			for (i = 0; i < len; ++i)
 			{
 				if (status[i] == Status.None)
-					action.Invoke(RefObjectList[i]);// todo 需考虑使用try catch的必要性
+				{
+#if TryCatch
+					try
+					{
+#endif
+						action.Invoke(RefObjectList[i]);// todo 需考虑使用try catch的必要性
+#if TryCatch
+					}
+					catch (Exception exception) 
+					{
+						DebugEx.Error(exception.StackTrace);
+					}
+#endif
+				}
 			}
 
 			loopCount -= 1;
@@ -246,6 +260,6 @@ namespace TaurenEngine
 				}
 			}
 		}
-		#endregion
+#endregion
 	}
 }

@@ -2,15 +2,19 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.7.0
- *│　Time    ：2022/8/2 20:09:16
+ *│　Time    ：2022/8/15 23:30:26
  *└────────────────────────┘*/
 
 namespace TaurenEngine
 {
 	/// <summary>
-	/// 资源缓冲池
+	/// 资源管理器
 	/// </summary>
-	public class AssetCachePool : ObjectCachePool
+	public class ResourceManager
 	{
+		public T Load<T>(string path)
+		{
+			return default;
+		}
 	}
 }

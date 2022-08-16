@@ -15,39 +15,135 @@ namespace TaurenEngine
 		private static readonly LoopList<Timer> lateUpdateList = InstanceManager.Instance.Get<TimerData>().updateList;
 		private static readonly LoopList<Timer> fixedUpdateList = InstanceManager.Instance.Get<TimerData>().updateList;
 
+		/// <summary>
+		/// Update
+		/// </summary>
+		/// <param name="action"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer Create(Action action, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.Update, 0.0f, action, isLoop, autoStart);
 
+		/// <summary>
+		/// Update带参
+		/// </summary>
+		/// <param name="action"></param>
+		/// <param name="param"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer Create(Action<object> action, object param, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.Update, 0.0f, action, param, isLoop, autoStart);
 
+		/// <summary>
+		/// Update Interval
+		/// </summary>
+		/// <param name="interval"></param>
+		/// <param name="action"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer Create(float interval, Action action, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.UpdateInterval, interval, action, isLoop, autoStart);
 
+		/// <summary>
+		/// Update Interval带参
+		/// </summary>
+		/// <param name="interval"></param>
+		/// <param name="action"></param>
+		/// <param name="param"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer Create(float interval, Action<object> action, object param, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.UpdateInterval, interval, action, param, isLoop, autoStart);
 
+		/// <summary>
+		/// LateUpdate
+		/// </summary>
+		/// <param name="action"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateLate(Action action, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.LateUpdate, 0.0f, action, isLoop, autoStart);
 
+		/// <summary>
+		/// LateUpdate带参
+		/// </summary>
+		/// <param name="action"></param>
+		/// <param name="param"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateLate(Action<object> action, object param, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.LateUpdate, 0.0f, action, param, isLoop, autoStart);
 
+		/// <summary>
+		/// LateUpdate Interval
+		/// </summary>
+		/// <param name="interval"></param>
+		/// <param name="action"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateLate(float interval, Action action, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.LateUpdateInterval, interval, action, isLoop, autoStart);
 
+		/// <summary>
+		/// LateUpdate Interval带参
+		/// </summary>
+		/// <param name="interval"></param>
+		/// <param name="action"></param>
+		/// <param name="param"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateLate(float interval, Action<object> action, object param, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.LateUpdateInterval, interval, action, param, isLoop, autoStart);
 
+		/// <summary>
+		/// FixedUpdate
+		/// </summary>
+		/// <param name="action"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateFixed(Action action, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.FixedUpdate, 0.0f, action, isLoop, autoStart);
 
+		/// <summary>
+		/// FixedUpdate带参
+		/// </summary>
+		/// <param name="action"></param>
+		/// <param name="param"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateFixed(Action<object> action, object param, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.FixedUpdate, 0.0f, action, param, isLoop, autoStart);
 
+		/// <summary>
+		/// FixedUpdate Interval
+		/// </summary>
+		/// <param name="interval"></param>
+		/// <param name="action"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateFixed(float interval, Action action, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.FixedUpdateInterval, interval, action, isLoop, autoStart);
 
+		/// <summary>
+		/// FixedUpdate Interval带参
+		/// </summary>
+		/// <param name="interval"></param>
+		/// <param name="action"></param>
+		/// <param name="param"></param>
+		/// <param name="isLoop"></param>
+		/// <param name="autoStart"></param>
+		/// <returns></returns>
 		public static Timer CreateFixed(float interval, Action<object> action, object param, bool isLoop = false, bool autoStart = true)
 			=> Create(TimerType.FixedUpdateInterval, interval, action, param, isLoop, autoStart);
 
