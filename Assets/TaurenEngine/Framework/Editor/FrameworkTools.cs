@@ -16,7 +16,7 @@ namespace TaurenEditor
 		[MenuItem("GameObject/初始化TaurenFramework组件", false, 20)]
 		private static void CreateFramework()
 		{
-			var taurenGo = GameObjectHelper.GetOrCreateGameObject("TaurenFramework");
+			var taurenGo = TaurenEngine.GameObjectUtility.GetOrCreateGameObject("TaurenFramework");
 
 			//CreateFramework<DebugComponent>(taurenGo, "Debug");
 			//CreateFramework<FrameComponent>(taurenGo, "Frame");

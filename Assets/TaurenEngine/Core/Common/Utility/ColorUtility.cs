@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace TaurenEngine
 {
-    public static class ColorHelper
+    public static class ColorUtility
     {
         /// <summary>
         /// RGBA转Color数据

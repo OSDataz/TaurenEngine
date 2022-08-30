@@ -18,7 +18,7 @@ namespace TaurenEngine
 		/// <returns></returns>
 		public static Color ToColor(this string @object)
 		{
-			return ColorUtility.TryParseHtmlString(@object, out var c) ? c : default;
+			return UnityEngine.ColorUtility.TryParseHtmlString(@object, out var c) ? c : default;
 		}
 	}
 }

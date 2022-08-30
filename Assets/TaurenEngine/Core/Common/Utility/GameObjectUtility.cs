@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace TaurenEngine
 {
-	public static class GameObjectHelper
+	public static class GameObjectUtility
 	{
 		/// <summary>
 		/// 获取指定GameObject，如果没找到，则创建GameObject

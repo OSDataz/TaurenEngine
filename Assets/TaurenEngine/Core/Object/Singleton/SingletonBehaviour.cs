@@ -30,7 +30,7 @@ namespace TaurenEngine
 					}
 					else
 					{
-						instance = GameObjectHelper.GetOrCreateGameObject(typeof(T).Name).GetOrAddComponent<T>();
+						instance = GameObjectUtility.GetOrCreateGameObject(typeof(T).Name).GetOrAddComponent<T>();
 						DontDestroyOnLoad(instance.gameObject);// 保证实例不会被释放
 					}
 				}

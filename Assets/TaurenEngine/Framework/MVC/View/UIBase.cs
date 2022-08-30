@@ -1,13 +1,14 @@
 ﻿/*┌────────────────────────┐
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
- *│　Version ：v0.6.0
- *│　Time    ：2022/6/26 19:15:21
+ *│　Version ：v0.7.0
+ *│　Time    ：2022/8/9 20:48:35
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Framework.Hotfix
+namespace TaurenEngine
 {
-	public class ControllerBase
+	public abstract class UIBase : ViewBase
 	{
+
 	}
 }

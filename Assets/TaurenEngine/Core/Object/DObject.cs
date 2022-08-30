@@ -29,7 +29,7 @@ namespace TaurenEngine
 
 		/// <summary>
 		/// 对象无引用时系统会自行调用
-		/// <para>手动调用请使用Destroy</para>
+		/// <para>切勿手动调用，手动调用请使用Destroy</para>
 		/// </summary>
 		public void Dispose()
 		{

@@ -1,13 +1,17 @@
 ﻿/*┌────────────────────────┐
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
- *│　Version ：v0.6.0
- *│　Time    ：2022/6/26 19:15:52
+ *│　Version ：v0.7.0
+ *│　Time    ：2022/8/9 21:08:53
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Framework.Hotfix
+namespace TaurenEngine
 {
-	public class UIBase
+	/// <summary>
+	/// 网络数据模型
+	/// </summary>
+	public class NetworkModel : ModelBase
 	{
+
 	}
 }

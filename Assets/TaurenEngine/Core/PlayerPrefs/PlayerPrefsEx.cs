@@ -43,5 +43,47 @@ namespace TaurenEngine
 			SetString(key, value);
 			Save();
 		}
+
+		/// <summary>
+		/// 获取Bool数据
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public static bool GetBool(string key)
+		{
+			return GetInt(key) != 0;
+		}
+
+		/// <summary>
+		/// 获取Bool数据
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="defaultValue"></param>
+		/// <returns></returns>
+		public static bool GetBool(string key, bool defaultValue)
+		{
+			return GetInt(key, defaultValue ? 1 : 0) != 0;
+		}
+
+		/// <summary>
+		/// 设置Bool数据
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		public static void SetBool(string key, bool value)
+		{
+			SetInt(key, value ? 1 : 0);
+		}
+
+		/// <summary>
+		/// 保存Bool数据
+		/// </summary>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		public static void SaveBool(string key, bool value)
+		{
+			SetBool(key, value);
+			Save();
+		}
 	}
 }

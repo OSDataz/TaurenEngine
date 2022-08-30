@@ -7,7 +7,10 @@
 
 namespace TaurenEngine
 {
-	public class NetworkComponent
+	/// <summary>
+	/// 网络组件
+	/// </summary>
+	public class NetworkComponent : OnceComponent
 	{
 	}
 }
