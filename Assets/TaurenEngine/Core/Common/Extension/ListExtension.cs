@@ -5,7 +5,6 @@
  *│　Time    ：2022/4/16 10:59:15
  *└────────────────────────┘*/
 
-using System;
 using System.Collections.Generic;
 
 namespace TaurenEngine
@@ -86,22 +85,6 @@ namespace TaurenEngine
 
 			@object.Add(item);
 			return true;
-		}
-
-		/// <summary>
-		/// 循环遍历，删减元素自动处理
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="object"></param>
-		/// <param name="func"></param>
-		public static void ForFunc<T>(this List<T> @object, Func<T, bool> func)
-		{
-			var len = @object.Count;
-			for (int i = 0; i < len;)
-			{
-				if (func(@object[i])) i += 1;
-				else len -= 1;
-			}
 		}
 	}
 }

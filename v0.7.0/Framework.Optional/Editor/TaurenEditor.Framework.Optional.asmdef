@@ -1,0 +1,21 @@
+{
+    "name": "TaurenEditor.Framework.Optional",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2183fe121646fd946bc80704484389fc",
+        "GUID:a60908c053a7c824b9c053cf27e70800",
+        "GUID:29d383159c498b44fb1c18a8b12e9659",
+        "GUID:8564ae026f276404184dbaa1cc6d8688"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

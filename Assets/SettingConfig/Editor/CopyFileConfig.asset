@@ -15,7 +15,7 @@ MonoBehaviour:
   groups:
   - showDetails: 0
     name: "Co.\u4EE3\u7801\u6A21\u677F-Me"
-    updateTime: 2022/8/30 20:37:09
+    updateTime: 2022/9/13 21:53:48
     items:
     - copyPath: D:\Workspace Me\TaurenEngine\CoreTemplates\TaurenEngine\Class.cs
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
@@ -23,7 +23,7 @@ MonoBehaviour:
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs
   - showDetails: 0
     name: "Co.\u4EE3\u7801\u6A21\u677F-Co"
-    updateTime: 2022/8/25 10:00:41
+    updateTime: 2022/9/13 21:58:25
     items:
     - copyPath: D:\Cahce\CoreTemplates\Co\Class.cs
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs

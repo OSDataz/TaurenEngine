@@ -12,105 +12,62 @@ namespace TaurenEngine
 	public static partial class StringExtension
 	{
 		/// <summary>
-		/// 从前往后查询，获取指定匹配字符串之前的部分
+		/// 截取字符串
 		/// </summary>
 		/// <param name="object"></param>
-		/// <param name="match"></param>
+		/// <param name="match">匹配文本</param>
+		/// <param name="useLastIndex">是否从后往前查询</param>
+		/// <param name="toSubBefore">获取匹配文本0之前文本</param>
 		/// <returns></returns>
-		public static string SubstringBefore(this string @object, string match)
+		public static string Substring(this string @object, string match, bool useLastIndex = false, bool toSubBefore = true)
 		{
-			var idx = @object.IndexOf(match);
+			int idx;
+			if (useLastIndex) idx = @object.LastIndexOf(match);
+			else idx = @object.IndexOf(match);
+
 			if (idx == -1)
 				return string.Empty;
 
-			return @object.Substring(0, idx);
+			if (toSubBefore) return @object.Substring(0, idx);
+			else return @object.Substring(idx + match.Length);
 		}
 
 		/// <summary>
-		/// 从后往前查询，获取指定匹配字符串之前的部分
+		/// 截取字符串
 		/// </summary>
 		/// <param name="object"></param>
-		/// <param name="match"></param>
+		/// <param name="startMatch"></param>
+		/// <param name="endMatch"></param>
+		/// <param name="useLastIndex">是否从后往前查询</param>
 		/// <returns></returns>
-		public static string SubstringBeforeLast(this string @object, string match)
+		public static string Substring(this string @object, string startMatch, string endMatch, bool useLastIndex = false)
 		{
-			var idx = @object.LastIndexOf(match);
-			if (idx == -1)
-				return string.Empty;
+			if (useLastIndex)
+			{
+				var eIdx = @object.LastIndexOf(endMatch);
+				if (eIdx == -1)
+					return string.Empty;
 
-			return @object.Substring(0, idx);
-		}
+				var idx = @object.LastIndexOf(startMatch, eIdx - endMatch.Length);
+				if (idx == -1)
+					return string.Empty;
 
-		/// <summary>
-		/// 从前往后查询，获取指定匹配字符串之后的部分
-		/// </summary>
-		/// <param name="object"></param>
-		/// <param name="match"></param>
-		/// <returns></returns>
-		public static string SubstringBehind(this string @object, string match)
-		{
-			var idx = @object.IndexOf(match);
-			if (idx == -1)
-				return string.Empty;
+				idx += startMatch.Length;
+				return @object.Substring(idx, eIdx - idx);
+			}
+			else
+			{
+				var idx = @object.IndexOf(startMatch);
+				if (idx == -1)
+					return string.Empty;
 
-			return @object.Substring(idx + match.Length);
-		}
+				idx += startMatch.Length;
+				var eIdx = @object.IndexOf(endMatch, idx);
+				if (eIdx == -1)
+					return string.Empty;
 
-		/// <summary>
-		/// 从后往前查询，获取指定匹配字符串之后的部分
-		/// </summary>
-		/// <param name="object"></param>
-		/// <param name="match"></param>
-		/// <returns></returns>
-		public static string SubstringBehindLast(this string @object, string match)
-		{
-			var idx = @object.LastIndexOf(match);
-			if (idx == -1)
-				return string.Empty;
-
-			return @object.Substring(idx + match.Length);
-		}
-
-		/// <summary>
-		/// 从前往后查询，获取指定起始字符串和截止字符串中间部分
-		/// </summary>
-		/// <param name="object"></param>
-		/// <param name="startValue"></param>
-		/// <param name="endValue"></param>
-		/// <returns></returns>
-		public static string Substring(this string @object, string startValue, string endValue)
-		{
-			var idx = @object.IndexOf(startValue);
-			if (idx == -1)
-				return string.Empty;
-
-			idx += startValue.Length;
-			var eIdx = @object.IndexOf(endValue, idx);
-			if (eIdx == -1)
-				return string.Empty;
-
-			return @object.Substring(idx, eIdx - idx);
-		}
-
-		/// <summary>
-		/// 从后往前查询，获取指定起始字符串和截止字符串中间部分
-		/// </summary>
-		/// <param name="object"></param>
-		/// <param name="startValue"></param>
-		/// <param name="endValue"></param>
-		/// <returns></returns>
-		public static string SubstringLast(this string @object, string startValue, string endValue)
-		{
-			var eIdx = @object.LastIndexOf(endValue);
-			if (eIdx == -1)
-				return string.Empty;
-
-			var idx = @object.LastIndexOf(startValue, eIdx - endValue.Length);
-			if (idx == -1)
-				return string.Empty;
-
-			idx += startValue.Length;
-			return @object.Substring(idx, eIdx - idx);
+				return @object.Substring(idx, eIdx - idx);
+			}
 		}
 
 		/// <summary>
