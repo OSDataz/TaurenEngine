@@ -7,11 +7,16 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace TaurenEngine
 {
 	/// <summary>
 	/// 服务管理器
+	/// 
+	/// 和单例管理器区别有两点：
+	/// 1.支持自定义服务；
+	/// 2.限制不能获取未添加的服务；
 	/// </summary>
 	public class ServiceManager : InstanceBase<ServiceManager>
 	{
@@ -27,14 +32,18 @@ namespace TaurenEngine
 		/// <param name="service"></param>
 		public void Add<T>(T service) where T : IService
 		{
-			var type = typeof(T);
-			if (_serviceMap.ContainsKey(type))
-			{
+			_serviceMap[typeof(T)] = service;
+		}
 
+		public void Add(Type type, IService service)
+		{
+			if (type is not IService)
+			{
+				Debug.LogError($"添加服务类型错误，Type：{type} Service：{service}");
 				return;
 			}
 
-			_serviceMap.Add(type, service);
+			_serviceMap[type] = service;
 		}
 
 		/// <summary>
@@ -47,7 +56,7 @@ namespace TaurenEngine
 			if (_serviceMap.TryGetValue(typeof(T), out var service) && service is T tService)
 				return tService;
 
-
+			Debug.LogError($"未找到{typeof(T)}服务");
 			return default(T);
 		}
 	}

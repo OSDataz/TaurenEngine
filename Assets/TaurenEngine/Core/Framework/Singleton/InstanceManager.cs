@@ -13,7 +13,7 @@ namespace TaurenEngine
 	/// <summary>
 	/// 单例管理器
 	/// </summary>
-	public class InstanceManager : Singleton<InstanceManager>
+	internal class InstanceManager : Singleton<InstanceManager>
 	{
 		/// <summary>
 		/// 实例字典
