@@ -6,6 +6,7 @@ using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
@@ -80,7 +81,12 @@ namespace ICSharpCode.SharpZipLib.Zip
 		{
 		}
 
-		internal ZipOutputStream(Stream baseOutputStream, StringCodec stringCodec) : this(baseOutputStream)
+		/// <summary>
+		/// Creates a new Zip output stream, writing a zip archive.
+		/// </summary>
+		/// <param name="baseOutputStream">The output stream to which the archive contents are written.</param>
+		/// <param name="stringCodec"></param>
+		public ZipOutputStream(Stream baseOutputStream, StringCodec stringCodec) : this(baseOutputStream)
 		{
 			_stringCodec = stringCodec;
 		}
@@ -160,7 +166,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// Defaults to <see cref="PathTransformer"/>, set to null to disable transforms and use names as supplied.
 		/// </summary>
 		public INameTransform NameTransform { get; set; } = new PathTransformer();
-		
+
 		/// <summary>
 		/// Get/set the password used for encryption.
 		/// </summary>
@@ -520,15 +526,15 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// </exception>
 		public async Task PutNextEntryAsync(ZipEntry entry, CancellationToken ct = default)
 		{
-			if (curEntry != null) await CloseEntryAsync(ct);
+			if (curEntry != null) await CloseEntryAsync(ct).ConfigureAwait(false);
 			var position = CanPatchEntries ? baseOutputStream_.Position : -1; 
 			await baseOutputStream_.WriteProcToStreamAsync(s =>
 			{
 				PutNextEntry(s, entry, position);
-			}, ct);
+			}, ct).ConfigureAwait(false);
 			
 			if (!entry.IsCrypted) return;
-			await WriteOutputAsync(GetEntryEncryptionHeader(entry));
+			await WriteOutputAsync(GetEntryEncryptionHeader(entry)).ConfigureAwait(false);
 		}
 
 		/// <summary>
@@ -561,13 +567,13 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <inheritdoc cref="CloseEntry"/>
 		public async Task CloseEntryAsync(CancellationToken ct)
 		{
-			await baseOutputStream_.WriteProcToStreamAsync(WriteEntryFooter, ct);
+			await baseOutputStream_.WriteProcToStreamAsync(WriteEntryFooter, ct).ConfigureAwait(false);
 
 			// Patch the header if possible
 			if (patchEntryHeader)
 			{
 				patchEntryHeader = false;
-				await ZipFormat.PatchLocalHeaderAsync(baseOutputStream_, curEntry, patchData, ct);
+				await ZipFormat.PatchLocalHeaderAsync(baseOutputStream_, curEntry, patchData, ct).ConfigureAwait(false);
 			}
 
 			entries.Add(curEntry);
@@ -723,7 +729,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 			InitializeZipCryptoPassword(Password);
 
 			byte[] cryptBuffer = new byte[ZipConstants.CryptoHeaderSize];
-			using (var rng = new RNGCryptoServiceProvider())
+			using (var rng = RandomNumberGenerator.Create())
 			{
 				rng.GetBytes(cryptBuffer);
 			}
@@ -742,7 +748,9 @@ namespace ICSharpCode.SharpZipLib.Zip
 		private void InitializeZipCryptoPassword(string password)
 		{
 			var pkManaged = new PkzipClassicManaged();
+			Console.WriteLine($"Output Encoding: {ZipCryptoEncoding.EncodingName}");
 			byte[] key = PkzipClassic.GenerateKeys(ZipCryptoEncoding.GetBytes(password));
+			Console.WriteLine($"Output Bytes: {string.Join(", ", key.Select(b => $"{b:x2}").ToArray())}");
 			cryptoTransform_ = pkManaged.CreateEncryptor(key, null);
 		}
 		
@@ -808,11 +816,11 @@ namespace ICSharpCode.SharpZipLib.Zip
 
 		private void CopyAndEncrypt(byte[] buffer, int offset, int count)
 		{
-			const int CopyBufferSize = 4096;
-			byte[] localBuffer = new byte[CopyBufferSize];
+			const int copyBufferSize = 4096;
+			byte[] localBuffer = new byte[copyBufferSize];
 			while (count > 0)
 			{
-				int bufferCount = (count < CopyBufferSize) ? count : CopyBufferSize;
+				int bufferCount = (count < copyBufferSize) ? count : copyBufferSize;
 
 				Array.Copy(buffer, offset, localBuffer, 0, bufferCount);
 				EncryptBlock(localBuffer, 0, bufferCount);
@@ -873,7 +881,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 
 				if (curEntry != null)
 				{
-					await CloseEntryAsync(ct);
+					await CloseEntryAsync(ct).ConfigureAwait(false);
 				}
 
 				long numEntries = entries.Count;
@@ -884,12 +892,12 @@ namespace ICSharpCode.SharpZipLib.Zip
 					await baseOutputStream_.WriteProcToStreamAsync(ms, s =>
 					{
 						sizeEntries += ZipFormat.WriteEndEntry(s, entry, _stringCodec);
-					}, ct);
+					}, ct).ConfigureAwait(false);
 				}
 
 				await baseOutputStream_.WriteProcToStreamAsync(ms, s 
 						=> ZipFormat.WriteEndOfCentralDirectory(s, numEntries, sizeEntries, offset, zipComment),
-					ct);
+					ct).ConfigureAwait(false);
 
 				entries = null;
 			}
@@ -969,8 +977,6 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// The password to use when encrypting archive entries.
 		/// </summary>
 		private string password;
-
-		private readonly StringCodec _stringCodec = ZipStrings.GetStringCodec();
 
 		#endregion Instance Fields
 

@@ -151,7 +151,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 
 				EncryptBlock(buffer_, 0, len);
 
-				await baseOutputStream_.WriteAsync(buffer_, 0, len, ct);
+				await baseOutputStream_.WriteAsync(buffer_, 0, len, ct).ConfigureAwait(false);
 			}
 
 			if (!deflater_.IsFinished)
@@ -159,7 +159,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 				throw new SharpZipBaseException("Can't deflate all input?");
 			}
 
-			await baseOutputStream_.FlushAsync(ct);
+			await baseOutputStream_.FlushAsync(ct).ConfigureAwait(false);
 
 			if (cryptoTransform_ != null)
 			{
@@ -205,7 +205,12 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 		protected byte[] AESAuthCode;
 
 		/// <inheritdoc cref="StringCodec.ZipCryptoEncoding"/>
-		public Encoding ZipCryptoEncoding { get; set; } = StringCodec.DefaultZipCryptoEncoding;
+		public Encoding ZipCryptoEncoding {
+			get => _stringCodec.ZipCryptoEncoding;
+			set {
+				_stringCodec = _stringCodec.WithZipCryptoEncoding(value);
+			} 
+		}
 
 		/// <summary>
 		/// Encrypt a block of data
@@ -412,7 +417,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 			}
 		}
 
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1_OR_GREATER
 		/// <summary>
 		/// Calls <see cref="FinishAsync"/> and closes the underlying
 		/// stream when <see cref="IsStreamOwner"></see> is true.
@@ -425,7 +430,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 
 				try
 				{
-					await FinishAsync(CancellationToken.None);
+					await FinishAsync(CancellationToken.None).ConfigureAwait(false);
 					if (cryptoTransform_ != null)
 					{
 						GetAuthCodeIfAES();
@@ -437,7 +442,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 				{
 					if (IsStreamOwner)
 					{
-						await baseOutputStream_.DisposeAsync();
+						await baseOutputStream_.DisposeAsync().ConfigureAwait(false);
 					}
 				}
 			}
@@ -507,6 +512,9 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
 		protected Stream baseOutputStream_;
 
 		private bool isClosed_;
+
+		/// <inheritdoc cref="StringCodec"/>
+		protected StringCodec _stringCodec = ZipStrings.GetStringCodec();
 
 		#endregion Instance Fields
 	}
