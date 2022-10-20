@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TaurenEngine
 {
@@ -178,7 +177,7 @@ namespace TaurenEngine
 		/// <summary>
 		/// 【逻辑上】清理列表
 		/// </summary>
-		public override void Clear()
+		public virtual void Clear()
 		{
 			if (IsLoop)
 			{

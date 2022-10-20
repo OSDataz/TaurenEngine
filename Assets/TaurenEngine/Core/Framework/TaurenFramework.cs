@@ -6,7 +6,6 @@
  *└────────────────────────┘*/
 
 using System;
-using System.Collections.Generic;
 
 namespace TaurenEngine
 {
@@ -40,11 +39,20 @@ namespace TaurenEngine
 				serviceMgr.Add(iType, (IService)Activator.CreateInstance(oType));
 			};
 
-			// 注意：以下顺序切勿随意修改
-			addServiceFunc(typeof(IPoolService), typeof(PoolService));// 对象池服务器
+			// 注意：以下顺序切勿随意修改 ======================
+			// 时间日期服务
+			addServiceFunc(typeof(IDateService), typeof(DateService));
+			DateHelper.dateService = serviceMgr.Get<IDateService>();
+
+			// 对象池服务
+			addServiceFunc(typeof(IPoolService), typeof(PoolService));
 			PoolHelper.poolService = serviceMgr.Get<IPoolService>();
-			addServiceFunc(typeof(ILogService), typeof(LogService));// 日志服务
-			addServiceFunc(typeof(ITimerService), typeof(TimerService));// 计时器服务
+
+			// 日志服务
+			addServiceFunc(typeof(ILogService), typeof(LogService));
+
+			// 计时器服务
+			addServiceFunc(typeof(ITimerService), typeof(TimerService));
 			TimerHelper.timerService = serviceMgr.Get<ITimerService>();
 		}
 	}

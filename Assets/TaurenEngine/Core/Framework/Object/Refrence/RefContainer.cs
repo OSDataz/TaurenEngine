@@ -11,10 +11,11 @@ namespace TaurenEngine
 {
 	/// <summary>
 	/// 指定类型的引用对象容器
+	/// 存在目的：在大量执行时，避免类型转换、提高效率，谨慎使用
 	/// <para>备注：不使用接口因为泛型接口的扩展函数不能正常使用</para>
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class RefContainer<T> : RefObject, IRecycle where T : IRefObject
+	public class RefContainer<T> : RefObject where T : IRefObject
 	{
 		/// <summary>
 		/// 引用对象列表
@@ -82,18 +83,6 @@ namespace TaurenEngine
 				RemoveRefObject(index);
 				index = RefObjectList.Count - 1;
 			}
-
-			for (int i = RefObjectList.Count - 1; i >= 0; --i)
-			{
-				RefObjectList[i]?.DelRefCount();// TODO 设计上Destroy嵌套删除
-			}
-
-			RefObjectList.Clear();
-		}
-
-		public virtual void Clear()
-		{
-			RemoveAllRefObjects();
 		}
 	}
 }
