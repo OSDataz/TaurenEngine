@@ -14,6 +14,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groups:
   - showDetails: 0
+    name: "LitJson \u5F15\u7528\u7ED1\u5B9A"
+    groups:
+    - rootFromPath: D:\Workspace\Git\litjson\src
+      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Core\ThirdPlugins
+      items:
+      - fromPath: LitJson
+        toPath: LitJson
+  - showDetails: 0
+    name: "Excel \u548C ZIP \u5F15\u7528\u7ED1\u5B9A\uFF08\u6539\uFF09"
+    groups:
+    - rootFromPath: D:\Workspace\Git\SharpZipLib\src\ICSharpCode.SharpZipLib
+      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Core\ThirdPlugins\SharpZipLib
+      items:
+      - fromPath: BZip2
+        toPath: BZip2
+      - fromPath: Checksum
+        toPath: Checksum
+      - fromPath: Core
+        toPath: Core
+      - fromPath: Encryption
+        toPath: Encryption
+      - fromPath: GZip
+        toPath: GZip
+      - fromPath: Lzw
+        toPath: Lzw
+      - fromPath: Tar
+        toPath: Tar
+      - fromPath: Zip
+        toPath: Zip
+      - fromPath: 
+        toPath: 
+    - rootFromPath: D:\Workspace\Git\ExcelDataReader\src
+      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Core\ThirdPlugins\ExcelDataReader
+      items:
+      - fromPath: ExcelDataReader
+        toPath: ExcelDataReader
+      - fromPath: ExcelDataReader.DataSet
+        toPath: ExcelDataReader.DataSet
+  - showDetails: 0
     name: "ILRuntime \u5F15\u7528\u7ED1\u5B9A"
     groups:
     - rootFromPath: D:\Workspace Me\Git\ILRuntime
@@ -39,40 +78,6 @@ MonoBehaviour:
         toPath: ILRuntime\Reflection
       - fromPath: ILRuntime\Runtime
         toPath: ILRuntime\Runtime
-    - rootFromPath: D:\Workspace Me\Git\litjson\src
-      rootToPath: D:\Workspace Me\TaurenEngine\Assets\TaurenEngine\Framework\Dependencies
-      items:
-      - fromPath: LitJson
-        toPath: LitJson
-  - showDetails: 0
-    name: "Excel \u548C ZIP \u5F15\u7528\u7ED1\u5B9A\uFF08\u6539\uFF09"
-    groups:
-    - rootFromPath: D:\Workspace Me\Git\SharpZipLib\src\ICSharpCode.SharpZipLib
-      rootToPath: D:\Workspace Me\TaurenEngine\Assets\TaurenEngine\Editor\Framework\Dependencies\SharpZipLib
-      items:
-      - fromPath: BZip2
-        toPath: BZip2
-      - fromPath: Checksum
-        toPath: Checksum
-      - fromPath: Core
-        toPath: Core
-      - fromPath: Encryption
-        toPath: Encryption
-      - fromPath: GZip
-        toPath: GZip
-      - fromPath: Lzw
-        toPath: Lzw
-      - fromPath: Tar
-        toPath: Tar
-      - fromPath: Zip
-        toPath: Zip
-    - rootFromPath: D:\Workspace Me\Git\ExcelDataReader\src
-      rootToPath: D:\Workspace Me\TaurenEngine\Assets\TaurenEngine\Editor\Framework\Dependencies\ExcelDataReader
-      items:
-      - fromPath: ExcelDataReader
-        toPath: ExcelDataReader
-      - fromPath: ExcelDataReader.DataSet
-        toPath: ExcelDataReader.DataSet
   - showDetails: 0
     name: "\u514B\u9686\u9879\u76EE"
     groups:
