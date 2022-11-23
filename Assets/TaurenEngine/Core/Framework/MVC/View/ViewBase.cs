@@ -12,7 +12,7 @@ namespace TaurenEngine
 	/// <summary>
 	/// 显示对象基类
 	/// </summary>
-	public abstract class ViewBase : IRefContainer
+	public abstract class ViewBase : MonoComponent, IRefContainer
 	{
 		public List<IRefObject> RefObjectList { get; } = new List<IRefObject>();
 

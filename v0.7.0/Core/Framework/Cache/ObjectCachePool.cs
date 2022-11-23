@@ -12,10 +12,7 @@ namespace TaurenEngine
 	/// </summary>
 	public class ObjectCachePool<T> : RefContainer<T> where T : IRefObject
 	{
-		/// <summary>
-		/// 缓冲数量
-		/// </summary>
-		public int capacity = 50;
+		
 
 		/// <summary>
 		/// 添加到缓冲队列

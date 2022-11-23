@@ -2,19 +2,16 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.8.0
- *│　Time    ：2022/10/20 12:24:42
+ *│　Time    ：2022/11/12 17:42:38
  *└────────────────────────┘*/
 
-using UnityEngine;
-
-namespace TaurenTest
+namespace TaurenEngine
 {
-	public class Launcher : MonoBehaviour
+	internal class FlagmentManager
 	{
-
-		private void Start()
-		{
-			
-		}
+		/// <summary>
+		/// 是否已经退出
+		/// </summary>
+		public bool IsExit { get; private set; }
 	}
 }

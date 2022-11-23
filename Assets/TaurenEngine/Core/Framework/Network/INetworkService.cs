@@ -2,19 +2,12 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.8.0
- *│　Time    ：2022/10/20 12:24:42
+ *│　Time    ：2022/10/22 15:30:04
  *└────────────────────────┘*/
 
-using UnityEngine;
-
-namespace TaurenTest
+namespace TaurenEngine
 {
-	public class Launcher : MonoBehaviour
+	public interface INetworkService : IService
 	{
-
-		private void Start()
-		{
-			
-		}
 	}
 }

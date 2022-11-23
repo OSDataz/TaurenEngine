@@ -54,6 +54,12 @@ namespace TaurenEngine
 			// 计时器服务
 			addServiceFunc(typeof(ITimerService), typeof(TimerService));
 			TimerHelper.timerService = serviceMgr.Get<ITimerService>();
+
+
+
+			// 资源服务
+			addServiceFunc(typeof(IResourceService), typeof(ResourceService));
+			ResourceHelper.resourceService = serviceMgr.Get<IResourceService>();
 		}
 	}
 }

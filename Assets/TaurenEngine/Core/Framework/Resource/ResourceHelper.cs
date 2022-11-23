@@ -2,19 +2,13 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.8.0
- *│　Time    ：2022/10/20 12:24:42
+ *│　Time    ：2022/10/21 20:13:27
  *└────────────────────────┘*/
 
-using UnityEngine;
-
-namespace TaurenTest
+namespace TaurenEngine
 {
-	public class Launcher : MonoBehaviour
+	public static class ResourceHelper
 	{
-
-		private void Start()
-		{
-			
-		}
+		internal static IResourceService resourceService;
 	}
 }
