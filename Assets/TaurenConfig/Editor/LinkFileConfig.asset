@@ -43,8 +43,6 @@ MonoBehaviour:
         toPath: Tar
       - fromPath: Zip
         toPath: Zip
-      - fromPath: 
-        toPath: 
     - rootFromPath: D:\Workspace\Git\ExcelDataReader\src
       rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Core\ThirdPlugins\ExcelDataReader
       items:
@@ -79,10 +77,12 @@ MonoBehaviour:
       - fromPath: ILRuntime\Runtime
         toPath: ILRuntime\Runtime
   - showDetails: 0
-    name: "\u514B\u9686\u9879\u76EE"
+    name: "\u6D4B\u8BD5\u9879\u76EEDLL\u540C\u6B65"
     groups:
-    - rootFromPath: D:\Workspace
-      rootToPath: D:\Workspace
+    - rootFromPath: D:\Workspace Me\TaurenEngine\Assets\TaurenConfig\Temp~\StandaloneWindows64
+      rootToPath: D:\Workspace Me\game-mylife\MyLife\Assets\Plugins
       items:
-      - fromPath: PhilippinesProject_2
-        toPath: PhilippinesProject_2_Ref
+      - fromPath: TaurenEngine.Core.dll
+        toPath: TaurenEngine.Core.dll
+      - fromPath: TaurenEngine.Core.pdb
+        toPath: TaurenEngine.Core.pdb

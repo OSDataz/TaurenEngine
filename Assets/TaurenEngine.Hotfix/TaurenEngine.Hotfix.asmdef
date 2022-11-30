@@ -1,0 +1,16 @@
+{
+    "name": "TaurenEngine.Hotfix",
+    "rootNamespace": "",
+    "references": [
+        "GUID:abab519207a41d143b9887d7c2eefed4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
