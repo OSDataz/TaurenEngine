@@ -39,12 +39,12 @@ namespace TaurenEngine
 
 	public static class ITimerServiceExtension
 	{
-		public static void InitInterface(this ITimerService @object, ITimerService instance)
+		public static void InitInterface(this ITimerService @object)
 		{
 			if (ITimerService.Instance != null)
 				Debug.LogError("ITimerService重复创建实例");
 
-			ITimerService.Instance = instance;
+			ITimerService.Instance = @object;
 		}
 	}
 }

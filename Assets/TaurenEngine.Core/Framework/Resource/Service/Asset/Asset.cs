@@ -12,7 +12,7 @@ namespace TaurenEngine
 	/// <summary>
 	/// 加载完成的资源
 	/// </summary>
-	internal class Asset : RefObject
+	internal class Asset : RefrenceObject
 	{
 		/// <summary>
 		/// 加载出来的原始资源

@@ -79,12 +79,12 @@ namespace TaurenEngine
 
 	public static class IPoolServiceExtension
 	{
-		public static void InitInterface(this IPoolService @object, IPoolService instance)
+		public static void InitInterface(this IPoolService @object)
 		{
 			if (IPoolService.Instance != null)
 				Debug.LogError("IPoolService重复创建实例");
 
-			IPoolService.Instance = instance;
+			IPoolService.Instance = @object;
 		}
 	}
 }

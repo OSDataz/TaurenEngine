@@ -11,7 +11,7 @@ namespace TaurenEngine
 	{
 		public AudioService()
 		{
-			this.InitInterface(this);
+			this.InitInterface();
 		}
 	}
 }

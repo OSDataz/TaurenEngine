@@ -20,7 +20,7 @@ namespace TaurenEngine
 
 		public TimerService()
 		{
-			this.InitInterface(this);
+			this.InitInterface();
 			TimerPool = PoolHelper.GetPool<Timer>();
 		}
 	}

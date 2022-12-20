@@ -20,7 +20,7 @@ namespace TaurenEngine
 
 		public PoolService()
 		{
-			this.InitInterface(this);
+			this.InitInterface();
 		}
 
 		public ObjectPool<T> GetPool<T>() where T : IRecycle, new()

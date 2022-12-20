@@ -22,12 +22,12 @@ namespace TaurenEngine
 
 	public static class ILogServiceExtension
 	{
-		public static void InitInterface(this ILogService @object, ILogService instance)
+		public static void InitInterface(this ILogService @object)
 		{
 			if (ILogService.Instance != null)
 				Debug.LogError("IPoolService重复创建实例");
 
-			ILogService.Instance = instance;
+			ILogService.Instance = @object;
 		}
 	}
 }

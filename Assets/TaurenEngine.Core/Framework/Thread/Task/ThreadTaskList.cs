@@ -18,13 +18,13 @@ namespace TaurenEngine
 		private List<IThreadTask> _taskList = new List<IThreadTask>();
 
 		/// <summary> 进行中任务数量 </summary>
-		public int RunningTaskCount { get; private set; }
+		public int RunningCount { get; private set; }
 
 		/// <summary> 已完成任务数量 </summary>
-		public int FinishTaskCount { get; private set; }
+		public int FinishCount { get; private set; }
 
 		/// <summary> 获取所有任务数量(剩余任务、进行中任务、已完成任务的数量之和)，非线程安全 </summary>
-		public int TotalTaskCount => _taskList.Count + RunningTaskCount + FinishTaskCount;
+		public int TotalCount => _taskList.Count + RunningCount + FinishCount;
 
 		public bool Run()
 		{
@@ -35,7 +35,7 @@ namespace TaurenEngine
 				{
 					task = _taskList[0];
 					_taskList.RemoveAt(0);
-					RunningTaskCount += 1;
+					RunningCount += 1;
 				}
 			}
 
@@ -44,8 +44,8 @@ namespace TaurenEngine
 				task.Run();
 				lock (this)
 				{
-					RunningTaskCount -= 1;
-					FinishTaskCount += 1;
+					RunningCount -= 1;
+					FinishCount += 1;
 				}
 
 				return true;

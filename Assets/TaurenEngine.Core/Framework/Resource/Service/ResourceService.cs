@@ -19,14 +19,19 @@ namespace TaurenEngine
 		/// </summary>
 		private ResourceCache _resourceCache = new ResourceCache();
 
-		public T Load<T>(IRefObject target, string path, bool cache = true)
+		public ResourceService()
+		{
+			this.InitInterface();
+		}
+
+		public T Load<T>(IRefrenceObject target, string path, bool cache = true)
 		{
 
 
 			return default(T);
 		}
 
-		public void Load<T>(IRefObject target, string path, Action<bool, T> onLoadComplete, bool cache = true, int loadPriority = 10, 
+		public void Load<T>(IRefrenceObject target, string path, Action<bool, T> onLoadComplete, bool cache = true, int loadPriority = 10, 
 			Action onLoadStart = null, Action<int, int> onLoadProgress = null)
 		{
 			

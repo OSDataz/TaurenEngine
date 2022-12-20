@@ -43,11 +43,7 @@ namespace TaurenEngine
 			addServiceFunc(typeof(IPoolService), typeof(PoolService));// 对象池服务
 			addServiceFunc(typeof(ILogService), typeof(LogService));// 日志服务
 			addServiceFunc(typeof(ITimerService), typeof(TimerService));// 计时器服务
-
-			//// 资源服务
-			//addServiceFunc(typeof(IResourceService), typeof(ResourceService));
-			//ResourceHelper.resourceService = serviceMgr.Get<IResourceService>();
-
+			addServiceFunc(typeof(IResourceService), typeof(ResourceService));// 资源服务
 			addServiceFunc(typeof(IAudioService), typeof(AudioService));// 音频服务
 			addServiceFunc(typeof(INetworkService), typeof(NetworkService));// 网络服务
 		}

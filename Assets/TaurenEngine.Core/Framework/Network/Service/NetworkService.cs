@@ -14,7 +14,7 @@ namespace TaurenEngine
 	{
 		public NetworkService()
 		{
-			this.InitInterface(this);
+			this.InitInterface();
 		}
 	}
 }

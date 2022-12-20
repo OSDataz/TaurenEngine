@@ -20,6 +20,13 @@ namespace TaurenEngine
 		/// <summary> 是否停止任务(停止未启动任务，已启动任务无法停止) </summary>
 		public bool Stop { get; set; }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="maxThreadCount">最大线程数</param>
+		/// <param name="priority">线程优先级</param>
+		/// <param name="onProgress">线程进度回调</param>
+		/// <param name="onComplete">全部完成回调</param>
 		public void Start(int maxThreadCount, int priority = -1, Action<int, int> onProgress = null, Action onComplete = null)
 		{
 			var threadCount = maxThreadCount <= 0 ? 3 : maxThreadCount;
@@ -29,12 +36,11 @@ namespace TaurenEngine
 			{
 				ProxyThread thread = new ProxyThread();
 				thread.SetPriority(priority);
-
-				Action taskAction = () =>
+				thread.runAction = () =>
 				{
 					do
 					{
-						onProgress?.Invoke(_taskList.FinishTaskCount, _taskList.TotalTaskCount);
+						onProgress?.Invoke(_taskList.FinishCount, _taskList.TotalCount);
 					}
 					while (!Stop && _taskList.Run());
 
@@ -50,8 +56,6 @@ namespace TaurenEngine
 						onComplete?.Invoke();
 					}
 				};
-
-				thread.runAction = taskAction;
 				thread.Start();
 			}
 		}

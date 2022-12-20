@@ -19,12 +19,12 @@ namespace TaurenEngine
 
 	public static class IAudioServiceExtension
 	{
-		public static void InitInterface(this IAudioService @object, IAudioService instance)
+		public static void InitInterface(this IAudioService @object)
 		{
 			if (IAudioService.Instance != null)
 				Debug.LogError("IAudioService重复创建实例");
 
-			IAudioService.Instance = instance;
+			IAudioService.Instance = @object;
 		}
 	}
 }

@@ -19,12 +19,12 @@ namespace TaurenEngine
 
 	public static class INetworkServiceExtension
 	{
-		public static void InitInterface(this INetworkService @object, INetworkService instance)
+		public static void InitInterface(this INetworkService @object)
 		{
 			if (INetworkService.Instance != null)
 				Debug.LogError("INetworkService重复创建实例");
 
-			INetworkService.Instance = instance;
+			INetworkService.Instance = @object;
 		}
 	}
 }

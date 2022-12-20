@@ -17,7 +17,7 @@ namespace TaurenEngine
 	{
 		public LogService()
 		{
-			this.InitInterface(this);
+			this.InitInterface();
 		}
 
 		private bool _enabled;
