@@ -551,6 +551,8 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// </exception>
 		public void CloseEntry()
 		{
+			// Note: This method will run synchronously
+			FinishCompressionSyncOrAsync(null).GetAwaiter().GetResult();
 			WriteEntryFooter(baseOutputStream_);
 
 			// Patch the header if possible
@@ -564,9 +566,41 @@ namespace ICSharpCode.SharpZipLib.Zip
 			curEntry = null;
 		}
 
+		private async Task FinishCompressionSyncOrAsync(CancellationToken? ct)
+		{
+			// Compression handled externally
+			if (entryIsPassthrough) return;
+
+			// First finish the deflater, if appropriate
+			if (curMethod == CompressionMethod.Deflated)
+			{
+				if (size >= 0)
+				{
+					if (ct.HasValue) {
+						await base.FinishAsync(ct.Value).ConfigureAwait(false);
+					} else {
+						base.Finish();
+					}
+				}
+				else
+				{
+					deflater_.Reset();
+				}
+			}
+			if (curMethod == CompressionMethod.Stored)
+			{
+				// This is done by Finish() for Deflated entries, but we need to do it
+				// ourselves for Stored ones
+				base.GetAuthCodeIfAES();
+			}
+
+			return;
+		}
+
 		/// <inheritdoc cref="CloseEntry"/>
 		public async Task CloseEntryAsync(CancellationToken ct)
 		{
+			await FinishCompressionSyncOrAsync(ct).ConfigureAwait(false);
 			await baseOutputStream_.WriteProcToStreamAsync(WriteEntryFooter, ct).ConfigureAwait(false);
 
 			// Patch the header if possible
@@ -600,24 +634,9 @@ namespace ICSharpCode.SharpZipLib.Zip
 
 			long csize = size;
 
-			// First finish the deflater, if appropriate
-			if (curMethod == CompressionMethod.Deflated)
+			if (curMethod == CompressionMethod.Deflated && size >= 0)
 			{
-				if (size >= 0)
-				{
-					base.Finish();
-					csize = deflater_.TotalOut;
-				}
-				else
-				{
-					deflater_.Reset();
-				}
-			}
-			else if (curMethod == CompressionMethod.Stored)
-			{
-				// This is done by Finish() for Deflated entries, but we need to do it
-				// ourselves for Stored ones
-				base.GetAuthCodeIfAES();
+				csize = deflater_.TotalOut;
 			}
 
 			// Write the AES Authentication Code (a hash of the compressed and encrypted data)
@@ -748,9 +767,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 		private void InitializeZipCryptoPassword(string password)
 		{
 			var pkManaged = new PkzipClassicManaged();
-			Console.WriteLine($"Output Encoding: {ZipCryptoEncoding.EncodingName}");
 			byte[] key = PkzipClassic.GenerateKeys(ZipCryptoEncoding.GetBytes(password));
-			Console.WriteLine($"Output Bytes: {string.Join(", ", key.Select(b => $"{b:x2}").ToArray())}");
 			cryptoTransform_ = pkManaged.CreateEncryptor(key, null);
 		}
 		
@@ -763,6 +780,13 @@ namespace ICSharpCode.SharpZipLib.Zip
 		/// <exception cref="ZipException">Archive size is invalid</exception>
 		/// <exception cref="System.InvalidOperationException">No entry is active.</exception>
 		public override void Write(byte[] buffer, int offset, int count)
+			=> WriteSyncOrAsync(buffer, offset, count, null).GetAwaiter().GetResult();
+
+		/// <inheritdoc />
+		public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken ct)
+			=> await WriteSyncOrAsync(buffer, offset, count, ct).ConfigureAwait(false);
+
+		private async Task WriteSyncOrAsync(byte[] buffer, int offset, int count, CancellationToken? ct)
 		{
 			if (curEntry == null)
 			{
@@ -797,7 +821,7 @@ namespace ICSharpCode.SharpZipLib.Zip
 
 			size += count;
 
-			if(curMethod == CompressionMethod.Stored || entryIsPassthrough)
+			if (curMethod == CompressionMethod.Stored || entryIsPassthrough)
 			{
 				if (Password != null)
 				{
@@ -805,12 +829,26 @@ namespace ICSharpCode.SharpZipLib.Zip
 				}
 				else
 				{
-					baseOutputStream_.Write(buffer, offset, count);
+					if (ct.HasValue)
+					{
+						await baseOutputStream_.WriteAsync(buffer, offset, count, ct.Value).ConfigureAwait(false);
+					}
+					else
+					{
+						baseOutputStream_.Write(buffer, offset, count);
+					}
 				}
 			}
 			else
 			{
-				base.Write(buffer, offset, count);
+				if (ct.HasValue)
+				{
+					await base.WriteAsync(buffer, offset, count, ct.Value).ConfigureAwait(false);
+				}
+				else
+				{
+					base.Write(buffer, offset, count);
+				}
 			}
 		}
 
