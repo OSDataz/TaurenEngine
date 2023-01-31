@@ -14,9 +14,7 @@ namespace TaurenEngine
 	/// </summary>
 	internal class ResourceCache
 	{
-		/// <summary>
-		/// 缓存列表
-		/// </summary>
+		/// <summary> 缓存列表 </summary>
 		protected readonly RefrenceList<Asset> cacheList = new RefrenceList<Asset>();
 
 		/// <summary> 回收资源列表 </summary>

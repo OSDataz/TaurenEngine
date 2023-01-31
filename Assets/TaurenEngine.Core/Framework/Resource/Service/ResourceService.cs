@@ -11,6 +11,11 @@ namespace TaurenEngine
 {
 	/// <summary>
 	/// 资源服务
+	/// 
+	/// 1.缓存资源；
+	/// 2.Http远程下载资源；
+	/// 3.本地下载资源；
+	/// 4.AB包管理和资源管理；
 	/// </summary>
 	internal class ResourceService : IResourceService
 	{
