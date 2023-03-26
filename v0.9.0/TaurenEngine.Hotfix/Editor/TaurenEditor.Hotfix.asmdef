@@ -2,9 +2,9 @@
     "name": "TaurenEditor.Hotfix",
     "rootNamespace": "",
     "references": [
-        "GUID:0a2bc84df0b089643b155c8a0ce1c673",
-        "GUID:8a4881bad63822b4ab0603d9069a6ea6",
-        "GUID:7c62b647da5e94743bddd44ad18d91ec"
+        "GUID:abab519207a41d143b9887d7c2eefed4",
+        "GUID:7c62b647da5e94743bddd44ad18d91ec",
+        "GUID:de19e8c87637a184594f9dc11c889f12"
     ],
     "includePlatforms": [
         "Editor"

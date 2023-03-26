@@ -2,8 +2,7 @@
     "name": "TaurenTest",
     "rootNamespace": "",
     "references": [
-        "GUID:2183fe121646fd946bc80704484389fc",
-        "GUID:582a788f3f0ea0049816b701cb69032b"
+        "GUID:0a2bc84df0b089643b155c8a0ce1c673"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,10 +1,8 @@
 {
-    "name": "TaurenEditor.Hotfix",
+    "name": "TaurenEditor",
     "rootNamespace": "",
     "references": [
-        "GUID:0a2bc84df0b089643b155c8a0ce1c673",
-        "GUID:8a4881bad63822b4ab0603d9069a6ea6",
-        "GUID:7c62b647da5e94743bddd44ad18d91ec"
+        "GUID:0a2bc84df0b089643b155c8a0ce1c673"
     ],
     "includePlatforms": [
         "Editor"
