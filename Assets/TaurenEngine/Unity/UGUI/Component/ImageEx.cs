@@ -1,23 +1,23 @@
 ﻿/*┌────────────────────────┐
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
- *│　Version ：v0.8.0
- *│　Time    ：2022/10/20 12:24:42
+ *│　Version ：v0.5.0
+ *│　Time    ：2022/5/8 17:22:25
  *└────────────────────────┘*/
 
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TaurenTest
+namespace TaurenEngine.Unity
 {
-	public class Launcher : MonoBehaviour
+	[RequireComponent(typeof(Image))]
+	/// <summary>
+	/// UI-图片 扩展
+	/// </summary>
+
+	public class ImageEx : UIComponentBase<Image>
 	{
-		public Transform tran;
-
-		private void Start()
-		{
-
-		}
+		#region 静态扩展
+		#endregion
 	}
 }

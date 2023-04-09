@@ -1,0 +1,22 @@
+{
+    "name": "TaurenEditor.Hotfix",
+    "rootNamespace": "TaurenEditor.Hotfix",
+    "references": [
+        "GUID:f45df9579f373884c997ec9abd8b5536",
+        "GUID:8ed909b8f14c733429915f8d4b361eef",
+        "GUID:199017b565691a2499b2a67d463ddf6e",
+        "GUID:850610141f6826d4798b76a7102d7966",
+        "GUID:c118b3b0acb787944832c7658c989b1c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

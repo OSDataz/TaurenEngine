@@ -1,0 +1,16 @@
+{
+    "name": "TaurenEngine.Unity",
+    "rootNamespace": "TaurenEngine.Unity",
+    "references": [
+        "GUID:f45df9579f373884c997ec9abd8b5536"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
