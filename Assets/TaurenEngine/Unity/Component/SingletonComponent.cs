@@ -5,6 +5,7 @@
  *│　Time    ：2022/4/16 10:50:12
  *└────────────────────────┘*/
 
+using TaurenEngine.Core;
 using UnityEngine;
 
 namespace TaurenEngine.Unity
@@ -31,7 +32,7 @@ namespace TaurenEngine.Unity
 					{
 						instance = objects[0];
 						if (objects.Length > 1)
-							Debug.LogError($"{typeof(T).Name} extends SingletonBehaviour more than 1!");
+							Log.Error($"{typeof(T).Name} extends SingletonBehaviour more than 1!");
 					}
 					else
 					{
