@@ -12,6 +12,9 @@ using UnityEngine;
 
 namespace TaurenEditor.Common
 {
+	/// <summary>
+	/// TODO 待确定具体使用方式后修改
+	/// </summary>
 	public static class CompileDllsHelper
 	{
 		[MenuItem("TaurenTools/Common/CompileDll/ActiveBuildTarget")]

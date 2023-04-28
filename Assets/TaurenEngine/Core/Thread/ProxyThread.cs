@@ -16,19 +16,13 @@ namespace TaurenEngine.Core
 	/// </summary>
 	internal class ProxyThread
 	{
-		/// <summary>
-		/// 系统线程
-		/// </summary>
+		/// <summary> 系统线程 </summary>
 		protected Thread thread;
 
-		/// <summary>
-		/// 线程优先级（-1表示未设置）
-		/// </summary>
+		/// <summary> 线程优先级（-1表示未设置） </summary>
 		private int priority = -1;
 
-		/// <summary>
-		/// 任务代理
-		/// </summary>
+		/// <summary> 任务代理 </summary>
 		public Action runAction;
 
 		/// <summary>

@@ -172,7 +172,7 @@ namespace TaurenEngine.Unity
 			}
 			else
 			{
-				refrenceList.RemoveAll();
+				refrenceList.Clear();
 				status.Clear();
 			}
 
@@ -224,7 +224,7 @@ namespace TaurenEngine.Unity
 
 				if (LengthLogic == 0)
 				{
-					refrenceList.RemoveAll();
+					refrenceList.Clear();
 					status.Clear();
 				}
 				else

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a676a27b8e9c1946a4758e7b3c4822f, type: 3}
+  m_Script: {fileID: 11500000, guid: b04c29a04f408f54980f09f6b6318f85, type: 3}
   m_Name: CopyFileConfig
   m_EditorClassIdentifier: 
   groups:
-  - showDetails: 1
+  - showDetails: 0
     name: "Co.\u4EE3\u7801\u6A21\u677F-Me"
-    updateTime: 2023/2/4 20:35:49
+    updateTime: 2023/4/27 20:06:12
     items:
     - copyPath: D:\Workspace Me\TaurenEngine\CoreTemplates\TaurenEngine\Class.cs
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
@@ -23,7 +23,7 @@ MonoBehaviour:
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs
   - showDetails: 0
     name: "Co.\u4EE3\u7801\u6A21\u677F-Co"
-    updateTime: 2022/11/30 9:56:44
+    updateTime: 2023/4/24 12:23:12
     items:
     - copyPath: D:\Cahce\CoreTemplates\Co\Class.cs
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs
@@ -31,7 +31,7 @@ MonoBehaviour:
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Interface\Interface.cs
   - showDetails: 0
     name: "Co.\u4EE3\u7801\u6A21\u677F-Co.Frame"
-    updateTime: 2022/10/24 14:06:26
+    updateTime: 
     items:
     - copyPath: D:\Cahce\CoreTemplates\Co.Frame\Class.cs
       pastePath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ItemTemplates\CSharp\Code\2052\Class\Class.cs

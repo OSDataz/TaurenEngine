@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53af68cea0e248e488bbca89d0c350ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f69f6abdf2059f4793f3b95d5f509a5, type: 3}
   m_Name: LinkFileConfig
   m_EditorClassIdentifier: 
   groups:
@@ -76,13 +76,3 @@ MonoBehaviour:
         toPath: ILRuntime\Reflection
       - fromPath: ILRuntime\Runtime
         toPath: ILRuntime\Runtime
-  - showDetails: 0
-    name: "\u6D4B\u8BD5\u9879\u76EEDLL\u540C\u6B65"
-    groups:
-    - rootFromPath: D:\Workspace Me\TaurenEngine\Assets\TaurenConfig\Temp~\StandaloneWindows64
-      rootToPath: D:\Workspace Me\game-mylife\MyLife\Assets\Plugins
-      items:
-      - fromPath: TaurenEngine.Core.dll
-        toPath: TaurenEngine.Core.dll
-      - fromPath: TaurenEngine.Core.pdb
-        toPath: TaurenEngine.Core.pdb

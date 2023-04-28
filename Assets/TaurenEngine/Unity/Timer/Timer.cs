@@ -82,14 +82,23 @@ namespace TaurenEngine.Unity
 				return;
 
 			IsRunning = true;
-			TriggerTime = Time.time + Interval;
+
 
 			if (Type == TimerType.Update || Type == TimerType.UpdateInterval)
+			{
+				TriggerTime = Time.time + Interval;
 				UpdateList.Add(this);
+			}
 			else if (Type == TimerType.LateUpdate || Type == TimerType.LateUpdateInterval)
+			{
+				TriggerTime = Time.time + Interval;
 				LateUpdateList.Add(this);
+			}
 			else if (Type == TimerType.FixedUpdate || Type == TimerType.FixedUpdateInterval)
+			{
+				TriggerTime = Time.fixedTime + Interval;
 				FixedUpdateList.Add(this);
+			}
 			else
 				Log.Error($"Timer类型异常：{Type}");
 		}
@@ -139,7 +148,12 @@ namespace TaurenEngine.Unity
 				callParamAction.Invoke(param);
 
 			if (IsLoop)
-				TriggerTime = Time.time + Interval;
+			{
+				if (Type == TimerType.FixedUpdate || Type == TimerType.FixedUpdateInterval)
+					TriggerTime = Time.fixedTime + Interval;
+				else
+					TriggerTime = Time.time + Interval;
+			}
 			else
 				Stop();
 		}

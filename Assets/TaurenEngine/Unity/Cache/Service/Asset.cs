@@ -11,10 +11,15 @@ using TaurenEngine.Core;
 namespace TaurenEngine.Unity
 {
 	/// <summary>
-	/// 加载完成的资源
+	/// 资源对象
 	/// </summary>
-	internal class Asset : RefrenceObject
+	public class Asset : RefrenceObject
 	{
+		/// <summary>
+		/// 资源键值（资源路径）
+		/// </summary>
+		public string key;
+
 		/// <summary>
 		/// 加载出来的原始资源
 		/// </summary>
@@ -23,7 +28,7 @@ namespace TaurenEngine.Unity
 		/// <summary>
 		/// 资源弱引用
 		/// </summary>
-		public WeakReference dataWeakRef;
+		private WeakReference _dataWeakRef;
 
 		/// <summary>
 		/// 是否可缓存
@@ -33,10 +38,10 @@ namespace TaurenEngine.Unity
 		/// <summary>
 		/// 最近访问时间
 		/// </summary>
-		public float visitTime;
+		internal float visitTime;
 
 		/// <summary>
-		/// 内存占用
+		/// 内存占用（字节）
 		/// </summary>
 		public int MemorySize { get; private set; }
 
@@ -60,23 +65,37 @@ namespace TaurenEngine.Unity
 				if (data != null)
 					return true;
 
-				if (dataWeakRef == null)
+				if (_dataWeakRef == null)
 					return false;
 
-				return dataWeakRef.IsAlive && dataWeakRef.Target != null;
+				return _dataWeakRef.IsAlive && _dataWeakRef.Target != null;
 			}
 		}
 
-		public override void Destroy()
+		/// <summary>
+		/// 是否是弱引用状态
+		/// </summary>
+		public bool IsWeakReference
 		{
-			if (data != null)
+			get => _dataWeakRef != null;
+			set
 			{
-				dataWeakRef = new WeakReference(data);
-				data = null;
-			}
-			else
-			{
-				base.Destroy();
+				if (value)
+				{
+					if (_dataWeakRef == null)
+					{
+						_dataWeakRef = new WeakReference(data);
+						data = null;
+					}
+				}
+				else
+				{
+					if (_dataWeakRef != null)
+					{
+						data = _dataWeakRef.Target as UnityEngine.Object;
+						_dataWeakRef = null;
+					}
+				}
 			}
 		}
 	}

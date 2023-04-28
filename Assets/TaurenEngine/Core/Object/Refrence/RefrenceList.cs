@@ -11,17 +11,19 @@ namespace TaurenEngine.Core
 {
 	public class RefrenceList<T> where T : IRefrenceObject
 	{
-		protected readonly List<T> refObjectList = new List<T>();
+		protected readonly List<T> refList = new List<T>();
 
 		#region 列表函数
-		public T this[int index] => refObjectList[index];
+		public T this[int index] => refList[index];
 
 		/// <summary>
 		/// 列表元素个数
 		/// </summary>
-		public int Count => refObjectList.Count;
+		public int Count => refList.Count;
 
-		public int IndexOf(T item) => refObjectList.IndexOf(item);
+		public int IndexOf(T item) => refList.IndexOf(item);
+
+		public bool Contains(T item) => refList.Contains(item);
 		#endregion
 
 		#region 引用函数
@@ -32,7 +34,7 @@ namespace TaurenEngine.Core
 		/// <returns></returns>
 		public virtual bool AddUnique(T refObject)
 		{
-			if (refObjectList.Contains(refObject))
+			if (refList.Contains(refObject))
 				return false;// 已有对象，不再缓存
 
 			Add(refObject);
@@ -45,7 +47,7 @@ namespace TaurenEngine.Core
 		/// <param name="refObject"></param>
 		public virtual void Add(T refObject)
 		{
-			refObjectList.Add(refObject);
+			refList.Add(refObject);
 			refObject.AddRefCount();
 		}
 
@@ -55,7 +57,7 @@ namespace TaurenEngine.Core
 		/// <param name="refObject"></param>
 		public virtual bool Remove(T refObject)
 		{
-			if (!refObjectList.Remove(refObject))
+			if (!refList.Remove(refObject))
 				return false;// 列表里没有该对象
 
 			refObject.DelRefCount();
@@ -68,21 +70,21 @@ namespace TaurenEngine.Core
 		/// <param name="index"></param>
 		public virtual void RemoveAt(int index)
 		{
-			var refObject = refObjectList[index];
-			refObjectList.RemoveAt(index);
+			var refObject = refList[index];
+			refList.RemoveAt(index);
 			refObject.DelRefCount();
 		}
 
 		/// <summary>
 		/// 移除所有引用计数对象
 		/// </summary>
-		public virtual void RemoveAll()
+		public virtual void Clear()
 		{
-			var index = refObjectList.Count - 1;
+			var index = refList.Count - 1;
 			while (index >= 0)
 			{
 				RemoveAt(index);
-				index = refObjectList.Count - 1;
+				index = refList.Count - 1;
 			}
 		}
 		#endregion

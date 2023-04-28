@@ -164,7 +164,7 @@ namespace TaurenEngine.Unity
 			}
 			else
 			{
-				refrenceList.RemoveAll();
+				refrenceList.Clear();
 				status.Clear();
 			}
 
@@ -197,7 +197,7 @@ namespace TaurenEngine.Unity
 					try
 					{
 #endif
-					action.Invoke(refrenceList[i]);// todo 需考虑使用try catch的必要性
+						action.Invoke(refrenceList[i]);// todo 需考虑使用try catch的必要性
 #if BUILD_MODE_DEBUG
 					}	
 					catch (Exception exception) 
@@ -216,7 +216,7 @@ namespace TaurenEngine.Unity
 
 				if (LengthLogic == 0)
 				{
-					refrenceList.RemoveAll();
+					refrenceList.Clear();
 					status.Clear();
 				}
 				else

@@ -14,8 +14,13 @@ namespace TaurenEngine.Unity
 	/// </summary>
 	public class TimerComponent : MonoComponent
 	{
+		private float _time;
+		private float _fixedTime;
+
 		private void Update()
 		{
+			_time = Time.time;
+
 			Timer.UpdateList.ForEach(OnUpdate, true);
 		}
 
@@ -26,14 +31,29 @@ namespace TaurenEngine.Unity
 
 		private void FixedUpdate()
 		{
-			Timer.FixedUpdateList.ForEach(OnUpdate, true);
+			_fixedTime = Time.fixedTime;
+
+			Timer.FixedUpdateList.ForEach(OnFixedUpdate, true);
 		}
 
 		private void OnUpdate(Timer timer)
 		{
 			if (timer.IsInterval)
 			{
-				if (Time.time >= timer.TriggerTime)
+				if (_time >= timer.TriggerTime)
+					timer.ExecuteInterval();
+			}
+			else
+			{
+				timer.Execute();
+			}
+		}
+
+		private void OnFixedUpdate(Timer timer)
+		{
+			if (timer.IsInterval)
+			{
+				if (_fixedTime >= timer.TriggerTime)
 					timer.ExecuteInterval();
 			}
 			else
