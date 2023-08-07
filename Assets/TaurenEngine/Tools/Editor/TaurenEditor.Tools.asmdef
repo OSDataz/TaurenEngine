@@ -1,0 +1,20 @@
+{
+    "name": "TaurenEditor.Tools",
+    "rootNamespace": "TaurenEditor.Tools",
+    "references": [
+        "GUID:958ccbb8a44f7434ca12f98e450ed07e",
+        "GUID:55b93f49adb72a949b71bfbb53bb5541",
+        "GUID:c8d18a80e0ed40244a574e55fec2fd09"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

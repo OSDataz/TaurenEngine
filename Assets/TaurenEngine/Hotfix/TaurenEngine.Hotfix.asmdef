@@ -2,9 +2,7 @@
     "name": "TaurenEngine.Hotfix",
     "rootNamespace": "TaurenEngine.Hotfix",
     "references": [
-        "GUID:f45df9579f373884c997ec9abd8b5536",
-        "GUID:8ed909b8f14c733429915f8d4b361eef",
-        "GUID:199017b565691a2499b2a67d463ddf6e"
+        "GUID:55b93f49adb72a949b71bfbb53bb5541"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
