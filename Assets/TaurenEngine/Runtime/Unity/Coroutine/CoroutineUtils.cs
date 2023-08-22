@@ -12,7 +12,6 @@ namespace TaurenEngine.Runtime.Unity
 {
 	public class CoroutineUtils
 	{
-		#region 静态接口
 		/// <summary>
 		/// 等待指定秒数
 		/// </summary>
@@ -36,6 +35,5 @@ namespace TaurenEngine.Runtime.Unity
 			while (frame-- > 0)
 				yield return null;
 		}
-		#endregion
 	}
 }

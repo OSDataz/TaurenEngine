@@ -11,7 +11,7 @@ using TaurenEngine.Editor;
 
 namespace TaurenEditor.Tools
 {
-	public class CopyFileWindow : EditorWindow
+	public class CopyFileWindow : DataWindow<CopyFileEditorData>
 	{
 		[MenuItem("TaurenTools/Tools/File/复制文件工具")]
 		private static void ShowWindow()
@@ -21,33 +21,36 @@ namespace TaurenEditor.Tools
 			window.Show();
 		}
 
-		private CopyFileEditorData _editorData;
-
 		private Vector2 _scrollPos;
 
-		void OnEnable()
+		protected override CopyFileEditorData CreateEditorData()
 		{
-			_editorData ??= new CopyFileEditorData();
-			_editorData.LoadData();
+			var data = new CopyFileEditorData();
+			data.LoadData();
+			return data;
 		}
 
-		void OnDisable()
+		protected override void OnEnable()
 		{
-			_editorData.SaveAssets();
+			base.OnEnable();
+
+			_scrollPos = Vector2.zero;
 		}
 
-		void OnGUI()
+		protected override void OnGUI()
 		{
 			_scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
 
-			_editorData.Groups.List.ForRemoveFunc(item => item.Draw());
+			editorData.Groups.List.ForRemoveFunc(item => item.Draw());
 
 			EditorGUILayout.EndScrollView();
 
 			if (GUILayout.Button("New"))
 			{
-				_editorData.Groups.Add();
+				editorData.Groups.Add();
 			}
+
+			base.OnGUI();
 		}
 	}
 }

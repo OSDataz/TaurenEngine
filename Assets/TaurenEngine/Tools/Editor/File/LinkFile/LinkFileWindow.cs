@@ -11,7 +11,7 @@ using TaurenEngine.Editor;
 
 namespace TaurenEditor.Tools
 {
-	public class LinkFileWindow : EditorWindow
+	public class LinkFileWindow : DataWindow<LinkFileEditorData>
 	{
 		[MenuItem("TaurenTools/Tools/File/链接文件工具")]
 		private static void ShowWindow()
@@ -21,33 +21,36 @@ namespace TaurenEditor.Tools
 			window.Show();
 		}
 
-		private LinkFileEditorData _editorData;
-
 		private Vector2 _scrollPos;
 
-		void OnEnable()
+		protected override LinkFileEditorData CreateEditorData()
 		{
-			_editorData ??= new LinkFileEditorData();
-			_editorData.LoadData();
+			var data = new LinkFileEditorData();
+			data.LoadData();
+			return data;
 		}
 
-		void OnDisable()
+		protected override void OnEnable()
 		{
-			_editorData.SaveAssets();
+			base.OnEnable();
+
+			_scrollPos = Vector2.zero;
 		}
 
-		void OnGUI()
+		protected override void OnGUI()
 		{
 			_scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
 
-			_editorData.Groups.List.ForRemoveFunc(item => item.Draw());
+			editorData.Groups.List.ForRemoveFunc(item => item.Draw());
 
 			EditorGUILayout.EndScrollView();
 
 			if (GUILayout.Button("New"))
 			{
-				_editorData.Groups.Add();
+				editorData.Groups.Add();
 			}
+
+			base.OnGUI();
 		}
 	}
 }

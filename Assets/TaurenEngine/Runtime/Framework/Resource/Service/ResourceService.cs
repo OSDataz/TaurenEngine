@@ -14,7 +14,7 @@ namespace TaurenEngine.Runtime.Framework
 	/// 
 	/// 1.缓存资源；
 	/// 2.Http远程下载资源；
-	/// 3.本地下载资源；
+	/// 3.本地加载资源；
 	/// 4.AB包管理和资源管理；
 	/// </summary>
 	internal class ResourceService : IResourceService
@@ -31,7 +31,8 @@ namespace TaurenEngine.Runtime.Framework
 			return default(T);
 		}
 
-		public void Load<T>(IRefrenceObject target, string path, Action<bool, T> onLoadComplete, bool cache = true, int loadPriority = 10, 
+		public void Load<T>(IRefrenceObject target, string path, Action<bool, T> onLoadComplete, 
+			bool cache = true, int loadPriority = 10, 
 			Action onLoadStart = null, Action<int, int> onLoadProgress = null)
 		{
 			

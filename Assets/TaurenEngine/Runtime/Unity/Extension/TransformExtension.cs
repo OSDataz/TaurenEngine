@@ -6,6 +6,7 @@
  *└────────────────────────┘*/
 
 using System.Collections.Generic;
+using TaurenEngine.Runtime.Framework;
 using UnityEngine;
 
 namespace TaurenEngine.Runtime.Unity
@@ -68,5 +69,100 @@ namespace TaurenEngine.Runtime.Unity
 
 			return childs;
 		}
+
+		#region 根据中间路径查找节点
+		/// <summary>
+		/// 获取指定节点的指定组件
+		/// </summary>
+		/// <param name="nodePath"></param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+		public static T GetComponent<T>(this Transform @object, string nodePath) where T : Component
+		{
+			var childTransform = FindNode(@object, nodePath);
+			if (childTransform == null)
+			{
+				Log.Error($"GetComponent获取节点失败，nodePath：{nodePath}");
+				return null;
+			}
+
+			return childTransform.GetComponent<T>();
+		}
+
+		public static T GetOrAddComponent<T>(this Transform @object, string nodePath) where T : Component
+		{
+			var childTransform = FindNode(@object, nodePath);
+			if (childTransform == null)
+			{
+				Log.Error($"GetOrAddComponent获取节点失败，nodePath：{nodePath}");
+				return null;
+			}
+
+			var type = typeof(T);
+			var comp = childTransform.GetComponent(type);
+			if (comp != null)
+				return comp as T;
+
+			return childTransform.gameObject.AddComponent(type) as T;
+		}
+
+		/// <summary>
+		/// 获取子节点的Transform对象
+		/// </summary>
+		/// <param name="nodePath"></param>
+		/// <returns></returns>
+		public static Transform FindNode(this Transform @object, string nodePath)
+		{
+			if (string.IsNullOrEmpty(nodePath))
+			{
+				Log.Error($"Find获取节点路径为空，nodePath：{nodePath}");
+				return null;
+			}
+
+			var index = nodePath.IndexOf("/");
+			if (index == -1)
+				return FindNodeAux(@object, nodePath);
+
+			return FindNodeAux(@object, nodePath.Substring(0, index), nodePath.Substring(index + 1));
+		}
+
+		private static Transform FindNodeAux(Transform transform, string nodeName)
+		{
+			var node = transform.Find(nodeName);
+			if (node == null)
+			{
+				var len = transform.childCount;
+				for (int i = 0; i < len; ++i)
+				{
+					node = FindNodeAux(transform.GetChild(i), nodeName);
+					if (node != null)
+						break;
+				}
+			}
+
+			return node;
+		}
+
+		private static Transform FindNodeAux(Transform transform, string nodeHead, string nodeEnd)
+		{
+			var node = transform.Find(nodeHead);
+			if (node != null)
+			{
+				node = node.Find(nodeEnd);
+				if (node != null)
+					return node;
+			}
+
+			var len = transform.childCount;
+			for (int i = 0; i < len; ++i)
+			{
+				node = FindNodeAux(transform.GetChild(i), nodeHead, nodeEnd);
+				if (node != null)
+					return node;
+			}
+
+			return null;
+		}
+		#endregion
 	}
 }

@@ -17,36 +17,14 @@ namespace TaurenEngine.Game.Module
 	/// </summary>
 	public class DateModel : ModelBase
 	{
-		#region 设置服务器时间
 		/// <summary> 服务器相对UTC0时区偏移(秒)，比如东八区偏移28800秒 </summary>
-		public double _serverTimezoneOffset;
+		public double serverTimezoneOffset;
 		/// <summary> 服务器UTC时间戳 </summary>
-		private double _serverTimestampUtc;
+		public double serverTimestampUtc;
 		/// <summary> 客户端UTC时间戳 </summary>
-		private double _clientTimestampUtc;
+		public double clientTimestampUtc;
 		/// <summary> 运行时间 </summary>
-		private double _startRealtime;
-
-		/// <summary>
-		/// 设置服务器时间戳
-		/// </summary>
-		/// <param name="utcTimestamp">秒</param>
-		public void SetServerTimestamp(double utcTimestamp)
-		{
-			_serverTimestampUtc = utcTimestamp;
-			_clientTimestampUtc = DateUtils.UtcNowTimestamp();
-			_startRealtime = Time.realtimeSinceStartup;
-		}
-
-		/// <summary>
-		/// 设置服务器区域
-		/// </summary>
-		/// <param name="offset">秒</param>
-		public void SetServerTimezoneOffset(double offset)
-		{
-			_serverTimezoneOffset = offset;
-		}
-		#endregion
+		public double startRealtime;
 
 		#region 服务器时间
 		/// <summary>
@@ -54,14 +32,14 @@ namespace TaurenEngine.Game.Module
 		/// </summary>
 		/// <returns></returns>
 		public double GetServerUtcTimestamp()
-			=> _serverTimestampUtc + Time.realtimeSinceStartup - _startRealtime;
+			=> serverTimestampUtc + Time.realtimeSinceStartup - startRealtime;
 
 		/// <summary>
 		/// 【精准】获取当前服务器本地时间戳
 		/// </summary>
 		/// <returns></returns>
 		public double GetServerTimestamp()
-			=> GetServerUtcTimestamp() + _serverTimezoneOffset;
+			=> GetServerUtcTimestamp() + serverTimezoneOffset;
 
 		/// <summary>
 		/// 【精准】获取当期服务器UTC时间
@@ -93,7 +71,7 @@ namespace TaurenEngine.Game.Module
 		/// <param name="clientUtcDate"></param>
 		/// <returns></returns>
 		public DateTime ClientToServerUtcDateTime(DateTime clientUtcDate)
-			=> DateUtils.TimestampToDateTime(DateUtils.DateTimeToTimestamp(clientUtcDate) + _serverTimestampUtc - _clientTimestampUtc);
+			=> DateUtils.TimestampToDateTime(DateUtils.DateTimeToTimestamp(clientUtcDate) + serverTimestampUtc - clientTimestampUtc);
 
 		/// <summary>
 		/// 【精准】服务器时间戳转客户端时间
@@ -101,7 +79,7 @@ namespace TaurenEngine.Game.Module
 		/// <param name="serverUtcTimestamp">服务器时间戳</param>
 		/// <returns></returns>
 		public DateTime ServerToClientUtcDateTime(long serverUtcTimestamp)
-			=> DateUtils.TimestampToDateTime(serverUtcTimestamp - _serverTimestampUtc + _clientTimestampUtc);
+			=> DateUtils.TimestampToDateTime(serverUtcTimestamp - serverTimestampUtc + clientTimestampUtc);
 
 		/// <summary>
 		/// 【精准】服务器时间戳 转 UTC时间
@@ -117,7 +95,7 @@ namespace TaurenEngine.Game.Module
 		/// <param name="serverTimestampUtc"></param>
 		/// <returns></returns>
 		public DateTime ToServerDateTime(long serverTimestampUtc)
-			=> DateUtils.TimestampToDateTime(serverTimestampUtc + _serverTimezoneOffset);
+			=> DateUtils.TimestampToDateTime(serverTimestampUtc + serverTimezoneOffset);
 
 		/// <summary>
 		/// 【精准】服务器时间戳 转 客户端本地时间

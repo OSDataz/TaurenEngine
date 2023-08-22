@@ -12,38 +12,25 @@ using UnityEngine;
 
 namespace TaurenEngine.Editor
 {
-	/// <summary>
-	/// 全局数据单例
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	/// <typeparam name="TData"></typeparam>
-	public abstract class EditorDataSingleton<T, TData> : EditorData<TData> where T : EditorDataSingleton<T, TData>, new() where TData : ScriptableObject
+	public interface IEditorData
 	{
-		private static T _instance;
-		public static T Instance 
-		{
-			get
-			{
-				if (_instance == null)
-				{
-					_instance = new T();
-					_instance.LoadData();
-				}
-				return _instance;
-			}
-		}
+		SerializedObject SerializedObject { get; }
+
+		void LoadData();
+
+		void SaveAssets();
 	}
 
 	/// <summary>
 	/// 编辑器存储数据
 	/// </summary>
 	/// <typeparam name="T">数据类</typeparam>
-	public abstract class EditorData<T> where T : ScriptableObject
+	public abstract class EditorData<T> : IEditorData where T : ScriptableObject
 	{
 		/// <summary>
 		/// 序列化数据
 		/// </summary>
-		private SerializedObject _serializedObject;
+		public SerializedObject SerializedObject { get; private set; }
 
 		#region 更新/存储
 		/// <summary>
@@ -67,7 +54,7 @@ namespace TaurenEngine.Editor
 					AssetDatabase.Refresh();
 				}
 
-				_serializedObject = new SerializedObject(Data);
+				SerializedObject = new SerializedObject(Data);
 			}
 			else
 			{
@@ -100,7 +87,7 @@ namespace TaurenEngine.Editor
 		/// </summary>
 		public void UpdateModified()
 		{
-			_serializedObject.UpdateIfRequiredOrScript();
+			SerializedObject.UpdateIfRequiredOrScript();
 		}
 
 		/// <summary>
@@ -112,7 +99,7 @@ namespace TaurenEngine.Editor
 		#region 序列化字段
 		private SerializedProperty GetProperty(string propertyPath)
 		{
-			return _serializedObject.FindProperty(propertyPath);
+			return SerializedObject.FindProperty(propertyPath);
 		}
 		#endregion
 
@@ -149,5 +136,27 @@ namespace TaurenEngine.Editor
 			return tObject;
 		}
 		#endregion
+	}
+
+	/// <summary>
+	/// 全局数据单例
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="TData"></typeparam>
+	public abstract class EditorDataSingleton<T, TData> : EditorData<TData> where T : EditorDataSingleton<T, TData>, new() where TData : ScriptableObject
+	{
+		private static T _instance;
+		public static T Instance
+		{
+			get
+			{
+				if (_instance == null)
+				{
+					_instance = new T();
+					_instance.LoadData();
+				}
+				return _instance;
+			}
+		}
 	}
 }
