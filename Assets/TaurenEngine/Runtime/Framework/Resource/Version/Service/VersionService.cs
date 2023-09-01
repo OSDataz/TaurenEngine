@@ -2,15 +2,16 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.11.0
- *│　Time    ：2023/8/17 20:35:50
+ *│　Time    ：2023/8/29 20:32:31
  *└────────────────────────┘*/
 
 namespace TaurenEngine.Runtime.Framework
 {
-	/// <summary>
-	/// 资源加载器
-	/// </summary>
-	public class AssetLoader
+	public class VersionService : IVersionService
 	{
+		public VersionService() 
+		{
+			this.InitInterface();
+		}
 	}
 }

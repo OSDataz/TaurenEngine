@@ -12,7 +12,7 @@ namespace TaurenEngine.Runtime.Framework
 	/// <summary>
 	/// 缓存服务
 	/// </summary>
-	public class CacheService : ICacheService
+	public class AssetCacheService : IAssetCacheService
 	{
 		#region 缓存参数
 		/// <summary> 最大缓存内存（正式模式无效） </summary>
@@ -42,7 +42,7 @@ namespace TaurenEngine.Runtime.Framework
 		private int _removeCountSinceLastGC;
 		#endregion
 
-		public CacheService()
+		public AssetCacheService()
 		{
 			this.InitInterface();
 		}

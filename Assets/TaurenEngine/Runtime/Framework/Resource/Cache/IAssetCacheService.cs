@@ -7,12 +7,12 @@
 
 namespace TaurenEngine.Runtime.Framework
 {
-	public interface ICacheService : IService
+	public interface IAssetCacheService : IService
 	{
 		/// <summary>
 		/// 接口唯一实例
 		/// </summary>
-		public static ICacheService Instance { get; internal set; }
+		public static IAssetCacheService Instance { get; internal set; }
 
 		/// <summary>
 		/// 将资源添加进缓存
@@ -46,14 +46,14 @@ namespace TaurenEngine.Runtime.Framework
 		void RemoveAll();
 	}
 
-	public static class ICacheServiceExtension
+	public static class IAssetCacheServiceExtension
 	{
-		public static void InitInterface(this ICacheService @object)
+		public static void InitInterface(this IAssetCacheService @object)
 		{
-			if (ICacheService.Instance != null)
-				Log.Error("ICacheService重复创建实例");
+			if (IAssetCacheService.Instance != null)
+				Log.Error("IAssetCacheService重复创建实例");
 
-			ICacheService.Instance = @object;
+			IAssetCacheService.Instance = @object;
 		}
 	}
 }
