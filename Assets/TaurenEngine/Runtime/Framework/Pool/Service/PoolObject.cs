@@ -23,6 +23,12 @@ namespace TaurenEngine.Runtime.Framework
 		public static ObjectPool<T> GetPool() => _pool ??= IPoolService.Instance.GetOrCreatePool<T>();
 
 		/// <summary>
+		/// 从对象池中取出对象
+		/// </summary>
+		/// <returns></returns>
+		public static T GetFromPool() => GetPool().Get();
+
+		/// <summary>
 		/// 重置对象池
 		/// </summary>
 		public static void ResetPool() => _pool = null;

@@ -13,5 +13,15 @@ namespace TaurenEngine.Runtime.Framework
 		{
 			this.InitInterface();
 		}
+
+		public T Load<T>(LoadData loadData) where T : UnityEngine.Object
+		{
+			return null;
+		}
+
+		public void LoadAsync<T>(LoadData loadData) where T : UnityEngine.Object
+		{
+			
+		}
 	}
 }

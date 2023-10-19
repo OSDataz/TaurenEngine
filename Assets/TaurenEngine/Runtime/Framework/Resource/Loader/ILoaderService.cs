@@ -13,6 +13,21 @@ namespace TaurenEngine.Runtime.Framework
 		/// 接口唯一实例
 		/// </summary>
 		public static ILoaderService Instance { get; internal set; }
+
+		/// <summary>
+		/// 同步加载
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="loadData"></param>
+		/// <returns></returns>
+		T Load<T>(LoadData loadData) where T : UnityEngine.Object;
+
+		/// <summary>
+		/// 异步加载
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="loadData"></param>
+		void LoadAsync<T>(LoadData loadData) where T : UnityEngine.Object;
 	}
 
 	public static class ILoaderServiceExtension

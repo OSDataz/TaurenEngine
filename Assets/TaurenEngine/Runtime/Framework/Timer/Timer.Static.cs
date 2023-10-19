@@ -158,7 +158,7 @@ namespace TaurenEngine.Runtime.Framework
 				return null;
 			}
 
-			var timer = GetPool().Get();
+			var timer = GetFromPool();
 			timer.Type = type;
 			timer.Interval = interval;
 			timer.IsInterval = interval > 0.0f;
@@ -177,7 +177,7 @@ namespace TaurenEngine.Runtime.Framework
 				return null;
 			}
 
-			var timer = GetPool().Get();
+			var timer = GetFromPool();
 			timer.Type = type;
 			timer.Interval = interval;
 			timer.IsInterval = interval > 0.0f;

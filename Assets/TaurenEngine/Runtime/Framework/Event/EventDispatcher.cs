@@ -60,7 +60,7 @@ namespace TaurenEngine.Runtime.Framework
 
 			if (@event == null)
 			{
-				@event = Event.GetPool().Get();
+				@event = Event.GetFromPool();
 				@event.callAction = callAction;
 				list.Add(@event);
 			}
@@ -95,7 +95,7 @@ namespace TaurenEngine.Runtime.Framework
 
 			if (@event == null)
 			{
-				@event = Event.GetPool().Get();
+				@event = Event.GetFromPool();
 				@event.callParamAction = callAction;
 				list.Add(@event);
 			}

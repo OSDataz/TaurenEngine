@@ -49,9 +49,16 @@ namespace TaurenEngine.Runtime.Framework
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public T Get<T>() where T : UnityEngine.Object
+		public bool TryGet<T>(out T asset) where T : UnityEngine.Object
 		{
-			return data as T;
+			if (data is T tData)
+			{
+				asset = tData;
+				return true;
+			}
+
+			asset = null;
+			return false;
 		}
 
 		/// <summary>
