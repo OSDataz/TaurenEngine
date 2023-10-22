@@ -46,14 +46,14 @@ namespace TaurenEngine.Editor
 
 		public void DrawEnum(string label, params GUILayoutOption[] options)
 		{
-			var editorEnum = EditorEnum.Get<T>();
+			var editorEnum = EditorEnumData.Get<T>();
 
 			Value = EditorGUILayout.IntPopup(label, property.enumValueIndex, editorEnum.tagArray, editorEnum.intArray, options);
 		}
 
 		public void DrawEnum(Rect rect)
 		{
-			var editorEnum = EditorEnum.Get<T>();
+			var editorEnum = EditorEnumData.Get<T>();
 
 			Value = EditorGUI.IntPopup(rect, property.enumValueIndex, editorEnum.tagArray, editorEnum.intArray);
 		}

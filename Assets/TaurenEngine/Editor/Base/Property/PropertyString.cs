@@ -60,7 +60,7 @@ namespace TaurenEngine.Editor
 
 		public void DrawEnum<T>(string label, params GUILayoutOption[] options) where T : Enum
 		{
-			var editorEnum = EditorEnum.Get<T>();
+			var editorEnum = EditorEnumData.Get<T>();
 
 			var value = property.stringValue;
 			var index = Array.FindIndex(editorEnum.nameArray, item => item == value);
@@ -74,7 +74,7 @@ namespace TaurenEngine.Editor
 
 		public void DrawEnum<T>(Rect rect) where T : Enum
 		{
-			var editorEnum = EditorEnum.Get<T>();
+			var editorEnum = EditorEnumData.Get<T>();
 
 			var value = property.stringValue;
 			var index = Array.FindIndex(editorEnum.nameArray, item => item == value);

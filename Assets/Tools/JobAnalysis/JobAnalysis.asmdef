@@ -1,0 +1,19 @@
+{
+    "name": "JobAnalysis",
+    "rootNamespace": "",
+    "references": [
+        "GUID:958ccbb8a44f7434ca12f98e450ed07e",
+        "GUID:55b93f49adb72a949b71bfbb53bb5541"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

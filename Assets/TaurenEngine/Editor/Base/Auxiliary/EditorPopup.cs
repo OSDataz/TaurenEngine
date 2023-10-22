@@ -35,9 +35,30 @@ namespace TaurenEngine.Editor
 			}
 		}
 
-		public void Draw(string label)
+		public void Draw(params GUILayoutOption[] options)
 		{
-			_index = EditorGUILayout.IntPopup(label, _index, _displayList, _indexList);
+			_index = EditorGUILayout.IntPopup(_index, _displayList, _indexList, options);
+		}
+
+		public void Draw(string label, params GUILayoutOption[] options)
+		{
+			_index = EditorGUILayout.IntPopup(label, _index, _displayList, _indexList, options);
+		}
+
+		public T Draw(string label, T value, params GUILayoutOption[] options)
+		{
+			var len = _contentList.Length;
+			for (_index = 0; _index < len; ++_index)
+			{
+				if (_contentList[_index].Equals(value))
+				{
+					_index = EditorGUILayout.IntPopup(label, _index, _displayList, _indexList, options);
+					return Value;
+				}
+			}
+
+			_index = 0;
+			return Value;
 		}
 
 		public T Value => _contentList[_index];
