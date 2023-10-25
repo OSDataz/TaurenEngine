@@ -7,7 +7,7 @@
 
 using System;
 
-namespace TaurenEngine.Runtime.Core
+namespace TaurenEngine.Runtime
 {
 	public static class EnumExtension
 	{

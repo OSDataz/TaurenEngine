@@ -5,7 +5,7 @@
  *│　Time    ：2022/10/22 16:11:14
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Runtime.Framework
+namespace TaurenEngine.Runtime
 {
 	public class AudioService : IAudioService
 	{

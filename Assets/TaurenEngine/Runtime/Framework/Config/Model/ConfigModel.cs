@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TaurenEngine.Runtime.Framework
+namespace TaurenEngine.Runtime
 {
 	/// <summary>
 	/// 配置表数据

@@ -7,7 +7,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace TaurenEngine.Runtime.Core
+namespace TaurenEngine.Runtime
 {
 	public static class StringExtension
 	{

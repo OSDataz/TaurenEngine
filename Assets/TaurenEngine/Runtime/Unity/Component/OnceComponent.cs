@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace TaurenEngine.Runtime.Unity
+namespace TaurenEngine.Runtime
 {
 	/// <summary>
 	/// 一次性设置组件

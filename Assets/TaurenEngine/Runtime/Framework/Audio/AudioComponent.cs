@@ -5,9 +5,7 @@
  *│　Time    ：2022/10/22 16:11:20
  *└────────────────────────┘*/
 
-using TaurenEngine.Runtime.Unity;
-
-namespace TaurenEngine.Runtime.Framework
+namespace TaurenEngine.Runtime
 {
 	/// <summary>
 	/// 音频组件

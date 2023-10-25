@@ -5,7 +5,7 @@
  *│　Time    ：2023/8/16 21:42:04
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Runtime.Framework
+namespace TaurenEngine.Runtime
 {
 	public interface IConfig
 	{

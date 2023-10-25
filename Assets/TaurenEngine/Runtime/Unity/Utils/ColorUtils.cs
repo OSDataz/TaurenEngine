@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace TaurenEngine.Runtime.Unity
+namespace TaurenEngine.Runtime
 {
 	public static class ColorUtils
 	{

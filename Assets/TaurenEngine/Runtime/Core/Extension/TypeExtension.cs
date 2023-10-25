@@ -8,7 +8,7 @@
 using System;
 using System.Reflection;
 
-namespace TaurenEngine.Runtime.Core
+namespace TaurenEngine.Runtime
 {
 	public static class TypeExtension
 	{

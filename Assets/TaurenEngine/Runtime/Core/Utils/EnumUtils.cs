@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-namespace TaurenEngine.Runtime.Core
+namespace TaurenEngine.Runtime
 {
 	public static class EnumUtils
 	{

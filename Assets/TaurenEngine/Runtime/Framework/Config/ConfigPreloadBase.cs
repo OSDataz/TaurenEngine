@@ -7,8 +7,9 @@
 
 using System;
 using System.Collections.Generic;
+using TaurenEngine.Launch;
 
-namespace TaurenEngine.Runtime.Framework
+namespace TaurenEngine.Runtime
 {
 	public abstract class ConfigPreloadBase
 	{

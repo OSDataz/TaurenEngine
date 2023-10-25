@@ -5,7 +5,9 @@
  *│　Time    ：2022/8/9 20:47:53
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Runtime.Framework
+using TaurenEngine.Launch;
+
+namespace TaurenEngine.Runtime
 {
 	/// <summary>
 	/// 数据模型基类

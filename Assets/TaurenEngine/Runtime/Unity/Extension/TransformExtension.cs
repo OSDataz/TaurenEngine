@@ -6,10 +6,9 @@
  *└────────────────────────┘*/
 
 using System.Collections.Generic;
-using TaurenEngine.Runtime.Framework;
 using UnityEngine;
 
-namespace TaurenEngine.Runtime.Unity
+namespace TaurenEngine.Runtime
 {
     public static class TransformExtension
     {

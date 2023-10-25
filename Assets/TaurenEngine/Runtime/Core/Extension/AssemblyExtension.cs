@@ -6,9 +6,8 @@
  *└────────────────────────┘*/
 
 using System.Reflection;
-using TaurenEngine.Runtime.Framework;
 
-namespace TaurenEngine.Runtime.Core
+namespace TaurenEngine.Runtime
 {
 	public static class AssemblyExtension
 	{

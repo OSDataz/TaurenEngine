@@ -5,8 +5,6 @@
  *│　Time    ：2022/6/10 10:48:38
  *└────────────────────────┘*/
 
-using TaurenEngine.Runtime;
-
 namespace TaurenEngine.Editor
 {
 	/// <summary>
@@ -19,7 +17,7 @@ namespace TaurenEngine.Editor
 			return $@"/*┌────────────────────────┐
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
- *│　Version ：v{TaurenDefine.Version}
+ *│　Version ：v1.12.0
  *│
  *│  该文件由工具自动生成，切勿自行修改。
  *└────────────────────────┘*/";

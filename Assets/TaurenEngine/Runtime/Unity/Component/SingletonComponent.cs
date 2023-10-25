@@ -5,10 +5,9 @@
  *│　Time    ：2022/4/16 10:50:12
  *└────────────────────────┘*/
 
-using TaurenEngine.Runtime.Framework;
 using UnityEngine;
 
-namespace TaurenEngine.Runtime.Unity
+namespace TaurenEngine.Runtime
 {
 	/// <summary>
 	/// MonoBehaviour单例，基于整个框架设计不推荐使用

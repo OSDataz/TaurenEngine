@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace TaurenEngine.Runtime.Framework
+namespace TaurenEngine.Runtime
 {
 	public class ConfigController : ControllerBase
 	{

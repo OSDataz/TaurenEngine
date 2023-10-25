@@ -8,7 +8,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace TaurenEngine.Runtime.Unity
+namespace TaurenEngine.Runtime
 {
 	public class CoroutineUtils
 	{
