@@ -5,6 +5,7 @@
  *│　Time    ：2022/6/21 15:04:12
  *└────────────────────────┘*/
 
+using ExcelDataReader;
 using System;
 using System.Data;
 using System.IO;
@@ -14,7 +15,8 @@ namespace TaurenEditor.Runtime
 	public class ExcelReader : IDisposable
 	{
 		public FileStream Stream { get; private set; }
-		//public IExcelDataReader DataReader { get; private set; }
+		public IExcelDataReader DataReader { get; private set; }
+
 		/// <summary>
 		/// 表格数据集合
 		/// </summary>
@@ -25,8 +27,8 @@ namespace TaurenEditor.Runtime
 			Dispose();
 
 			Stream = File.Open(path, FileMode.Open, FileAccess.Read);
-			//DataReader = ExcelReaderFactory.CreateOpenXmlReader(Stream);
-			//DataSet = DataReader.AsDataSet();
+			DataReader = ExcelReaderFactory.CreateOpenXmlReader(Stream);
+			DataSet = DataReader.AsDataSet();
 		}
 
 		/// <summary>
@@ -47,12 +49,12 @@ namespace TaurenEditor.Runtime
 				DataSet = null;
 			}
 
-			//if (DataReader != null)
-			//{
-			//	DataReader.Close();
-			//	DataReader.Dispose();
-			//	DataReader = null;
-			//}
+			if (DataReader != null)
+			{
+				DataReader.Close();
+				DataReader.Dispose();
+				DataReader = null;
+			}
 		}
 	}
 }

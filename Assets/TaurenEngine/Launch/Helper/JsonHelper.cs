@@ -17,7 +17,7 @@ namespace TaurenEngine.Launch
 		/// <returns></returns>
 		public static T ToObject<T>(string value)
 		{
-			return default;// LitJson.JsonMapper.ToObject<T>(value);
+			return LitJson.JsonMapper.ToObject<T>(value);
 		}
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace TaurenEngine.Launch
 		/// <returns></returns>
 		public static string ToJson(object value)
 		{
-			return default;// LitJson.JsonMapper.ToJson(value);
+			return LitJson.JsonMapper.ToJson(value);
 		}
 	}
 }
