@@ -17,7 +17,7 @@ namespace TaurenEngine.Editor
 			return $@"/*┌────────────────────────┐
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
- *│　Version ：v1.12.0
+ *│　Version ：v1.12.1
  *│
  *│  该文件由工具自动生成，切勿自行修改。
  *└────────────────────────┘*/";

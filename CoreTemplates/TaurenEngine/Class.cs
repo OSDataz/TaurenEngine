@@ -1,7 +1,7 @@
 ﻿ /*┌────────────────────────┐
   *│　Engine  ：TaurenEngine
   *│　Author  ：Osdataz
-  *│　Version ：v0.12.0
+  *│　Version ：v0.12.1
   *│　Time    ：$time$
   *└────────────────────────┘*/
 

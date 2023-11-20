@@ -2,10 +2,8 @@
     "name": "TaurenEditor.Game",
     "rootNamespace": "",
     "references": [
+        "GUID:e4d6194583eb6c74893745226b0a0aac",
         "GUID:958ccbb8a44f7434ca12f98e450ed07e",
-        "GUID:bf24e8ba5a5499b49a78a80bb31556a0",
-        "GUID:9660dd4e0104ab248b2b25ed3db11e0a",
-        "GUID:55b93f49adb72a949b71bfbb53bb5541",
         "GUID:57764e75a58527a4fbf128e221d8546e"
     ],
     "includePlatforms": [
