@@ -17,15 +17,15 @@ MonoBehaviour:
     name: "LitJson \u5F15\u7528\u7ED1\u5B9A"
     groups:
     - rootFromPath: D:\Workspace\Git\litjson\src
-      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Launch\Plugins
+      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Module\Json\Plugins
       items:
       - fromPath: LitJson
         toPath: LitJson
-  - showDetails: 1
+  - showDetails: 0
     name: "Excel \u548C ZIP \u5F15\u7528\u7ED1\u5B9A\uFF08\u6539\uFF09"
     groups:
     - rootFromPath: D:\Workspace\Git\SharpZipLib\src\ICSharpCode.SharpZipLib
-      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Launch\Plugins\SharpZipLib
+      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Module\Editor\Config\Plugins\SharpZipLib
       items:
       - fromPath: BZip2
         toPath: BZip2
@@ -46,7 +46,7 @@ MonoBehaviour:
       - fromPath: SharpZipLibOptions.cs
         toPath: SharpZipLibOptions.cs
     - rootFromPath: D:\Workspace\Git\ExcelDataReader\src
-      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Runtime\Editor\Plugins\ExcelDataReader
+      rootToPath: D:\Workspace\Unity\TaurenEngine\Assets\TaurenEngine\Module\Editor\Config\Plugins\ExcelDataReader
       items:
       - fromPath: ExcelDataReader
         toPath: ExcelDataReader

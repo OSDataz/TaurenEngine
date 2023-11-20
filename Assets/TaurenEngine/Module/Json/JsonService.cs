@@ -16,14 +16,12 @@ namespace TaurenEngine.ModJson
 
 		public T ToObject<T>(string value)
 		{
-			return default;
-			//return LitJson.JsonMapper.ToObject<T>(value);
+			return LitJson.JsonMapper.ToObject<T>(value);
 		}
 
 		public string ToJson(object value)
 		{
-			return default;
-			//return LitJson.JsonMapper.ToJson(value);
+			return LitJson.JsonMapper.ToJson(value);
 		}
 	}
 }

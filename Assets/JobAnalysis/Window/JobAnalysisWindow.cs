@@ -11,6 +11,7 @@ using System.IO;
 using System.Text;
 using TaurenEngine.Core;
 using TaurenEngine.Editor;
+using TaurenEngine.ModJson;
 using UnityEditor;
 using UnityEngine;
 
@@ -60,6 +61,11 @@ namespace Tools.JobAnalysis
 
 			_filterUI ??= new JobAnalysisFilterUI(this);
 			_filterUI.OnEnable();
+
+			if (IJsonService.Instance == null)
+			{
+				new JsonService();
+			}
 		}
 
 		protected override void OnGUI()

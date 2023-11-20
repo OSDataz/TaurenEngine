@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8030d6466ba9ca2438ab1d34722c5812, type: 3}
+  m_Script: {fileID: 11500000, guid: ea65a58b7be93a045831c870bf531dff, type: 3}
   m_Name: ExcelConfig
   m_EditorClassIdentifier: 
   excelPath: ./ExcelTemplate
   scriptNamespace: Hotfix
   scriptSavePath: Assets/TaurenTest/Script/Config
-  configSavePath: Assets/TaurenTest/Config
+  configSavePath: Assets/TaurenTest/Config 
   formatType: 0
   encodingType: 0
