@@ -54,6 +54,12 @@ namespace Tools.JobAnalysis
 					if (!GetNextStr(ref list, ref i, out var workExperience))
 						return $"第{i}行工作年限解析异常";
 
+					if (workExperience.Contains('天'))
+					{
+						if (!GetNextStr(ref list, ref i, out workExperience))
+							return $"第{i}行工作年限解析异常";
+					}
+
 					// 学历
 					if (!GetNextStr(ref list, ref i, out var education))
 						return $"第{i}行学历解析异常";
@@ -212,6 +218,12 @@ namespace Tools.JobAnalysis
 				str = str.Substring(0, str.Length - 3);
 				min = min * 4 / 1000;
 				max = float.Parse(str) * 4 / 1000;
+			}
+			else if (str.EndsWith("元/天"))
+			{
+				str = str.Substring(0, str.Length - 3);
+				min = min * 22 / 1000;
+				max = float.Parse(str) * 22 / 1000;
 			}
 			else if (str.EndsWith("K"))
 			{
