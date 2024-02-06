@@ -5,7 +5,7 @@
  *│　Time    ：2022/6/10 10:48:38
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 生成代码模板

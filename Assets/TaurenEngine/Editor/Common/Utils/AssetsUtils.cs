@@ -10,7 +10,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	public static class AssetsUtils
 	{

@@ -23,10 +23,5 @@ namespace TaurenEngine.Core
 		/// 【调动】销毁对象，可能不会实际销毁对象（或放入对象池）
 		/// </summary>
 		void Destroy();
-
-		/// <summary>
-		/// 【重写】销毁对象执行响应，实际销毁逻辑。切勿写重复使用逻辑
-		/// </summary>
-		void OnDestroy();
 	}
 }

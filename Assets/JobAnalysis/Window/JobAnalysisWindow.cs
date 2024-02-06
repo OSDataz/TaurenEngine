@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TaurenEngine.Core;
-using TaurenEngine.Editor;
+using TaurenEditor;
 using TaurenEngine.ModJson;
 using UnityEditor;
 using UnityEngine;

@@ -40,5 +40,7 @@ namespace TaurenEngine.Game
 			rootTr.localRotation = Quaternion.identity;
 			rootTr.localScale = scale;// 保留预制体上的scale
 		}
+
+		internal string ToLog() => $"RootPath:{Path} LoadStatus:{Status}";
 	}
 }

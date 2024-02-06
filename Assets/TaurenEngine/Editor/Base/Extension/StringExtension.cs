@@ -5,7 +5,7 @@
  *│　Time    ：2022/6/26 17:41:35
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	public static class StringExtension
 	{

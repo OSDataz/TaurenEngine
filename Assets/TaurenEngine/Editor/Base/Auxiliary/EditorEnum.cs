@@ -9,7 +9,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	public class EditorEnum<T> where T : Enum
 	{

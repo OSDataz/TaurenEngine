@@ -2,12 +2,16 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.12.1
- *│　Time    ：2023/11/13 22:17:02
+ *│　Time    ：2023/12/11 20:41:23
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Game
+namespace TaurenEditor
 {
-	public class ActorModSkinCell : ActorModCellBase
+	/// <summary>
+	/// 项目设置
+	/// </summary>
+	public static class ProjectSettings
 	{
+		public static ProjectSettings_Player Player = new ProjectSettings_Player();
 	}
 }

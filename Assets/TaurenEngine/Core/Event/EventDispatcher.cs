@@ -337,7 +337,7 @@ namespace TaurenEngine.Core
 				CloseAsyncUpdate();
 		}
 
-		public override void OnDestroy()
+		protected override void OnDestroy()
 		{
 			Clear();
 

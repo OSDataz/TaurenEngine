@@ -44,7 +44,7 @@ namespace TaurenEngine.Core
 			GetPool().Add(this as T);
 		}
 
-		public override void OnDestroy()
+		protected override void OnDestroy()
 		{
 			Clear();
 		}

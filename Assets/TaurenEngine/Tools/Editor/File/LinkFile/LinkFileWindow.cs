@@ -7,7 +7,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using TaurenEngine.Editor;
 
 namespace TaurenEditor.Tools
 {

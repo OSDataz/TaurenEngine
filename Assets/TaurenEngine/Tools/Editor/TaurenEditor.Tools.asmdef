@@ -1,5 +1,5 @@
 {
-    "name": "TaurenEngine.Tools",
+    "name": "TaurenEditor.Tools",
     "rootNamespace": "",
     "references": [
         "GUID:e4d6194583eb6c74893745226b0a0aac",

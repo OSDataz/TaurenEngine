@@ -63,7 +63,7 @@ namespace TaurenEngine.Core
 			isOnce = false;
 		}
 
-		public override void OnDestroy()
+		protected override void OnDestroy()
 		{
 			callAction = null;
 			callParamAction = null;

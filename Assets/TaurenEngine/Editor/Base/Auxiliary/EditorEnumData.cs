@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using TaurenEngine.Core;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 枚举编辑器显示解析数据

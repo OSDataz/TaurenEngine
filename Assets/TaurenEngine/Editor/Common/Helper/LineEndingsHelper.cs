@@ -7,7 +7,7 @@
 
 using System.IO;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	/// <summary>
 	/// 文件行尾结束符转换

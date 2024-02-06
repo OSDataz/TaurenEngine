@@ -163,5 +163,16 @@ namespace TaurenEngine.Core
 			return null;
 		}
 		#endregion
+
+		#region 设置父节点
+		public static void SetParentOrigin(this Transform @object, Transform parent)
+		{
+			@object.SetParent(parent);
+
+			@object.localPosition = Vector3.zero;
+			@object.localRotation = Quaternion.identity;
+			@object.localScale = Vector3.one;
+		}
+		#endregion
 	}
 }

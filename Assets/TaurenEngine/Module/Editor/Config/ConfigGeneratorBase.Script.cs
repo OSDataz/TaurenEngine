@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using TaurenEngine.Editor;
 using UnityEngine;
 
 namespace TaurenEditor.ModConfig

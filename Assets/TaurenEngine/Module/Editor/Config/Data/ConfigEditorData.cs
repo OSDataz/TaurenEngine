@@ -5,8 +5,6 @@
  *│　Time    ：2022/6/23 20:33:35
  *└────────────────────────┘*/
 
-using TaurenEngine.Editor;
-
 namespace TaurenEditor.ModConfig
 {
 	public class ConfigEditorData : EditorData<ConfigData>

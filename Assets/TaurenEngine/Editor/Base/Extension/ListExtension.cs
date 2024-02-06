@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	public static class ListExtension
 	{

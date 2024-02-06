@@ -5,6 +5,8 @@
  *│　Time    ：2023/11/13 20:49:23
  *└────────────────────────┘*/
 
+using System;
+
 namespace TaurenEngine.Game
 {
 	/// <summary>
@@ -12,10 +14,26 @@ namespace TaurenEngine.Game
 	/// </summary>
 	public abstract class ActorModCellBase : LoadObject
 	{
+		protected ActorX actor;
+
 		/// <summary>
 		/// 模块数据
 		/// </summary>
 		public ActorModuleItem Data { get; private set; }
 
+		public ActorModCellBase(ActorX actor)
+		{
+			this.actor = actor;
+		}
+
+		public void Load(string path, Action<ActorModCellBase> onLoadComplete)
+		{
+			Load(path, false, result => onLoadComplete.Invoke(this));
+		}
+
+		/// <summary>
+		/// 是否已经组合合并
+		/// </summary>
+		public abstract bool IsCombined { get; }
 	}
 }

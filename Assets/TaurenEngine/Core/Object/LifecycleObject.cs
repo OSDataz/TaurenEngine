@@ -41,6 +41,6 @@ namespace TaurenEngine.Core
 			OnDestroy();
 		}
 
-		public virtual void OnDestroy() { }
+		protected virtual void OnDestroy() { }
 	}
 }

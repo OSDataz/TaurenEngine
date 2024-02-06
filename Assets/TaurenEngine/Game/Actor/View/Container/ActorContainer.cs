@@ -7,6 +7,7 @@
 
 using TaurenEngine.Core;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace TaurenEngine.Game
 {
@@ -18,6 +19,7 @@ namespace TaurenEngine.Game
 		#region 容器对象
 		public GameObject gameObject { get; private set; }// 整个actor的根节点
 		public Transform transform => gameObject?.transform;// 整个actor的根节点
+		public ActorBehaviour behaviour { get; private set; }
 		public bool IsInit => gameObject != null;
 
 		public void Init()
@@ -29,6 +31,8 @@ namespace TaurenEngine.Game
 			gameObject.layer = _layer;
 			gameObject.SetActive(_active);
 
+			behaviour = gameObject.GetOrAddComponent<ActorBehaviour>();
+
 			GameObject.DontDestroyOnLoad(gameObject);// 不随着场景加载而销毁
 		}
 
@@ -39,6 +43,8 @@ namespace TaurenEngine.Game
 
 			GameObject.Destroy(gameObject);
 			gameObject = null;
+
+			behaviour = null;
 		}
 		#endregion
 

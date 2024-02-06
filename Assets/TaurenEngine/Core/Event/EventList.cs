@@ -178,7 +178,7 @@ namespace TaurenEngine.Core
 			LengthLogic = 0;
 		}
 
-		public override void OnDestroy() => Clear();
+		protected override void OnDestroy() => Clear();
 
 		#region 循环执行
 		/// <summary>

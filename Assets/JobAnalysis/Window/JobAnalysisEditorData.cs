@@ -5,7 +5,7 @@
  *│　Time    ：2023/10/3 12:15:26
  *└────────────────────────┘*/
 
-using TaurenEngine.Editor;
+using TaurenEditor;
 
 namespace Tools.JobAnalysis
 {

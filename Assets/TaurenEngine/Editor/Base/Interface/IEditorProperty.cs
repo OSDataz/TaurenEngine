@@ -5,7 +5,7 @@
  *│　Time    ：2022/1/17 20:10:22
  *└────────────────────────┘*/
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	public interface IEditorProperty
 	{

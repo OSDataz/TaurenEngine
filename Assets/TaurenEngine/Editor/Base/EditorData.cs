@@ -10,7 +10,7 @@ using TaurenEngine.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	public interface IEditorData
 	{

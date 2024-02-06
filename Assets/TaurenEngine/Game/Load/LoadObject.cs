@@ -26,7 +26,7 @@ namespace TaurenEngine.Game
 		public bool IsLoaded => Status is LoadStatus.Success or LoadStatus.Fail;
 		public bool IsLoadSuccess => Status == LoadStatus.Success;
 
-		public void Clear()
+		public virtual void Clear()
 		{
 			StopLoad();
 			ClearCloneObject();

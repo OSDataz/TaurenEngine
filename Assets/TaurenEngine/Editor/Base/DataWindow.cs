@@ -7,7 +7,7 @@
 
 using UnityEditor;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
 	public abstract class DataWindow<T> : EditorWindow where T : IEditorData
 	{

@@ -8,7 +8,6 @@
 using System.Data;
 using System.Text;
 using TaurenEngine.Core;
-using TaurenEngine.Editor;
 
 namespace TaurenEditor.ModConfig
 {

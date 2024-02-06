@@ -8,7 +8,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace TaurenEngine.Editor
+namespace TaurenEditor
 {
     public class PropertyVector4 : EditorProperty
     {

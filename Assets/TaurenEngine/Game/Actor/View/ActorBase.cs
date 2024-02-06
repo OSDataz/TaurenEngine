@@ -16,6 +16,8 @@ namespace TaurenEngine.Game
 		internal readonly ActorContainer container;
 		/// <summary> 角色根对象 </summary>
 		internal readonly ActorRoot root;
+		/// <summary> 角色动作控制器 </summary>
+		internal readonly ActorAnimator animator;
 
 		public ActorBase()
 		{
@@ -23,6 +25,8 @@ namespace TaurenEngine.Game
 			container.Init();
 
 			root = new ActorRoot();
+
+			animator = new ActorAnimator(this);
 		}
 
 		/// <summary>
@@ -80,10 +84,17 @@ namespace TaurenEngine.Game
 
 		protected virtual void ClearRoot()
 		{
+			animator.Clear();
 			root.Clear();
 		}
 
-		protected virtual void OnLoadRootComplete(bool result) { }
+		protected virtual void OnLoadRootComplete(bool result) 
+		{
+			if (result)
+			{
+				animator.ParseRootAnimator();// 解析动画控制器
+			}
+		}
 		#endregion
 	}
 }
