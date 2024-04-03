@@ -6,7 +6,7 @@
  *└────────────────────────┘*/
 
 using System.Text;
-using TaurenEditor;
+using Tauren.Core.Editor;
 using UnityEditor;
 using UnityEngine;
 

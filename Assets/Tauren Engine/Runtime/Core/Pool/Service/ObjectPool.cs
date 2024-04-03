@@ -10,18 +10,18 @@ namespace Tauren.Core.Runtime
 	/// <summary>
 	/// 对象池
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public sealed class ObjectPool<T> : IPool where T : IRecycle, new()
+	/// <typeparam name="TItem"></typeparam>
+	public sealed class ObjectPool<TItem> : IPool where TItem : IRecycle, new()
 	{
-		private T[] _caches;
+		private TItem[] _caches;
 		private int _count;
 
 		public ObjectPool(int maximum = 30)
 		{
-			_caches = new T[maximum];
+			_caches = new TItem[maximum];
 		}
 
-		public bool Contains(T item)
+		public bool Contains(TItem item)
 		{
 			for (int i = 0; i < _count; ++i)
 			{
@@ -32,9 +32,9 @@ namespace Tauren.Core.Runtime
 			return false;
 		}
 
-		public bool Recycle(IRecycle item) => Recycle((T)item);
+		public bool Recycle(IRecycle item) => Recycle((TItem)item);
 
-		public bool Recycle(T item)
+		public bool Recycle(TItem item)
 		{
 			if (item == null)
 				return false;
@@ -58,22 +58,22 @@ namespace Tauren.Core.Runtime
 			}
 		}
 
-		public IRecycle GetItem() => Get();
+		public IRecycle Get() => GetItem();
 
-		public T Get()
+		public TItem GetItem()
 		{
 			while (_count > 0)
 			{
 				_count -= 1;
 				var item = _caches[_count];
-				_caches[_count] = default(T);
+				_caches[_count] = default(TItem);
 				if (item.IsDestroyed)
 					continue;
 
 				return item;
 			}
 
-			return new T();
+			return new TItem();
 		}
 
 		public void Clear()
@@ -99,7 +99,7 @@ namespace Tauren.Core.Runtime
 			for (; startIdx < _count; ++startIdx)
 			{
 				_caches[startIdx].Dispose();// 避免重复进入对象池
-				_caches[startIdx] = default(T);
+				_caches[startIdx] = default(TItem);
 			}
 		}
 
@@ -111,7 +111,7 @@ namespace Tauren.Core.Runtime
 				if (Maximum == value)
 					return;
 
-				var copyList = new T[value];
+				var copyList = new TItem[value];
 
 				if (_count > 0)
 					_caches.CopyTo(copyList, 0);

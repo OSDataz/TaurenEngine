@@ -60,7 +60,7 @@ namespace Tauren.Core.Runtime
 			}
 		}
 
-		public IRecycle GetItem()
+		public IRecycle Get()
 		{
 			while (_count > 0)
 			{

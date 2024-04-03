@@ -6,10 +6,9 @@
  *└────────────────────────┘*/
 
 using System.Text;
-using TaurenEditor;
+using Tauren.Core.Editor;
 using UnityEditor;
 using UnityEngine;
-using static PlasticGui.LaunchDiffParameters;
 
 namespace Tools.JobAnalysis
 {

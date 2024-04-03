@@ -34,6 +34,20 @@ namespace Tauren.Core.Runtime
 		void Recycle<T>(T item) where T : IRecycle, new();
 
 		/// <summary>
+		/// 获取对象池
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+		IPool GetPool<T>() where T : IRecycle, new();
+
+		/// <summary>
+		/// 获取对象池
+		/// </summary>
+		/// <param name="type"></param>
+		/// <returns></returns>
+		IPool GetPool(Type type);
+
+		/// <summary>
 		/// 设置对象池缓存数量
 		/// </summary>
 		/// <param name="type"></param>

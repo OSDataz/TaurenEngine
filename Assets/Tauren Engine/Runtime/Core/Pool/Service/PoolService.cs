@@ -22,63 +22,40 @@ namespace Tauren.Core.Runtime
 			this.InitInterface();
 		}
 
-		public ObjectPool<T> GetPool<T>() where T : IRecycle, new()
+		public IPool GetPool<T>() where T : IRecycle, new()
 		{
 			Type type = typeof(T);
 			if (_map.TryGetValue(type, out var pool))
-			{
-				if (pool is ObjectPool<T> oPool)
-					return oPool;
-
-				Log.Error($"{typeof(T)}已有同类型对象池，类型：{pool.GetType()}");
-				return null;
-			}
+				return pool;
 
 			var nPool = new ObjectPool<T>();
 			_map.Add(type, nPool);
 			return nPool;
 		}
 
-		public TypePool GetPool(Type type)
+		public IPool GetPool(Type type)
 		{
 			if (_map.TryGetValue(type, out var pool))
-			{
-				if (pool is TypePool tPool)
-					return tPool;
-
-				Log.Error($"{type}已有同类型对象池，类型：{pool.GetType()}");
-				return null;
-			}
+				return pool;
 
 			var nPool = new TypePool(type);
 			_map.Add(type, nPool);
 			return nPool;
 		}
 
-		private IPool GetIPool(Type type)
-		{
-			if (!_map.TryGetValue(type, out var pool))
-			{
-				pool = new TypePool(type);
-				_map[type] = pool;
-			}
-
-			return pool;
-		}
-
 		public T Get<T>() where T : IRecycle, new()
 		{
-			return (T)GetIPool(typeof(T)).GetItem();
+			return (T)GetPool(typeof(T)).Get();
 		}
 
 		public void Recycle<T>(T item) where T : IRecycle, new()
 		{
-			GetIPool(typeof(T)).Recycle(item);
+			GetPool(typeof(T)).Recycle(item);
 		}
 
 		public void SetPoolSize(Type type, int size)
 		{
-			GetIPool(type).Maximum = size;
+			GetPool(type).Maximum = size;
 		}
 
 		public void ClearPool(Type type)

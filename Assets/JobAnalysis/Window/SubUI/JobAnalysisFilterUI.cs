@@ -5,7 +5,7 @@
  *│　Time    ：2023/10/12 0:11:45
  *└────────────────────────┘*/
 
-using TaurenEditor;
+using Tauren.Core.Editor;
 using UnityEditor;
 using UnityEngine;
 

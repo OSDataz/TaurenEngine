@@ -2,9 +2,9 @@
     "name": "JobAnalysis",
     "rootNamespace": "",
     "references": [
-        "GUID:e4d6194583eb6c74893745226b0a0aac",
-        "GUID:958ccbb8a44f7434ca12f98e450ed07e",
-        "GUID:28774db63827cdd46ad6036cfae9d4bd"
+        "GUID:f74cecbec8dd82946bd482eaf92268ea",
+        "GUID:7efa7da311decc44f864d4dc69528476",
+        "GUID:0e202b51cd30234439218fba85a98124"
     ],
     "includePlatforms": [
         "Editor"

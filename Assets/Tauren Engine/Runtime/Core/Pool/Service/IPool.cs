@@ -9,7 +9,7 @@ namespace Tauren.Core.Runtime
 {
 	public interface IPool
 	{
-		IRecycle GetItem();
+		IRecycle Get();
 
 		bool Recycle(IRecycle item);
 
