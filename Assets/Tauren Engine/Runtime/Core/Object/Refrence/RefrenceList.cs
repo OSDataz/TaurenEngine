@@ -9,21 +9,26 @@ using System.Collections.Generic;
 
 namespace Tauren.Core.Runtime
 {
-	public class RefrenceList<T> where T : IRefrenceObject
+	public class RefrenceList : DObject, IRefrenceContainer
 	{
-		protected readonly List<T> refList = new List<T>();
+		protected readonly List<IRefrenceObject> refList = new List<IRefrenceObject>();
 
 		#region 列表函数
-		public T this[int index] => refList[index];
+		public IRefrenceObject this[int index] => refList[index];
+
+		public T Get<T>(int index) where T : IRefrenceObject
+		{
+			return (T)refList[index];
+		}
 
 		/// <summary>
 		/// 列表元素个数
 		/// </summary>
 		public int Count => refList.Count;
 
-		public int IndexOf(T item) => refList.IndexOf(item);
+		public int IndexOf(IRefrenceObject item) => refList.IndexOf(item);
 
-		public bool Contains(T item) => refList.Contains(item);
+		public bool Contains(IRefrenceObject item) => refList.Contains(item);
 		#endregion
 
 		#region 引用函数
@@ -32,10 +37,13 @@ namespace Tauren.Core.Runtime
 		/// </summary>
 		/// <param name="refObject"></param>
 		/// <returns></returns>
-		public virtual bool AddUnique(T refObject)
+		public virtual bool AddUnique(IRefrenceObject refObject)
 		{
+			if (IsDestroyed)
+				return false;
+
 			if (refList.Contains(refObject))
-				return false;// 已有对象，不再缓存
+				return false;// 已有对象，不再添加
 
 			Add(refObject);
 			return true;
@@ -45,8 +53,11 @@ namespace Tauren.Core.Runtime
 		/// 【谨慎使用】添加到引用计数对象到管理队列，并且引用计数+1；不会检测唯一性
 		/// </summary>
 		/// <param name="refObject"></param>
-		public virtual void Add(T refObject)
+		public virtual void Add(IRefrenceObject refObject)
 		{
+			if (IsDestroyed)
+				return;
+
 			refList.Add(refObject);
 			refObject.AddRefCount();
 		}
@@ -55,7 +66,7 @@ namespace Tauren.Core.Runtime
 		/// 从引用计数对象到管理队列中移除，并且引用计数-1
 		/// </summary>
 		/// <param name="refObject"></param>
-		public virtual bool Remove(T refObject)
+		public virtual bool Remove(IRefrenceObject refObject)
 		{
 			if (!refList.Remove(refObject))
 				return false;// 列表里没有该对象
@@ -86,6 +97,13 @@ namespace Tauren.Core.Runtime
 				RemoveAt(index);
 				index = refList.Count - 1;
 			}
+		}
+
+		protected override void OnDestroy()
+		{
+			Clear();
+
+			base.OnDestroy();
 		}
 		#endregion
 	}

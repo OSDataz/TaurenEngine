@@ -135,7 +135,7 @@ namespace Tauren.Module.Runtime
 		/// </summary>
 		internal void ParseRootAnimator()
 		{
-			if (actor.root.gameObject.TryGetComponent<Animator>(out var animator))
+			if (actor.root.GameObject.TryGetComponent<Animator>(out var animator))
 			{
 				this.animator = animator;
 			}
@@ -143,7 +143,7 @@ namespace Tauren.Module.Runtime
 			{
 				Log.Error($"角色根对象没有Animator。 {actor.root.ToLog()}");
 
-				this.animator = actor.root.gameObject.AddComponent<Animator>();
+				this.animator = actor.root.GameObject.AddComponent<Animator>();
 
 				_rootAnimatorCtrl = null;
 				_runAnimatorCtrl = null;

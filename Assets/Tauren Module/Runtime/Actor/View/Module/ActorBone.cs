@@ -35,7 +35,7 @@ namespace Tauren.Module.Runtime
 
 		public void RefreshMainBones()
 		{
-			_mainBones = actor.root.gameObject.GetComponentsInChildren<Transform>().ToList();
+			_mainBones = actor.root.GameObject.GetComponentsInChildren<Transform>().ToList();
 		}
 
 		private void ClearMainBones()

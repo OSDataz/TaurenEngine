@@ -79,7 +79,7 @@ namespace Tauren.Module.Runtime
 		#region 模型根对象
 		public void LoadRoot(string path, bool force)
 		{
-			root.Load(path, force, OnLoadRootComplete);
+			root.Load(null, path, force, OnLoadRootComplete);
 		}
 
 		protected virtual void ClearRoot()

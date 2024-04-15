@@ -15,15 +15,15 @@ namespace Tauren.Framework.Runtime
 		/// <summary>
 		/// 事件字典
 		/// </summary>
-		private readonly RefrenceMap<T, EventList> _events;
+		internal readonly RefrenceMap<T, EventList> events;
 		/// <summary>
 		/// 是否有注册的事件
 		/// </summary>
-		public bool HasEvent => _events.Count > 0;
+		public bool HasEvent => events.Count > 0;
 
 		public EventDispatcher()
 		{
-			_events = new RefrenceMap<T, EventList>();
+			events = new RefrenceMap<T, EventList>();
 		}
 
 		#region 添加事件
@@ -42,14 +42,14 @@ namespace Tauren.Framework.Runtime
 			}
 
 			Event @event = null;
-			if (_events.TryGetValue(key, out var list))
+			if (events.TryGetValue(key, out var list))
 			{
 				@event = list.Find(item => item.Contains(callAction));
 			}
 			else
 			{
 				list = PoolHelper.Get<EventList>();
-				_events.Add(key, list);
+				events.Add(key, list);
 			}
 
 			if (@event == null)
@@ -77,14 +77,14 @@ namespace Tauren.Framework.Runtime
 			}
 
 			Event @event = null;
-			if (_events.TryGetValue(key, out var list))
+			if (events.TryGetValue(key, out var list))
 			{
 				@event = list.Find(item => item.Contains(callAction));
 			}
 			else
 			{
 				list = PoolHelper.Get<EventList>();
-				_events.Add(key, list);
+				events.Add(key, list);
 			}
 
 			if (@event == null)
@@ -130,7 +130,7 @@ namespace Tauren.Framework.Runtime
 		/// <param name="callAction">回调函数</param>
 		public void RemoveEvent(T key, Action callAction)
 		{
-			if (!_events.TryGetValue(key, out var list))
+			if (!events.TryGetValue(key, out var list))
 				return;
 
 			Event @event = list.Find(item => item.Contains(callAction));
@@ -147,7 +147,7 @@ namespace Tauren.Framework.Runtime
 		/// <param name="callAction">回调函数</param>
 		public void RemoveEvent(T key, Action<object> callAction)
 		{
-			if (!_events.TryGetValue(key, out var list))
+			if (!events.TryGetValue(key, out var list))
 				return;
 
 			Event @event = list.Find(item => item.Contains(callAction));
@@ -163,7 +163,7 @@ namespace Tauren.Framework.Runtime
 
 			if (list.IsEmptyReal)
 			{
-				_events.Remove(key);
+				events.Remove(key);
 			}
 		}
 
@@ -173,14 +173,14 @@ namespace Tauren.Framework.Runtime
 		/// <param name="key">事件键值</param>
 		public void RemoveEvent(T key)
 		{
-			if (!_events.TryGetValue(key, out var list))
+			if (!events.TryGetValue(key, out var list))
 				return;
 
 			list.Clear();
 
 			if (list.IsEmptyReal)
 			{
-				_events.Remove(key);
+				events.Remove(key);
 			}
 		}
 		#endregion
@@ -194,7 +194,7 @@ namespace Tauren.Framework.Runtime
 		/// <param name="async">是否异步执行（下一帧执行）</param>
 		public void TriggerEvent(T key, object data = null, bool async = false)
 		{
-			if (!_events.TryGetValue(key, out var list))
+			if (!events.TryGetValue(key, out var list))
 				return;
 
 			if (async)
@@ -222,7 +222,7 @@ namespace Tauren.Framework.Runtime
 
 			if (list.IsEmptyReal)
 			{
-				_events.Remove(key);
+				events.Remove(key);
 			}
 		}
 		#endregion
@@ -312,7 +312,7 @@ namespace Tauren.Framework.Runtime
 
 		public virtual void Clear()
 		{
-			_events.Clear();
+			events.Clear();
 
 			_asyncEvents.Clear();
 

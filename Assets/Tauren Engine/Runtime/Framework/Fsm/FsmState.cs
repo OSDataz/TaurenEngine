@@ -25,8 +25,7 @@ namespace Tauren.Framework.Runtime
 		/// <summary>
 		/// 有限状态机状态离开时调用
 		/// </summary>
-		/// <param name="isDestroy">状态机是否被销毁</param>
-		protected internal virtual void OnLeave(bool isDestroy) { }
+		protected internal virtual void OnLeave() { }
 
 		/// <summary>
 		/// 有限状态机状态销毁时调用

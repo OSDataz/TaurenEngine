@@ -16,7 +16,7 @@ namespace Tauren.Engine.Runtime
 	/// </summary>
 	public abstract class ViewBase : MonoComponent
 	{
-		protected readonly RefrenceList<IRefrenceObject> refList = new RefrenceList<IRefrenceObject>();
+		protected readonly RefrenceList refList = new RefrenceList();
 
 		#region 控制器
 		/// <summary>

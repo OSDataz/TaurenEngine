@@ -26,7 +26,7 @@ namespace Tauren.Core.Runtime
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="item"></param>
-		public static void Recycle<T>(T item) where T : IRecycle, new()
+		public static void Recycle<T>(T item) where T : IRecycle
 		{
 			IPoolService.Instance.Recycle(item);
 		}

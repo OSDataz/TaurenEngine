@@ -48,7 +48,7 @@ namespace Tauren.Core.Runtime
 			return (T)GetPool(typeof(T)).Get();
 		}
 
-		public void Recycle<T>(T item) where T : IRecycle, new()
+		public void Recycle<T>(T item) where T : IRecycle
 		{
 			GetPool(typeof(T)).Recycle(item);
 		}

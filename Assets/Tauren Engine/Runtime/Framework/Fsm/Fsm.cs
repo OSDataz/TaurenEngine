@@ -14,25 +14,18 @@ namespace Tauren.Framework.Runtime
 	/// <summary>
 	/// 有限状态机
 	/// </summary>
-	public class Fsm : RefrenceObject
+	public class Fsm<TState> : RefrenceObject where TState : FsmState
 	{
-		private readonly Dictionary<Type, FsmState> _states;
-
-		/// <summary> 当前状态 </summary>
-		public FsmState _currentState;
+		private readonly Dictionary<Type, TState> _states;
 
 		public Fsm()
 		{
-			_states = new Dictionary<Type, FsmState>();
+			_states = new Dictionary<Type, TState>();
 		}
 
 		public void Clear()
 		{
-			if (_currentState != null)
-			{
-				_currentState.OnLeave(true);
-				_currentState = null;
-			}
+			LeaveCurrentState(true);
 
 			foreach (var kv in _states)
 			{
@@ -52,7 +45,12 @@ namespace Tauren.Framework.Runtime
 			base.OnDestroy();
 		}
 
-		public void Init(params FsmState[] states)
+		#region 【可选】预初始化
+		/// <summary>
+		/// 【可选】提前初始化状态
+		/// </summary>
+		/// <param name="states"></param>
+		public void Init(params TState[] states)
 		{
 			if (IsDestroyed)
 			{
@@ -70,29 +68,39 @@ namespace Tauren.Framework.Runtime
 					continue;
 				}
 
-				AddState(state);
+				Add(state);
 			}
 		}
 
-		public void AddState<T>() where T : FsmState, new()
+		public TState Create<T>() where T : TState, new()
 		{
-			AddState(new T());
+			var type = typeof(T);
+			if (_states.TryGetValue(type, out var state))
+			{
+				Log.Error($"初始化状态机检测有重复状态：{type.FullName}");
+				return state;
+			}
+
+			state = new T();
+			Add(state);
+			return state;
 		}
 
-		private void AddState(FsmState state)
+		protected virtual bool Add(TState state)
 		{
 			var type = state.GetType();
 			if (_states.ContainsKey(type))
 			{
 				Log.Error($"初始化状态机检测有重复状态：{type.FullName}");
-				return;
+				return false;
 			}
 
 			_states.Add(type, state);
 			state.OnInit();
+			return true;
 		}
 
-		public void RemoveState<T>() where T : FsmState
+		public void Destroy<T>() where T : TState
 		{
 			var type = typeof(T);
 			if (!_states.TryGetValue(type, out var state))
@@ -103,28 +111,41 @@ namespace Tauren.Framework.Runtime
 
 			if (state == _currentState)
 			{
-				_currentState.OnLeave(false);
-				_currentState = null;
+				LeaveCurrentState(true);
+			}
+			else
+			{
+				state.OnDestroy();
 			}
 
-			state.OnDestroy();
 			_states.Remove(type);
 		}
+		#endregion
 
+		#region 当前状态
+		/// <summary> 当前状态 </summary>
+		private TState _currentState;
+
+		private void LeaveCurrentState(bool isDestroy)
+		{
+			if (_currentState == null)
+				return;
+
+			_currentState.OnLeave();
+
+			if (isDestroy)
+				_currentState.OnDestroy();
+
+			_currentState = null;
+		}
+		#endregion
+
+		#region 切换状态
 		/// <summary>
 		/// 切换状态
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		public void ChangeState<T>() where T : FsmState
-		{
-			ChangeState(typeof(T));
-		}
-
-		/// <summary>
-		/// 切换状态
-		/// </summary>
-		/// <param name="stateType"></param>
-		public void ChangeState(Type stateType)
+		public void Change<T>() where T : TState, new()
 		{
 			if (IsDestroyed)
 			{
@@ -132,27 +153,28 @@ namespace Tauren.Framework.Runtime
 				return;
 			}
 
-			if (!_states.TryGetValue(stateType, out var state))
+			var type = typeof(T);
+			if (!_states.TryGetValue(type, out var state))
 			{
-				Log.Error($"有限状态机切换状态未找到：{stateType.FullName}");
-				return;
+				state = Create<T>();
 			}
 
-			if (_currentState != null)
-				_currentState.OnLeave(false);
+			LeaveCurrentState(false);
 
 			_currentState = state;
 			_currentState.OnEnter();
 		}
+		#endregion
 
+		#region 判断接口
 		/// <summary>
 		/// 是否有指定状态
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public bool HasState<T>() where T : FsmState
+		public bool Has<T>() where T : TState
 		{
-			return HasState(typeof(T));
+			return Has(typeof(T));
 		}
 
 		/// <summary>
@@ -160,7 +182,7 @@ namespace Tauren.Framework.Runtime
 		/// </summary>
 		/// <param name="stateType"></param>
 		/// <returns></returns>
-		public bool HasState(Type stateType)
+		public bool Has(Type stateType)
 		{
 			return _states.ContainsKey(stateType);
 		}
@@ -170,7 +192,7 @@ namespace Tauren.Framework.Runtime
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public bool IsCurrentState<T>() where T : FsmState
+		public bool CheckCurrent<T>() where T : TState
 		{
 			return _currentState != null && _currentState is T;
 		}
@@ -180,9 +202,10 @@ namespace Tauren.Framework.Runtime
 		/// </summary>
 		/// <param name="stateType"></param>
 		/// <returns></returns>
-		public bool IsCurrentState(Type stateType)
+		public bool CheckCurrent(Type stateType)
 		{
 			return _currentState != null && _currentState.GetType() == stateType;
 		}
+		#endregion
 	}
 }

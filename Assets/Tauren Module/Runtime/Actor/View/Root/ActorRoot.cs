@@ -14,7 +14,7 @@ namespace Tauren.Module.Runtime
 	/// <summary>
 	/// 模型根对象
 	/// </summary>
-	public class ActorRoot : LoadObject
+	public class ActorRoot : ResObject
 	{
 		protected ActorBase actor;
 
@@ -22,7 +22,7 @@ namespace Tauren.Module.Runtime
 		{
 			this.actor = actor;
 
-			Load(path, force, onLoadComplete);
+			Load(null, path, force, onLoadComplete);
 		}
 
 		protected override void InitCloneObject()
@@ -33,7 +33,7 @@ namespace Tauren.Module.Runtime
 			if (!container.IsInit)
 				return;
 
-			var rootTr = gameObject.transform;
+			var rootTr = GameObject.transform;
 			var scale = rootTr.localScale;
 
 			rootTr.SetParent(container.transform);

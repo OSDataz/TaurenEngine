@@ -13,7 +13,7 @@ namespace Tauren.Module.Runtime
 	/// <summary>
 	/// 角色单个模块
 	/// </summary>
-	public abstract class ActorModCellBase : LoadObject
+	public abstract class ActorModCellBase : ResObject
 	{
 		protected ActorX actor;
 
@@ -29,7 +29,7 @@ namespace Tauren.Module.Runtime
 
 		public void Load(string path, Action<ActorModCellBase> onLoadComplete)
 		{
-			Load(path, false, result => onLoadComplete.Invoke(this));
+			Load(null, path, false, result => onLoadComplete.Invoke(this));
 		}
 
 		/// <summary>

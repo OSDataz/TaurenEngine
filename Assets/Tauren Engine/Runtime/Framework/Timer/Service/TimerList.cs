@@ -28,7 +28,7 @@ namespace Tauren.Framework.Runtime
 		}
 
 		/// <summary> 引用列表 </summary>
-		protected readonly RefrenceList<Timer> refrenceList = new RefrenceList<Timer>();
+		protected readonly RefrenceList refrenceList = new RefrenceList();
 
 		/// <summary> 列表对象对应的当前状态 </summary>
 		protected readonly List<Status> status = new List<Status>();
@@ -140,8 +140,12 @@ namespace Tauren.Framework.Runtime
 			var len = refrenceList.Count;
 			for (int i = 0; i < len; ++i)
 			{
-				if (status[i] != Status.Remove && match.Invoke(refrenceList[i]))
-					return refrenceList[i];
+				if (status[i] != Status.Remove)
+				{
+					var timer = refrenceList.Get<Timer>(i);
+					if (match.Invoke(timer))
+						return timer;
+				}
 			}
 
 			return null;
@@ -197,7 +201,7 @@ namespace Tauren.Framework.Runtime
 					try
 					{
 #endif
-						action.Invoke(refrenceList[i]);// todo 需考虑使用try catch的必要性
+						action.Invoke(refrenceList.Get<Timer>(i));// todo 需考虑使用try catch的必要性
 #if BUILD_MODE_DEBUG
 					}	
 					catch (Exception exception) 

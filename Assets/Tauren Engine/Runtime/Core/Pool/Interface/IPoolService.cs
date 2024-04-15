@@ -31,7 +31,7 @@ namespace Tauren.Core.Runtime
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="item"></param>
-		void Recycle<T>(T item) where T : IRecycle, new();
+		void Recycle<T>(T item) where T : IRecycle;
 
 		/// <summary>
 		/// 获取对象池

@@ -7,49 +7,40 @@
 
 using System.IO;
 using System;
-using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Tauren.Core.Editor
 {
 	public static class AssetsUtils
 	{
 		/// <summary>
-		/// 遍历指定路径下的所有预制体
+		/// 获取忽略ignoreSuffixs后缀的所有文件
 		/// </summary>
-		/// <param name="findCall"></param>
-		/// <param name="path"></param>
-		public static void ForeachPrefabs(Action<GameObject> findCall, string path = "Assets")
+		/// <param name="dirPath"></param>
+		/// <param name="ignoreSuffixs">规范使用小写后缀，如[".meta", ".cs"]</param>
+		/// <returns></returns>
+		public static List<string> GetAllFilesIgnoreExt(string dirPath, string[] ignoreSuffixs)
 		{
-			if (findCall == null)
+			if (!Directory.Exists(dirPath))
 			{
-				Debug.LogError("ForeachPerfabs 回调函数不能为空");
-				return;
+				Debug.LogError(@"未找到指定文件夹：{dirPath}");
+				return new List<string>();
 			}
 
-			var rootPath = Application.dataPath.Replace("/", "\\");
-			rootPath = rootPath.Substring(0, rootPath.Length - 6);
-
-			DirectoryInfo directory = new DirectoryInfo(path);
-			FileInfo[] files = directory.GetFiles("*", SearchOption.AllDirectories);
-			var len = files.Length;
-			for (var i = 0; i < len; ++i)
+			var files = Directory.GetFiles(dirPath, "*", SearchOption.AllDirectories);
+			var res = new List<string>();
+			foreach (var file in files)
 			{
-				if (files[i].Name.EndsWith(".prefab"))
-				{
-					var filePath = files[i].FullName.Replace(rootPath, "");
-					GameObject prefab = PrefabUtility.LoadPrefabContents(filePath);
-					if (prefab == null)
-					{
-						Debug.LogError($"预制体未加载成功：{path}");
-						continue;
-					}
+				var suffix = Path.GetExtension(file).ToLower();
+				if (ignoreSuffixs.Contains(suffix))
+					continue;
 
-					findCall.Invoke(prefab);
-
-					PrefabUtility.UnloadPrefabContents(prefab);
-				}
+				res.Add(file);
 			}
+
+			return res;
 		}
 	}
 }

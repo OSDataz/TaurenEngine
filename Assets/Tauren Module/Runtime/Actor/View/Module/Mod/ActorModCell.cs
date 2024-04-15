@@ -30,7 +30,7 @@ namespace Tauren.Module.Runtime
 
 		public SkinnedMeshRenderer[] CreateMeshs()
 		{
-			var smrList = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+			var smrList = GameObject.GetComponentsInChildren<SkinnedMeshRenderer>(true);
 
 			ClearMeshs();
 			Meshs = new GameObject[smrList.Length];
@@ -57,7 +57,7 @@ namespace Tauren.Module.Runtime
 
 		private void CheckAnimatorController()
 		{
-			if (gameObject != null && gameObject.TryGetComponent<Animator>(out var animator))
+			if (GameObject != null && GameObject.TryGetComponent<Animator>(out var animator))
 				RuntimeAnimatorController = animator.runtimeAnimatorController;
 		}
 

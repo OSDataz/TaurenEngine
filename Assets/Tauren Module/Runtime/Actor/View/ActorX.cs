@@ -250,7 +250,7 @@ namespace Tauren.Module.Runtime
 			var len = smrList.Length;
 
 			if (len == 0)
-				Log.Warn($"模型-未找到Mesh {cell.gameObject.name}");
+				Log.Warn($"模型-未找到Mesh {cell.GameObject.name}");
 
 			for (int i = 0; i < len; ++i)
 			{
@@ -260,7 +260,7 @@ namespace Tauren.Module.Runtime
 
 					// 创建新Mesh
 					var newObj = GameObject.Instantiate(subSmr.gameObject);
-					newObj.transform.SetParentOrigin(root.gameObject.transform);
+					newObj.transform.SetParentOrigin(root.GameObject.transform);
 					newObj.SetActive(true);
 
 					meshList[i] = newObj;
