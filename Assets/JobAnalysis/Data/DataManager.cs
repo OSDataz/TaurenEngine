@@ -52,6 +52,9 @@ namespace Tools.JobAnalysis
 				jobItem.salary.bonus = bonus;
 				jobItem.recruiter = recruiter;
 				jobItem.company = GetCompanyItem(companyName);
+				jobItem.releaseDate = DateTime.Now.ToString("yyyy-MM-dd");
+				jobItem.wishStatus = WishStatus.None;
+				jobItem.interviewStatus = InterviewStatus.None;
 
 				jobData.jobItems.Add(jobItem);
 			}
@@ -65,8 +68,8 @@ namespace Tools.JobAnalysis
 		{
 			foreach (var jobItem in jobData.jobItems)
 			{
-				jobItem.wishStatus = WishStatus.None;
-				jobItem.interviewStatus = InterviewStatus.None;
+				//jobItem.wishStatus = WishStatus.None;
+				//jobItem.interviewStatus = InterviewStatus.None;
 
 				var companyItem = companyList.Find(item => item.name == jobItem.company.name);
 				if (companyItem != null)
@@ -81,10 +84,10 @@ namespace Tools.JobAnalysis
 				}
 			}
 
-			foreach (var item in companyList)
-			{
-				item.wishStatus = WishStatus.None;
-			}
+			//foreach (var item in companyList)
+			//{
+			//	item.wishStatus = WishStatus.None;
+			//}
 		}
 
 		public void GenerateRemoveKeyArray()
@@ -120,6 +123,7 @@ namespace Tools.JobAnalysis
 				companyItem = new CompanyItem();
 				companyItem.name = companyName;
 				companyItem.size = new NumRange();
+				companyItem.wishStatus = WishStatus.None;
 
 				companyList.Add(companyItem);
 			}
@@ -181,6 +185,9 @@ namespace Tools.JobAnalysis
 					continue;
 
 				if (isFilterKeys && !CheckFilterJob(item))
+					continue;
+
+				if (item.company.wishStatus == WishStatus.Refuse)
 					continue;
 
 				var str = item.ToText();

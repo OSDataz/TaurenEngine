@@ -22,7 +22,7 @@ namespace Tools.JobAnalysis
 
 		#region 记录数据
 		/// <summary> 意向状态 </summary>
-		public string wishStatus = WishStatus.None;
+		public string wishStatus;
 
 		/// <summary> 备注 </summary>
 		public string notes;
