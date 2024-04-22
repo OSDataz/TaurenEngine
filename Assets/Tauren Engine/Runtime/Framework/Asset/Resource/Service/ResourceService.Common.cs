@@ -13,7 +13,7 @@ namespace Tauren.Framework.Runtime
 	public partial class ResourceService
 	{
 		#region 检查缓存池
-		public bool FindFromCache<T>(IRefrenceContainer container, string path, out T asset) where T : UnityEngine.Object
+		public bool FindFromCache<T>(IRefrenceContainer container, string path, out T asset)
 		{
 			if (ICacheService.Instance.TryGet(path, out var cacheAsset))
 			{
@@ -26,17 +26,17 @@ namespace Tauren.Framework.Runtime
 				}
 				else
 				{
-					asset = null;
+					asset = default;
 				}
 
 				return true;
 			}
 
-			asset = null;
+			asset = default;
 			return false;
 		}
 
-		public bool FindFromCache<T>(IRefrenceContainer container, string path, Action<bool, T> onComplete) where T : UnityEngine.Object
+		public bool FindFromCache<T>(IRefrenceContainer container, string path, Action<bool, T> onComplete)
 		{
 			if (ICacheService.Instance.TryGet(path, out var cacheAsset))
 			{
@@ -49,7 +49,7 @@ namespace Tauren.Framework.Runtime
 				}
 				else
 				{
-					onComplete?.Invoke(false, null);
+					onComplete?.Invoke(false, default);
 				}
 
 				return true;
@@ -60,7 +60,7 @@ namespace Tauren.Framework.Runtime
 		#endregion
 
 		#region 加载资源
-		public T LoadPure<T>(IRefrenceContainer container, string path, LoadType loadType, bool cache) where T : UnityEngine.Object
+		public T LoadPure<T>(IRefrenceContainer container, string path, LoadType loadType, bool cache)
 		{
 			var loadData = ILoadService.Instance.Load(path, loadType);
 			if (loadData.Code == 0 && loadData.Asset.TryGetAsset<T>(out var tLoadAsset))
@@ -74,11 +74,11 @@ namespace Tauren.Framework.Runtime
 				return tLoadAsset;// 返回加载资源
 			}
 
-			return null;
+			return default;
 		}
 
 		public ILoadHandler LoadPure<T>(IRefrenceContainer container, string path, LoadType loadType, bool cache,
-			int priority, Action<bool, T> onComplete) where T : UnityEngine.Object
+			int priority, Action<bool, T> onComplete)
 		{
 			return ILoadService.Instance.LoadAsync(path, loadType, priority, loadData =>
 			{
@@ -94,7 +94,7 @@ namespace Tauren.Framework.Runtime
 				}
 				else
 				{
-					onComplete?.Invoke(false, null);
+					onComplete?.Invoke(false, default);
 				}
 			});
 		}

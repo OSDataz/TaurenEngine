@@ -59,9 +59,13 @@ namespace Tauren.Framework.Runtime
 	public enum LoadType
 	{
 		/// <summary>
-		/// 直接加载单个资源
+		/// 直接加载单个资源（从AB包中加载或编辑器模式加载）
 		/// </summary>
 		Asset,
+		/// <summary>
+		/// 加载AB包（注意：不是从AB包中加载）
+		/// </summary>
+		AssetBundle,
 		/// <summary>
 		/// 加载Resources下资源
 		/// </summary>

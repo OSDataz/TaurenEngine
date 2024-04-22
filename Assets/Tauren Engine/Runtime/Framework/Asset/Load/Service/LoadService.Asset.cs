@@ -15,14 +15,28 @@ namespace Tauren.Framework.Runtime
 		#region 同步加载
 		private void LoadByAsset(LoadItem loadItem)
 		{
+			if (IAssetBundleService.Instance.InAssetBundle(loadItem.path))
+			{
 
+			}
+			else
+			{
+				
+			}
 		}
 		#endregion
 
 		#region 异步加载
 		private void LoadAsyncByAsset(LoadItemAsync loadItem)
 		{
+			if (IAssetBundleService.Instance.InAssetBundle(loadItem.path))
+			{
 
+			}
+			else
+			{
+
+			}
 		}
 		#endregion
 	}

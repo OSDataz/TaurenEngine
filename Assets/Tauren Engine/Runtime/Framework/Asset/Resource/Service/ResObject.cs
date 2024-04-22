@@ -52,7 +52,7 @@ namespace Tauren.Framework.Runtime
 			LoadStart();// 开始加载
 
 			// 加载资源
-			_loadHandler = IResourceService.Instance.LoadAsync<GameObject>(container, path, true, 10, 
+			_loadHandler = IResourceService.Instance.LoadAsync<GameObject>(container, path, LoadType.Asset, true, 10, 
 				(ret, go) => 
 				{
 					LoadComplete(path, go, onLoadComplete);

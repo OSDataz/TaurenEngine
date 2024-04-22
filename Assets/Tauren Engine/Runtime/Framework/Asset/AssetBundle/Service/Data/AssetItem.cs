@@ -2,21 +2,18 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.12.1
- *│　Time    ：2023/11/3 20:42:51
+ *│　Time    ：2024/4/18 17:37:02
  *└────────────────────────┘*/
-
-using Tauren.Core.Runtime;
 
 namespace Tauren.Framework.Runtime
 {
-	public interface IAsset : IRefrenceObject
+	public class AssetItem
 	{
+		public string path;
+
 		/// <summary>
-		/// 获取转化指定类型的资源
+		/// 所属AB包
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="asset"></param>
-		/// <returns></returns>
-		bool TryGetAsset<T>(out T asset);
+		public AssetBundleItem abItem;
 	}
 }

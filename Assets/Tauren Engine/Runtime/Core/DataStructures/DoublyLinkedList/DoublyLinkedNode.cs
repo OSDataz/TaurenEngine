@@ -7,24 +7,34 @@
 
 namespace Tauren.Core.Runtime
 {
-	public class DoublyLinkedNode<T>
+	public interface IDoublyLinkedNode
 	{
-		public T Value { get; set; }
+		DoublyLinkedNode Node { get; }
+	}
+
+	public class DoublyLinkedNode
+	{
+		public IDoublyLinkedNode Value { get; private set; }
 
 		/// <summary>
 		/// 前一个节点
 		/// </summary>
-		public DoublyLinkedNode<T> Prev { get; internal set; }
+		public DoublyLinkedNode Prev { get; internal set; }
 		/// <summary>
 		/// 下一个节点
 		/// </summary>
-		public DoublyLinkedNode<T> Next { get; internal set; }
+		public DoublyLinkedNode Next { get; internal set; }
+
+		public DoublyLinkedNode(IDoublyLinkedNode value)
+		{
+			Value = value;
+		}
 
 		/// <summary>
 		/// 添加到前一个节点
 		/// </summary>
 		/// <param name="node"></param>
-		public void AddPrev(DoublyLinkedNode<T> node)
+		public void AddPrev(DoublyLinkedNode node)
 		{
 			node.RemoveSelf();
 
@@ -48,11 +58,13 @@ namespace Tauren.Core.Runtime
 			node.Next = this;
 		}
 
+		public void AddPrev(IDoublyLinkedNode node) => AddPrev(node.Node);
+
 		/// <summary>
 		/// 添加到后一个节点
 		/// </summary>
 		/// <param name="node"></param>
-		public void AddNext(DoublyLinkedNode<T> node)
+		public void AddNext(DoublyLinkedNode node)
 		{
 			node.RemoveSelf();
 
@@ -75,6 +87,8 @@ namespace Tauren.Core.Runtime
 			Next = node;
 			node.Prev = this;
 		}
+
+		public void AddNext(IDoublyLinkedNode node) => AddNext(node.Node);
 
 		/// <summary>
 		/// 从列表中删除自身
@@ -121,18 +135,35 @@ namespace Tauren.Core.Runtime
 		{
 			RemoveSelf();
 
-			Value = default(T);
+			Value = null;
 		}
 
 		#region 链表
-		public DoublyLinkedList<T> LinkedList { get; internal set; }
+		private DoublyLinkedList _linkedList;
+		public DoublyLinkedList LinkedList
+		{
+			get => _linkedList;
+			set
+			{
+				if (_linkedList == value)
+					return;
+
+				if (_linkedList != null)
+					_linkedList.Count -= 1;
+
+				_linkedList = value;
+
+				if (_linkedList != null)
+					_linkedList.Count -= 1;
+			}
+		}
 
 		private void CreateLinkedList()
 		{
 			if (LinkedList != null)
 				return;
 
-			LinkedList = new DoublyLinkedList<T>();
+			LinkedList = new DoublyLinkedList();
 			LinkedList.SetRoot(this);
 		}
 		#endregion

@@ -25,8 +25,8 @@ namespace Tauren.Framework.Runtime
 		/// <summary>
 		/// 加载出来的原始资源
 		/// </summary>
-		private UnityEngine.Object _data;
-		public UnityEngine.Object Data
+		private object _data;
+		public object Data
 		{
 			get => _data;
 			set
@@ -54,7 +54,7 @@ namespace Tauren.Framework.Runtime
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public bool TryGetAsset<T>(out T asset) where T : UnityEngine.Object
+		public bool TryGetAsset<T>(out T asset)
 		{
 			if (Data is T tData)
 			{
@@ -62,7 +62,7 @@ namespace Tauren.Framework.Runtime
 				return true;
 			}
 
-			asset = null;
+			asset = default(T);
 			return false;
 		}
 
@@ -103,7 +103,7 @@ namespace Tauren.Framework.Runtime
 				{
 					if (_dataWeakRef != null)
 					{
-						Data = _dataWeakRef.Target as UnityEngine.Object;
+						Data = _dataWeakRef.Target;
 						_dataWeakRef = null;
 					}
 				}
@@ -125,9 +125,13 @@ namespace Tauren.Framework.Runtime
 				{
 					MemorySize = Profiler.GetRuntimeMemorySizeLong(sp.texture);
 				}
+				else if (_data is UnityEngine.Object obj)
+				{
+					MemorySize = Profiler.GetRuntimeMemorySizeLong(obj);
+				}
 				else
 				{
-					MemorySize = Profiler.GetRuntimeMemorySizeLong(_data);
+					MemorySize = 0;
 				}
 			}
 			else

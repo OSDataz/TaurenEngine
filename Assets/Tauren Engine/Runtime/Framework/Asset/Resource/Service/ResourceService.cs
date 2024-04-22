@@ -26,7 +26,7 @@ namespace Tauren.Framework.Runtime
 		}
 
 		#region 同步加载
-		public T Load<T>(IRefrenceContainer container, string path, bool cache) where T : UnityEngine.Object
+		public T Load<T>(IRefrenceContainer container, string path, LoadType loadType, bool cache)
 		{
 			// 格式化地址
 			path = FormatPath(path);
@@ -35,26 +35,13 @@ namespace Tauren.Framework.Runtime
 			if (FindFromCache<T>(container, path, out var cacheAsset))
 				return cacheAsset;
 
-			// 查找资源数据
-			if (!FindResItem(path, out var resItem))
-				return null;
-
-			if (resItem.InAssetBundle)
-			{
-				// 从AB包加载资源
-				return null;
-			}
-			else
-			{
-				// 加载资源
-				return LoadPure<T>(container, path, resItem.loadType, cache);
-			}
+			// 加载资源
+			return LoadPure<T>(container, path, loadType, cache);
 		}
 		#endregion
 
 		#region 异步加载
-		public ILoadHandler LoadAsync<T>(IRefrenceContainer container, string path, bool cache, int priority, Action<bool, T> onComplete) 
-			where T : UnityEngine.Object
+		public ILoadHandler LoadAsync<T>(IRefrenceContainer container, string path, LoadType loadType, bool cache, int priority, Action<bool, T> onComplete) 
 		{
 			// 格式化地址
 			path = FormatPath(path);
@@ -63,20 +50,8 @@ namespace Tauren.Framework.Runtime
 			if (FindFromCache<T>(container, path, onComplete))
 				return null;
 
-			// 查找资源数据
-			if (!FindResItem(path, out var resItem))
-				return null;
-
-			if (resItem.InAssetBundle)
-			{
-				// 从AB包加载资源
-				return null;
-			}
-			else
-			{
-				// 加载资源
-				return LoadPure<T>(container, path, resItem.loadType, cache, priority, onComplete);
-			}
+			// 加载资源
+			return LoadPure<T>(container, path, loadType, cache, priority, onComplete);
 		}
 		#endregion
 

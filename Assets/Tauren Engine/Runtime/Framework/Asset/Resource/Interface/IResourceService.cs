@@ -23,9 +23,10 @@ namespace Tauren.Framework.Runtime
 		/// <typeparam name="T"></typeparam>
 		/// <param name="container"></param>
 		/// <param name="path"></param>
+		/// <param name="loadType"></param>
 		/// <param name="cache"></param>
 		/// <returns></returns>
-		T Load<T>(IRefrenceContainer container, string path, bool cache) where T : UnityEngine.Object;
+		T Load<T>(IRefrenceContainer container, string path, LoadType loadType, bool cache);
 
 		/// <summary>
 		/// 异步加载资源
@@ -33,11 +34,12 @@ namespace Tauren.Framework.Runtime
 		/// <typeparam name="T"></typeparam>
 		/// <param name="container"></param>
 		/// <param name="path"></param>
+		/// <param name="loadType"></param>
 		/// <param name="cache"></param>
 		/// <param name="priority"></param>
 		/// <param name="onComplete"></param>
 		/// <returns></returns>
-		ILoadHandler LoadAsync<T>(IRefrenceContainer container, string path, bool cache, int priority, Action<bool, T> onComplete) where T : UnityEngine.Object;
+		ILoadHandler LoadAsync<T>(IRefrenceContainer container, string path, LoadType loadType, bool cache, int priority, Action<bool, T> onComplete);
 	}
 
 	public static class IResourceServiceExtension

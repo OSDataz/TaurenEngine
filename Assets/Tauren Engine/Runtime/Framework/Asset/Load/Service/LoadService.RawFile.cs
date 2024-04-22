@@ -5,6 +5,8 @@
  *│　Time    ：2024/4/10 11:36:51
  *└────────────────────────┘*/
 
+using System.IO;
+
 namespace Tauren.Framework.Runtime
 {
 	/// <summary>
@@ -15,14 +17,36 @@ namespace Tauren.Framework.Runtime
 		#region 同步加载
 		private void LoadByFile(LoadItem loadItem)
 		{
+			if (File.Exists(loadItem.path))
+			{
+				var asset = File.ReadAllBytes(loadItem.path);
 
+				loadItem.Asset = CreateAsset(loadItem.path, asset);
+				loadItem.Code = LoadCode.Success;
+			}
+			else
+			{
+				loadItem.Code = LoadCode.Fail;
+			}
 		}
 		#endregion
 
 		#region 异步加载
-		private void LoadAsyncByFile(LoadItemAsync loadItem)
+		private async void LoadAsyncByFile(LoadItemAsync loadItem)
 		{
+			if (File.Exists(loadItem.path))
+			{
+				var asset = await File.ReadAllBytesAsync(loadItem.path);
 
+				loadItem.Asset = CreateAsset(loadItem.path, asset);
+				loadItem.Code = LoadCode.Success;
+			}
+			else
+			{
+				loadItem.Code = LoadCode.Fail;
+			}
+
+			OnLoadAsyncComplete(loadItem);
 		}
 		#endregion
 	}

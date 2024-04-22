@@ -33,7 +33,7 @@ namespace Tauren.Framework.Runtime
 		#endregion
 	}
 
-	internal class LoadItemAsync : LoadItem, ILoadHandler, IExecuteItem
+	internal class LoadItemAsync : LoadItem, ILoadHandler, IExecuteItem, IDoublyLinkedNode
 	{
 		#region 加载参数
 		/// <summary> 加载优先级 </summary>
@@ -42,6 +42,15 @@ namespace Tauren.Framework.Runtime
 		/// <summary> 加载完成回调 </summary>
 		public Action<ILoadData> onComplete;
 		#endregion
+
+		#region 链表节点
+		public DoublyLinkedNode Node { get; }
+		#endregion
+
+		public LoadItemAsync()
+		{
+			Node = new DoublyLinkedNode(this);
+		}
 
 		public void Unload()
 		{

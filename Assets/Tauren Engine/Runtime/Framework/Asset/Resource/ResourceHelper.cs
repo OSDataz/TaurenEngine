@@ -18,11 +18,13 @@ namespace Tauren.Framework.Runtime
 		/// <typeparam name="T"></typeparam>
 		/// <param name="container"></param>
 		/// <param name="path"></param>
+		/// <param name="loadType"></param>
 		/// <param name="cache"></param>
 		/// <returns></returns>
-		public static T Load<T>(IRefrenceContainer container, string path, bool cache = true) where T : UnityEngine.Object
+		public static T Load<T>(IRefrenceContainer container, string path,
+			LoadType loadType = LoadType.Asset, bool cache = true)
 		{
-			return IResourceService.Instance.Load<T>(container, path, cache);
+			return IResourceService.Instance.Load<T>(container, path, loadType, cache);
 		}
 
 		/// <summary>
@@ -32,13 +34,14 @@ namespace Tauren.Framework.Runtime
 		/// <param name="container"></param>
 		/// <param name="path"></param>
 		/// <param name="onComplete"></param>
+		/// <param name="loadType"></param>
 		/// <param name="cache"></param>
 		/// <param name="priority"></param>
-		/// <returns>有缓存的情况下为空</returns>
+		/// <returns></returns>
 		public static ILoadHandler LoadAsync<T>(IRefrenceContainer container, string path, Action<bool, T> onComplete,
-			bool cache = true, int priority = 10) where T : UnityEngine.Object
+			LoadType loadType = LoadType.Asset, bool cache = true, int priority = 10)
 		{
-			return IResourceService.Instance.LoadAsync<T>(container, path, cache, priority, onComplete);
+			return IResourceService.Instance.LoadAsync<T>(container, path, loadType, cache, priority, onComplete);
 		}
 	}
 }

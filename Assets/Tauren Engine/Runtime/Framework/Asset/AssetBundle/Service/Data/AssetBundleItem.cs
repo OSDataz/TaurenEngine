@@ -2,21 +2,23 @@
  *│　Engine  ：TaurenEngine
  *│　Author  ：Osdataz
  *│　Version ：v0.12.1
- *│　Time    ：2023/11/3 20:42:51
+ *│　Time    ：2024/4/18 17:37:36
  *└────────────────────────┘*/
 
-using Tauren.Core.Runtime;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Tauren.Framework.Runtime
 {
-	public interface IAsset : IRefrenceObject
+	public class AssetBundleItem
 	{
+		public string path;
+
+		public AssetBundle bundle;
+
 		/// <summary>
-		/// 获取转化指定类型的资源
+		/// 依赖其他AB包
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="asset"></param>
-		/// <returns></returns>
-		bool TryGetAsset<T>(out T asset);
+		public List<AssetBundle> dependencies;
 	}
 }

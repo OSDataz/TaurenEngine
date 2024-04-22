@@ -6,7 +6,6 @@
  *└────────────────────────┘*/
 
 using Tauren.Core.Runtime;
-using UnityEngine;
 
 namespace Tauren.Framework.Runtime
 {
@@ -22,7 +21,7 @@ namespace Tauren.Framework.Runtime
 			_execList = new ExecuteList(OnExecute, 5);
 		}
 
-		private Asset CreateAsset(string key, UnityEngine.Object data)
+		private Asset CreateAsset(string key, object data)
 		{
 			var asset = new Asset();
 			asset.key = key;
