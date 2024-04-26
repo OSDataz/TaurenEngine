@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ExcelDataReader.Core.OpenXmlFormat.Records;
 using System.IO;
-using System.Text;
-using ExcelDataReader.Core.OpenXmlFormat.Records;
 
 namespace ExcelDataReader.Core.OpenXmlFormat.BinaryFormat
 {

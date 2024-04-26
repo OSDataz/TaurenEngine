@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-
 using ExcelDataReader.Core.OpenXmlFormat.Records;
+using System.Collections.Generic;
 
 namespace ExcelDataReader.Core.OpenXmlFormat
 {

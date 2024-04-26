@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#nullable enable
 
-#nullable enable
+using System.Collections.Generic;
 
 namespace ExcelDataReader.Core
 {

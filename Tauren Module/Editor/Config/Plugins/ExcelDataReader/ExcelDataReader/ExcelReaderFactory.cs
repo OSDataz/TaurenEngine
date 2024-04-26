@@ -1,9 +1,9 @@
-using System.IO;
 using ExcelDataReader.Core.BinaryFormat;
 using ExcelDataReader.Core.CompoundFormat;
 using ExcelDataReader.Core.OfficeCrypto;
 using ExcelDataReader.Exceptions;
 using ExcelDataReader.Misc;
+using System.IO;
 
 namespace ExcelDataReader
 {

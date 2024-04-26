@@ -1,5 +1,5 @@
-using System.IO;
 using ExcelDataReader.Core.OpenXmlFormat;
+using System.IO;
 
 namespace ExcelDataReader
 {
@@ -7,7 +7,7 @@ namespace ExcelDataReader
     {
         public ExcelOpenXmlReader(Stream stream)
         {
-            Document = new ZipWorker(stream);
+            Document = new(stream);
             Workbook = new XlsxWorkbook(Document);
 
             // By default, the data reader is positioned on the first result.

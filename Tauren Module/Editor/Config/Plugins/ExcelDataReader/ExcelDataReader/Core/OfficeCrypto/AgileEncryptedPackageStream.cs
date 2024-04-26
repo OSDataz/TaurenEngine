@@ -17,7 +17,7 @@ namespace ExcelDataReader.Core.OfficeCrypto
             IV = iv;
             Encryption = encryption;
 
-            Stream.ReadAtLeast(SegmentBytes, 0, 8);
+			Stream.ReadAtLeast(SegmentBytes, 0, 8);
             DecryptedLength = BitConverter.ToInt32(SegmentBytes, 0);
             ReadSegment();
         }

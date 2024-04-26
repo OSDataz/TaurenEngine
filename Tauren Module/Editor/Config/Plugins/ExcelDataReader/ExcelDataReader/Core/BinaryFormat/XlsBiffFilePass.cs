@@ -1,5 +1,5 @@
-using System;
 using ExcelDataReader.Core.OfficeCrypto;
+using System;
 
 namespace ExcelDataReader.Core.BinaryFormat
 {

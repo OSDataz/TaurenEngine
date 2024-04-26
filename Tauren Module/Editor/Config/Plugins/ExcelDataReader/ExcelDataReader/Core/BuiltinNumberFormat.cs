@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ExcelDataReader.Core.NumberFormat;
+﻿using ExcelDataReader.Core.NumberFormat;
+using System.Collections.Generic;
 
 namespace ExcelDataReader.Core
 {

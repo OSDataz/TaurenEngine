@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ExcelDataReader.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using ExcelDataReader.Exceptions;
 
 namespace ExcelDataReader.Core.CompoundFormat
 {
