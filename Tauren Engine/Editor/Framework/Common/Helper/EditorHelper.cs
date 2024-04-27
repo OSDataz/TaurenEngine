@@ -28,7 +28,7 @@ namespace Tauren.Framework.Editor
 		/// <summary>
 		/// 配置路径
 		/// </summary>
-		public static string ConfigPath = "Assets/Tauren Config";
+		public static string ConfigPath = "Assets/TaurenEngine.Config";
 
 		public static string ConfigFullPath => $"{ProjectPath}/{ConfigPath}";
 

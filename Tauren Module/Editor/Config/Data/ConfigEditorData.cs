@@ -6,12 +6,13 @@
  *└────────────────────────┘*/
 
 using Tauren.Core.Editor;
+using Tauren.Framework.Editor;
 
 namespace Tauren.Module.Editor
 {
 	public class ConfigEditorData : EditorData<ConfigData>
 	{
-		protected override string SavePath => "Assets/Tauren Config/Project/ExcelConfig.asset";
+		protected override string SavePath => $"{EditorHelper.ConfigPath}/Project/ExcelConfig.asset";
 
 		protected override void UpdateProperty()
 		{

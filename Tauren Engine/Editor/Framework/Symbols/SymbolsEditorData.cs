@@ -14,7 +14,7 @@ namespace Tauren.Framework.Editor
 {
 	public sealed class SymbolsEditorData : EditorData<SymbolsData>
 	{
-		protected override string SavePath => $"Assets/Tauren Config/Project/SymbolsConfig.asset";
+		protected override string SavePath => $"{EditorHelper.ConfigPath}/Project/SymbolsConfig.asset";
 
 		protected override void UpdateProperty()
 		{
