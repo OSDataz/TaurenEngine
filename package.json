@@ -1,0 +1,10 @@
+{
+  "name": "com.osdataz.taurenengine",
+  "displayName": "TaurenEngine",
+  "version": "1.0.0",
+  "description": "TaurenEngine",
+  "unity": "2022.3.0",
+  "author": {
+    "name": "Osdataz"
+  }
+}
